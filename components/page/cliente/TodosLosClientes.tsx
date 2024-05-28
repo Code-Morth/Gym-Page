@@ -11,9 +11,10 @@ const TodosLosClientes = () => {
     setCustomers(todosLosUsuarios)
   }, [])
 
-  return (
+  return (  
     <div className="TodosLosClientes">
       <div className="todos-los-clientes-container">
+        <input type="text" placeholder='Buscar cliente' />
         <div className="table-1">
           <h1>Clientes activos</h1>
           <div className="tabla-container">

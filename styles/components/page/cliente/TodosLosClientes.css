@@ -4,6 +4,13 @@
     .todos-los-clientes-container{
   
       @apply flex flex-col gap-[4rem];
+
+      input{
+
+        @apply w-fit p-[0.5rem] ;
+
+      }
+
   
     }
   
