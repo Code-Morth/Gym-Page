@@ -132,3 +132,25 @@ body {
 /*-------------------------Tablas Generales-------------------------*/
 
 
+
+
+/*-----------------------------Form---------------------------------*/
+
+.form-container {
+  @apply flex flex-col gap-[6rem] justify-center items-center;
+}
+
+.data-container {
+  @apply flex  gap-[4rem];
+}
+
+.form-left,
+.form-rigth {
+  @apply flex flex-col gap-[0.7rem];
+}
+
+input {
+  @apply px-[0.5rem] rounded-[0.3rem];
+}
+
+/*-----------------------------Form---------------------------------*/
