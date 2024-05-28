@@ -1,7 +1,7 @@
 
 export default function page () {
     return (
-      <div>Soy los Productos</div>
+      <div>Soy estadisticas</div>
     )
   }
   
