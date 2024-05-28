@@ -1,0 +1,17 @@
+ .box_add_gastos{
+    @apply w-full h-screen bg-slate-500 flex justify-center items-center ;
+
+    .for_box_data_add_contabilidad{
+        @apply w-[40rem] h-[auto] bg-[#000000b0] p-[2rem] border-2 border-[white] shadow-[5px_5px_10px_black] rounded-2xl flex flex-col gap-[2rem];
+
+        & h2 {
+            @apply text-[2.5rem] font-extrabold text-textButon ;
+        }
+        & label {
+            @apply text-[1.5rem] text-textButon;
+        }
+        & input {
+            @apply  font-bold text-[1.4rem] text-black ;
+        }
+    }
+ }

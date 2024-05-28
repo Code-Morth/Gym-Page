@@ -1,0 +1,20 @@
+[
+    {
+        "id" : 1,
+        "nombre": "MenbrePadre",
+        "description": "Dia del Papa",
+        "precio": "10",
+        "permiso": "false",
+        "duration": "1mes",
+        "acciones": "toda las maquinas"
+      },
+      {
+        "id" : 2,
+        "nombre": "MenbreMadre",
+        "description": "Dia del Madre",
+        "precio": "1000",
+        "permiso": "false",
+        "duration": "3mes",
+        "acciones": "Solo caminadora"
+      }
+]

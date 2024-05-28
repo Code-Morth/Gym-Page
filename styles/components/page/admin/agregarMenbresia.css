@@ -1,0 +1,16 @@
+.box_add_menbresia_ {
+    @apply w-full h-screen bg-[#768794] flex flex-col gap-[2rem] px-[20rem]  justify-center ;
+    & h2 {
+        @apply text-textoSideBar font-extrabold text-[3rem]  ;
+    }
+    .box_inputs_{
+        @apply  w-[40rem] h-auto  grid grid-cols-2 grid-rows-3 gap-[2rem] p-[3rem] border-2 border-[#e7e3e3]  rounded-2xl text-textoSideBar bg-[#000000b2];
+    }
+    & label {
+        @apply text-[1.5rem] font-extrabold;
+    }
+     & input {
+        @apply text-[black] font-bold text-[1.3rem] ;
+     }
+    
+}

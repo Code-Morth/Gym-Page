@@ -1,0 +1,50 @@
+.box_content_sueldos{
+    @apply flex flex-col gap-[1rem];
+   
+}
+
+.main_principal_{
+    @apply   w-full max-h-full min-h-screen bg-slate-600 flex flex-col justify-center 
+    px-[10rem] gap-[5rem];
+    & h2 {
+        @apply text-[3rem] font-bold  ;
+    }
+}
+
+.main_principal_ {
+  padding: 20px;
+}
+
+.box_content_sueldos {
+  margin-bottom: 20px;
+}
+
+.tabla-container-1 {
+  overflow-x: auto;
+  
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    width: 20%;
+  border: 1px solid #ddd;
+  padding: 8px;
+  
+}
+
+.data-table th {
+  background-color: #f2f2f2;
+  color: black;
+  
+}
+
+
+
+.data-table .cursor-pointer {
+  cursor: pointer;
+}

@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "name" :"Maria",
+        "frist_name": "Quispe ",
+        "last_name" : "Zapata",
+        "fecha_inicio" : "01-01-2023",
+        "fecha_final" : "02-01-2023",
+        "ci" : "89765467",
+        "sueldo": "1000",
+        "accion" : "pagar",
+        "pago" : "false",
+        "pagado_por" : ""
+    },
+    {
+        "id": 2,
+        "name" :"Kevin",
+        "frist_name": "Sandalia",
+        "last_name" : "torre",
+        "fecha_inicio" : "01-01-2023",
+        "fecha_final" : "03-01-2023",
+        "ci" : "8976543241",
+        "sueldo": "1400",
+        "accion" : "pagar",
+        "pago" : "false",
+        "pagado_por" : ""
+    },
+    {
+        "id": 3,
+        "name" :"Andres",
+        "frist_name": "sanches",
+        "last_name" : "quispe",
+        "fecha_inicio" : "01-01-2023",
+        "fecha_final" : "05-01-2023",
+        "ci" : "83213241",
+        "sueldo": "1800",
+        "accion" : "pagar",
+        "pago" : "false",
+        "pagado_por" : ""
+    },
+    {
+        "id": 3,
+        "name" :"Andres",
+        "frist_name": "sanches",
+        "last_name" : "quispe",
+        "fecha_inicio" : "01-01-2023",
+        "fecha_final" : "05-01-2023",
+        "ci" : "83213241",
+        "sueldo": "1800",
+        "accion" : "pagar",
+        "pago" : "false",
+        "pagado_por" : ""
+    },
+    {
+        "id": 4,
+        "name" :"Jairo",
+        "frist_name": "Mamani",
+        "last_name" : "Aguilar",
+        "fecha_inicio" : "01-01-2023",
+        "fecha_final" : "09-01-2023",
+        "ci" : "83213241",
+        "sueldo": "2700",
+        "accion" : "pagar",
+        "pago" : "false",
+        "pagado_por" : ""
+    }
+    
+]

@@ -1,7 +1,94 @@
+"use client";
 
-export default function page () {
-    return (
-      <div>Soy agregarMembresia</div>
-    )
-  }
-  
+import { useRef } from "react";
+import { useAlerts } from "../../../../../../hook/useAlerts";
+import { Toast } from "primereact/toast";
+
+export default function page() {
+  const { show, toast } = useAlerts();
+  const formRef = useRef<any>(null);
+  const handleMenbresia = (event: any) => {
+    event.preventDefault();
+
+    const dataMenbresia = Object.fromEntries(new FormData(event.target));
+    if (dataMenbresia) {
+      show("Menbresía  Agregada");
+      return formRef.current?.reset();
+    } else {
+      show("Complete los campos");
+    }
+  };
+
+  return (
+    <div className="main-page box_add_menbresia_">
+      <h2>Agregar Menbresía</h2>
+      <form ref={formRef} onSubmit={handleMenbresia} className="box_inputs_ ">
+        <div className="content_box_inputs">
+          <label htmlFor="nombre">Nombre</label>
+          <input
+            required
+            type="text"
+            placeholder="title mebresia"
+            name="title_menbresia"
+            id="nombre"
+          />
+        </div>
+
+        <div className="content_box_inputs">
+          <label htmlFor="description">Description</label>
+          <input
+            required
+            type="text"
+            placeholder="description"
+            name="description"
+            id="description"
+          />
+        </div>
+
+        <div className="content_box_inputs">
+          <label htmlFor="precio">Description</label>
+          <input
+            required
+            type="text"
+            placeholder="$5000"
+            name="precio"
+            id="precio"
+          />
+        </div>
+
+        <div className="content_box_inputs">
+          <label htmlFor="duracion">Duracion</label>
+          <input
+            required
+            type="text"
+            placeholder="1mes"
+            name="duracion"
+            id="duracion"
+          />
+        </div>
+
+        <div className="content_box_inputs">
+          <label htmlFor="permisos">Permisos</label>
+          <input
+            required
+            type="text"
+            placeholder="Toda las Maquinas"
+            name="permisos"
+            id="permisos"
+          />
+        </div>
+
+        <div className="flex items-center justify-center pt-[2rem]">
+          <button
+            className="button-default !text-[1.2rem] font-bold"
+            type="submit"
+          >
+            Agregar Menbresía
+          </button>
+        </div>
+      </form>
+
+      <Toast ref={toast} position="top-center" />
+    </div>
+  );
+}
