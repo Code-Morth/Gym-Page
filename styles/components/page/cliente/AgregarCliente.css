@@ -1,0 +1,14 @@
+.AgregarCliente{
+
+    @apply w-full flex justify-center items-center text-[2.4rem] font-semibold;
+
+    .agregar-cliente-container{
+
+        @apply flex flex-col gap-[2rem];
+ 
+        h1 {
+            @apply text-[3.4rem] font-bold;
+          }
+    }
+
+}

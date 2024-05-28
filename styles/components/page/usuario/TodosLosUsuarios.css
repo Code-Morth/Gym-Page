@@ -1,6 +1,22 @@
 .TodosLosUsuarios {
   @apply w-full flex justify-center items-center text-[1.4rem];
 
+  .todos-los-usarios-container{
 
+    @apply flex flex-col gap-[4rem];
+
+  }
+
+  .table-1,.table-2{
+
+    @apply flex flex-col gap-[1rem];
+
+    h1{
+
+      @apply text-[3rem] font-semibold ;
+
+    }
+
+  }
 
 }
