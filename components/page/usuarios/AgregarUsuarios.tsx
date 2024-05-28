@@ -1,7 +1,11 @@
 "use client"
+import apisPeticion from "@/api/apisPeticion";
 import React from "react"
 
 const AgregarUsuarios = () => {
+
+  const { postUser } = apisPeticion();
+
 
   const handleLogin = (event: any) => {
 

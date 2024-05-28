@@ -1,0 +1,30 @@
+[
+  {
+    "id" : 1,
+    "nombre": "Galleta",
+    "precio": "300",
+    "stock": "10",
+    "acciones": "false"
+  },
+  {
+    "id" : 2,
+    "nombre": "Gaseosa",
+    "precio": "100",
+    "stock": "20",
+    "acciones": "false"
+  },
+  {
+    "id" : 3,
+    "nombre": "Ron",
+    "precio": "600",
+    "stock": "5",
+    "acciones": "false"
+  },
+  {
+    "id" : 4,
+    "nombre": "Cerveza",
+    "precio": "700",
+    "stock": "40",
+    "acciones": "false"
+  }
+]

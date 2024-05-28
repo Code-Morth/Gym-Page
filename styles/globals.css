@@ -150,7 +150,11 @@ body {
 }
 
 input {
-  @apply px-[0.5rem] rounded-[0.3rem];
+  @apply px-[0.5rem] rounded-[0.3rem] py-[.5rem] text-center outline-none;
+}
+
+.content_box_inputs{
+  @apply flex flex-col gap-[1.5rem] ;
 }
 
 /*-----------------------------Form---------------------------------*/
