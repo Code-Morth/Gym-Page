@@ -1,7 +1,9 @@
+import AgregarUsuarios from '../../../../../../components/page/usuarios/AgregarUsuarios';
 
-export default function page () {
-    return (
-      <div>Soy los agregar usuario</div>
-    )
-  }
-  
+export default function page() {
+  return (
+    <>
+      <AgregarUsuarios/>
+    </>
+  )
+}
