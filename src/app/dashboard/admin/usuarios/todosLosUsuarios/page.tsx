@@ -1,7 +1,10 @@
+import TodosLosUsuarios from '../../../../../../components/page/usuarios/TodosLosUsuarios';
 
 export default function page () {
     return (
-      <div>Soy todos los usuarios</div>
+      <>
+      <TodosLosUsuarios/>
+      </>
     )
   }
   

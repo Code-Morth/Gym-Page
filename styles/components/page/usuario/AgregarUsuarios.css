@@ -1,0 +1,32 @@
+.AgregarUsuarios {
+  @apply w-full flex justify-center items-center text-[2.4rem] font-semibold;
+
+  .agregar-usuarios-container {
+    @apply flex flex-col gap-[2rem];
+
+    h1 {
+      @apply text-[3.4rem] font-bold;
+    }
+  }
+
+  .form-container {
+    @apply flex flex-col gap-[6rem] justify-center items-center;
+  }
+
+  .data-container {
+    @apply flex  gap-[4rem];
+  }
+
+  .form-left,
+  .form-rigth {
+    @apply flex flex-col gap-[0.7rem];
+  }
+
+  input {
+    @apply px-[0.5rem] rounded-[0.3rem];
+  }
+
+  /* button {
+    @apply bg-[#c71d20] text-[white] w-fit px-[2rem] p-[1rem] rounded-[1.5rem];
+  } */
+}
