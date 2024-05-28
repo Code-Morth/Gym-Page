@@ -1,18 +1,6 @@
-.TodosLosUsuarios{
+.TodosLosUsuarios {
+  @apply w-full flex justify-center items-center text-[1.4rem];
 
-    @apply w-full flex justify-center items-center text-[1.4rem];
 
-
-    .column{
-
-        @apply border-collapse border-[0.2rem] text-center ;
-
-    }
-    
-    .data-table{
-
-        @apply flex flex-col gap-[2rem] ;
-
-    }
 
 }

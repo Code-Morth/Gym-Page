@@ -3,6 +3,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useEffect, useState } from 'react';
 import todosLosUsuarios from './todosLosUsuarios.json'
+import { Chart } from 'primereact/chart';
 
 
 const TodosLosUsuarios = () => {
@@ -20,7 +21,7 @@ const TodosLosUsuarios = () => {
     <>
     <div className='TodosLosUsuarios'>
         <div className='tabla-container'>
-        <DataTable className='data-table' value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}  tableStyle={{ minWidth: '50rem' }}>
+        <DataTable  className='data-table' value={customers} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}  tableStyle={{ minWidth: '50rem' }}>
                 <Column className='column' field="fullName" header="Nombre completo" style={{ width: '8%' }}></Column>
                 <Column className='column' field="firstSurname" header="Primer apellido" style={{ width: '8%' }}></Column>
                 <Column className='column' field="secondSurname" header="Segundo apellido" style={{ width: '8%' }}></Column>

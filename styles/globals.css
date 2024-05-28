@@ -50,3 +50,72 @@ body {
   background-color: #57a3e1; /* Color del pulgar de la barra */
   border-radius: 5px; /* Radio de borde del pulgar de la barra */
 }
+
+
+/*-------------------------Tablas Generales-------------------------*/
+
+.tabla-container {
+  @apply border-[0.2rem] border-[white];
+}
+
+.column {
+  @apply border-collapse text-center;
+}
+
+.data-table {
+  @apply flex flex-col;
+}
+
+.p-datatable-header {
+  font-weight: bold;
+  background-color: #e3f2fd;
+  color: #1976d2;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.p-datatable-thead > tr > th {
+  background-color: #ddeeff;
+  color: #071429;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.p-datatable-tbody > tr > td {
+  text-align: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.p-paginator {
+  background-color: #e3f2fd;
+  border-top: 1px solid #ddd;
+  padding: 0.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.p-paginator-pages{
+
+  @apply flex gap-[1rem] ;
+
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  
+  @apply rounded-[1rem] w-[2.1rem] h-auto  ;
+
+  background-color: #2793ff;
+  color: #fff;
+}
+
+.p-column-header-content{
+
+  @apply flex  justify-center ;
+
+}
+
+/*-------------------------Tablas Generales-------------------------*/
+
+
