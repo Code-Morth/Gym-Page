@@ -150,7 +150,7 @@ body {
 }
 
 input {
-  @apply px-[0.5rem] rounded-[0.3rem];
+  @apply px-[0.5rem] rounded-[0.3rem] py-[.5rem] text-center outline-none;
 }
 
 /*-----------------------------Form---------------------------------*/
