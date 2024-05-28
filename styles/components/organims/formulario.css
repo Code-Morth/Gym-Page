@@ -1,0 +1,15 @@
+.box_formulario{
+    @apply w-[40rem] h-[40rem] rounded-xl bg-[#ffffff4f] flex  flex-col justify-center gap-[2rem] items-center font-bold  shadow-[1px_1px_5px_black] ;
+    .box_imagen_{
+        @apply  w-[10rem] h-[10rem];
+    }
+    .box_imputs-{
+        @apply flex flex-col gap-[2rem];
+    }
+    & input {
+        @apply text-[1.6rem] text-center  outline-none rounded-lg py-[.5rem];
+    }
+    & label {
+        @apply text-[#132644] font-extrabold text-[2rem]; ;
+    }
+}

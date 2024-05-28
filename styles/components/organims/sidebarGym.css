@@ -1,0 +1,19 @@
+.box_sidebar_{
+    @apply flex flex-col  gap-[5rem] w-[70%] bg-[#664B2B] min-h-screen max-h-[auto] text-[#BFAB5E] font-bold text-[1.8rem];
+    @screen tablet {
+        @apply w-[50%];
+    }
+    @screen laptop {
+        width: calc(30rem * var(--scale));
+    }
+    .box_image{
+        @apply  w-full  flex justify-center;
+    }
+
+    .box_text_sidebar{
+        @apply  flex flex-col gap-[1rem] px-[5rem];
+    }
+    .items_sidebar_content-{
+        @apply flex flex-col gap-3 px-[2rem] ;
+    }
+}
