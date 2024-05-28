@@ -21,8 +21,8 @@ const SidebarGym = () => {
         <h3 onClick={() => optionSelect(1)}>Usuario</h3>
         {selectedOption === 1 && (
             <ul className='items_sidebar_content-'>
-              <Link href={"#"}>Agregar Usuarios</Link>
-              <Link href={"#"}>Todo Los Usuarios</Link>
+              <Link href={"/dashboard/admin/usuarios/agregarUsuarios"}>Agregar Usuarios</Link>
+              <Link href={"/dashboard/admin/usuarios/todosLosUsuarios"}>Todo Los Usuarios</Link>
             </ul>
           )}
         </div>
