@@ -59,7 +59,7 @@ body {
 
 .button-default{
 
-  @apply bg-colorButon text-[white] w-fit px-[2.5rem] py-[1rem] rounded-[1.5rem] duration-300 ease-in-out hover:bg-hoverButon;
+  @apply bg-colorButon text-[white] w-fit px-[2.5rem] py-[1rem] rounded-[1.5rem] duration-300 ease-in-out hover:bg-hoverButon text-[1.6rem];
 
 
 }
