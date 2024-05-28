@@ -1,0 +1,60 @@
+:root {
+    --scale: 1;
+    @media (min-width: 1200px) {
+      --scale: 0.631578947368421;
+    }
+    @media (min-width: 1250px) {
+      --scale: 0.6578947368421053;
+    }
+    @media (min-width: 1280px) {
+      --scale: 0.6736842105263158;
+    }
+    @media (min-width: 1300px) {
+      --scale: 0.6842105263157895;
+    }
+    @media (min-width: 1350px) {
+      --scale: 0.7105263157894737;
+    }
+    @media (min-width: 1366px) {
+      --scale: 0.7189473684210527;
+    }
+    @media (min-width: 1400px) {
+      --scale: 0.7368421052631579;
+    }
+    @media (min-width: 1440px) {
+      --scale: 0.7578947368421053;
+    }
+    @media (min-width: 1450px) {
+      --scale: 0.7631578947368421;
+    }
+    @media (min-width: 1500px) {
+      --scale: 0.7894736842105263;
+    }
+    @media (min-width: 1536px) {
+      --scale: 0.8084210526315789;
+    }
+    @media (min-width: 1550px) {
+      --scale: 0.8157894736842105;
+    }
+    @media (min-width: 1600px) {
+      --scale: 0.8421052631578947;
+    }
+    @media (min-width: 1650px) {
+      --scale: 0.868421052631579;
+    }
+    @media (min-width: 1700px) {
+      --scale: 0.8947368421052632;
+    }
+    @media (min-width: 1750px) {
+      --scale: 0.9210526315789473;
+    }
+    @media (min-width: 1800px) {
+      --scale: 0.9473684210526315;
+    }
+    @media (min-width: 1850px) {
+      --scale: 0.9736842105263158;
+    }
+    @media (min-width: 1900px) {
+      --scale: 1;
+    }
+  }
