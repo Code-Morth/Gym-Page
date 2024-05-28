@@ -50,7 +50,7 @@ const AgregarUsuarios = () => {
               <input name="userType" type="text" />
             </div>
           </div>
-          <button>Agregar usuario</button>
+          <button className='button-default'>Agregar usuario</button>
         </form>
       </div>
     </div>

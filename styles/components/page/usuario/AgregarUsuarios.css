@@ -26,7 +26,4 @@
     @apply px-[0.5rem] rounded-[0.3rem];
   }
 
-  /* button {
-    @apply bg-[#c71d20] text-[white] w-fit px-[2rem] p-[1rem] rounded-[1.5rem];
-  } */
 }
