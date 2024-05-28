@@ -2,28 +2,25 @@
   
   function userLocalStoras() {
     
-    const agregarLocal = (clave: string, datos: any) => {
-  
-  
+    const agregarLocal = (clave:any, datos:any) => {
       localStorage.setItem(clave, JSON.stringify(datos));
     };
   
-  
-    const obtenerLocal = (clave: string) => {
+    const obtenerLocal = (clave:any) => {
       try {
         const item = localStorage.getItem(clave);
-  
-        return item ? JSON.parse(item) : null;
+        return item ? item : null;
       } catch (error) {
-        console.log(error);
+        return null;
       }
     };
   
-    const eliminarLocal = (clave: string) => {
+    const eliminarLocal = (clave:any) => {
       localStorage.removeItem(clave);
     };
   
     return { agregarLocal, obtenerLocal, eliminarLocal };
   }
+  
   
   export default userLocalStoras;

@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
+import ProtectedRoute from "../../../../components/protecte/ProtecteRouter";
 
 const index = () => {
   return (
-    <div>
-      <h2>soy el user</h2>
-    </div>
-  )
-}
+    <ProtectedRoute>
+      <div>
+        <h2>soy el user</h2>
+      </div>
+      </ProtectedRoute>
+   
+  );
+};
 
-export default index
+export default index;

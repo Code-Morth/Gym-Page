@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundColor: {
+        "sidebarColor" : "#2F3541",
+        "colorButon" : "#0A1932"
+      },
+      colors :{
+        "textoSideBar": "white",
+        "textButon" : "white",
+        "hoverButon" : "#244886",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

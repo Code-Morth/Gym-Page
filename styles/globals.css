@@ -19,6 +19,13 @@ textarea {
   resize: none;
 }
 
+.p-toast-message-content {
+  @apply w-[30rem] !border-hoverButon border text-textoSideBar bg-sidebarColor  text-[2rem] gap-[1rem]  text-center px-[2.5rem] py-[1rem] rounded-[1rem];
+  .p-toast-icon-close{
+    @apply hidden;
+  }
+}
+
 .main-page {
   animation-name: fadeIn;
   animation-duration: 0.6s;
