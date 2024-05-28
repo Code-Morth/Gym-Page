@@ -1,5 +1,5 @@
 .box_sidebar_{
-    @apply flex flex-col  gap-[5rem] w-[70%] bg-[#664B2B] min-h-screen max-h-[auto] text-[#BFAB5E] font-bold text-[1.8rem];
+    @apply flex flex-col  gap-[5rem] w-[70%] bg-[#929ea8] min-h-screen max-h-[auto] text-[#041431] font-bold text-[1.8rem];
     @screen tablet {
         @apply w-[50%];
     }
@@ -14,6 +14,16 @@
         @apply  flex flex-col gap-[1rem] px-[5rem];
     }
     .items_sidebar_content-{
-        @apply flex flex-col gap-3 px-[2rem] ;
+        @apply flex flex-col gap-3 px-[2rem]  ;
+        & a {
+            @apply duration-300 ease-in-out hover:text-[#B10A0E] ;
+        }
     }
+    .image_next_box {
+        @apply w-[20rem] h-[20rem] ;
+    }
+    & h3 {
+        @apply duration-300 ease-in-out hover:text-[#B10A0E]  cursor-pointer;
+    }
+   
 }

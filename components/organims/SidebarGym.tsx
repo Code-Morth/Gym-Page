@@ -17,8 +17,8 @@ const SidebarGym = ( ) => {
 <div className='box_sidebar_ ' >
 
   <div className='box_image'>
-    <div className='w-[10rem] h-[10rem]'>
-    <Image className='w-full  h-full' src={"/logoMyg.png"} alt='logo' width={1000} height={1000}/>
+    <div className='image_next_box'>
+    <Image className='w-full  h-full' src={"/logo.png"} alt='logo' width={1000} height={1000}/>
     </div>
   </div>
        <div className='box_text_sidebar '>

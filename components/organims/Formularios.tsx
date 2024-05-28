@@ -2,8 +2,11 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import userLocalStoras from '../../hook/userLocalStoras'
 
 const Formularios = () => {
+
+  const { agregarLocal } = userLocalStoras()
 
   const router  =useRouter()
 
@@ -11,8 +14,9 @@ const Formularios = () => {
     const handleLogin = (event: any) => {
         event.preventDefault()
     
-        const dataForm = Object.fromEntries(new FormData(event.target))  
+        const dataForm = Object.fromEntries(new FormData(event.target)) ;
         dataForm.type = "admin";  
+        agregarLocal("typeUser",dataForm?.type); 
         dataForm.type === "admin" ? router.push("/dashboard/admin") : router.push("/dashboard/user")
       }
 
@@ -30,7 +34,7 @@ const Formularios = () => {
    <label htmlFor="password">Password</label>
     <input type="password"  placeholder="********" id="password" name="password" />
    </div>
-    <button type='submit' className='bg-[#97A3AE] px-[5rem] py-[1rem] text-[black] rounded-xl font-extrabold text-[1.3rem] duration-300 ease-in-out hover:bg-[#cedbe7]'>Ingresar</button>
+    <button type='submit' className=''>Ingresar</button>
   </form>
   )
 }
