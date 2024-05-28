@@ -15,9 +15,17 @@ const Formularios = () => {
         event.preventDefault()
     
         const dataForm = Object.fromEntries(new FormData(event.target)) ;
-        dataForm.type = "admin";  
+        // dataForm.type = "admin";  
         agregarLocal("typeUser",dataForm?.type); 
-        dataForm.type === "admin" ? router.push("/dashboard/admin") : router.push("/dashboard/user")
+        if(dataForm?.type === null ){
+          router.push("/");
+          if(dataForm.type === "admin"){
+            router.push("/dashboard/admin")
+          }else{
+            router.push("/dashboard/user")
+          }
+        }
+        
       }
 
   return (
@@ -27,7 +35,7 @@ const Formularios = () => {
     </div>
     <div className="box_imputs-">
     <label htmlFor="email">Email</label>
-    <input type="email" placeholder="amid@gmail.com" id="email" name="email"/>
+    <input type="text" placeholder="amid@gmail.com" id="email" name="email"/>
     </div>
    
    <div className="box_imputs-">
