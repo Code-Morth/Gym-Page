@@ -1,0 +1,51 @@
+.AgregarVentas {
+    @apply w-full flex justify-center items-center text-[2.4rem] font-semibold;
+  
+    .agregar-ventas-container {
+      @apply flex flex-col gap-[2rem] border-[#ffffff] border-[0.2rem] rounded-[1rem] p-[3rem];
+  
+      h1 {
+        @apply text-[3.4rem] font-bold;
+      }
+    }
+
+    .form-container{
+
+        @apply gap-[2rem] ;
+
+    }
+  
+    .form-left{
+
+        @apply flex flex-col justify-center items-center gap-[2rem] ;
+
+    }
+
+    .tabla-container{
+
+        th{
+
+            @apply border-[0.1rem] ;
+
+        }
+
+        @apply text-[1.6rem] ;
+
+        td{
+
+            @apply text-center border-t-[0.2rem] ; 
+    
+        }
+    
+        input{
+    
+            @apply w-[10rem] text-center;
+    
+        }
+
+    }
+    
+ 
+  
+  }
+  
