@@ -1,0 +1,26 @@
+.box_add_product{
+    @apply  w-full bg-[##768794] min-h-screen max-h-full flex  justify-center items-center;
+
+    .box_info_form {
+        @apply w-[40rem] h-[40rem] bg-[#000000c2] rounded-xl shadow-[5px_5px_5px_black] flex flex-col items-center 
+        justify-center gap-[4rem] ;
+        & h3 {
+            @apply  text-textButon font-extrabold text-[2rem];
+        }
+
+        .info_context_formt{
+            @apply border w-[90%] place-content-center h-auto p-[2rem] grid grid-cols-2 grid-rows-2 gap-[2rem]; 
+        }
+
+        .inputs_for{
+            @apply  flex flex-col gap-[1rem];
+            & label {
+                @apply text-white font-bold text-[1.5rem] ;
+            }
+            & input {
+                @apply outline-none border-[white] border-2 py-[.7rem] text-center text-[black] font-bold text-[1.2rem]  rounded-2xl; 
+            }
+        }
+        
+    }
+}
