@@ -7,10 +7,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <PrimeReactProvider>
-        <body>{children}</body>
-      </PrimeReactProvider>
-    </html>
+    <PrimeReactProvider>
+      <html lang="es">
+        <body>
+        {children}
+        </body>
+      </html>
+    </PrimeReactProvider>
   )
 }

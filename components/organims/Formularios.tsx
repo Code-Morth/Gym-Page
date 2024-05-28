@@ -37,6 +37,7 @@ const Formularios = () => {
   };
 
   return (
+   <>
     <form onSubmit={handleLogin} className="box_formulario">
       <div className="box_imagen_">
         <Image
@@ -71,6 +72,7 @@ const Formularios = () => {
       </button>
       <Toast ref={toast} position="top-center" />
     </form>
+   </>
   );
 };
 
