@@ -158,3 +158,21 @@ input {
 }
 
 /*-----------------------------Form---------------------------------*/
+
+
+/*-----------------------------Date Picker----------------------------------*/
+
+.tittle {
+  @apply text-[3rem];
+}
+
+.dates-container {
+  @apply flex gap-[1.5rem] justify-center items-center;
+
+  h1 {
+      @apply text-[2.7rem] font-bold;
+    }
+
+}
+
+/*-----------------------------Date Picker----------------------------------*/

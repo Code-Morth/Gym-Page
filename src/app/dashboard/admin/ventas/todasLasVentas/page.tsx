@@ -1,7 +1,9 @@
+import TodasLasVentas from "../../../../../../components/page/ventas/TodasLasVentas"
 
-export default function page () {
-    return (
-      <div>Soy todasLasVentas</div>
-    )
-  }
-  
+export default function page() {
+  return (
+    <>
+      <TodasLasVentas />
+    </>
+  )
+}

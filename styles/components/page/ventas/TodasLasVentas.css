@@ -1,0 +1,27 @@
+.TodasLasVentas {
+  @apply w-full flex justify-center items-center text-[1.9rem] font-semibold;
+
+  .todas-las-ventas-container {
+    @apply flex flex-col gap-[4rem];
+
+    input {
+      @apply w-fit p-[0.5rem];
+    }
+  }
+
+  .tittle {
+    @apply text-[4rem];
+  }
+
+  .dates-container {
+    @apply flex gap-[1.5rem] justify-center items-center;
+
+    h1 {
+        @apply text-[2.7rem] font-bold;
+      }
+
+  }
+
+
+
+}

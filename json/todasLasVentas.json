@@ -1,0 +1,123 @@
+[
+    {
+      "product": "Agua mineral",
+      "totalPrice": 4.00,
+      "saleDate": "02/11/2023",
+      "clientName": "Pedro Martinez Gonzales"
+    },
+    {
+      "product": "Barra de proteína",
+      "totalPrice": 15.50,
+      "saleDate": "03/11/2023",
+      "clientName": "Ana Lopez"
+    },
+    {
+      "product": "Banda elástica",
+      "totalPrice": 10.00,
+      "saleDate": "04/11/2023",
+      "clientName": "Juan Perez"
+    },
+    {
+      "product": "Botella shaker",
+      "totalPrice": 6.00,
+      "saleDate": "05/11/2023",
+      "clientName": "María Rodríguez"
+    },
+    {
+      "product": "Toalla de gimnasio",
+      "totalPrice": 8.00,
+      "saleDate": "06/11/2023",
+      "clientName": "Sara García"
+    },
+    {
+      "product": "Manoplas para levantamiento de pesas",
+      "totalPrice": 25.00,
+      "saleDate": "07/11/2023",
+      "clientName": "Carlos Fernandez"
+    },
+    {
+      "product": "Guantes de entrenamiento",
+      "totalPrice": 12.00,
+      "saleDate": "08/11/2023",
+      "clientName": "Laura Sánchez"
+    },
+    {
+      "product": "Cinturón de levantamiento de pesas",
+      "totalPrice": 18.00,
+      "saleDate": "09/11/2023",
+      "clientName": "Daniel Gomez"
+    },
+    {
+      "product": "Bebida energética",
+      "totalPrice": 5.00,
+      "saleDate": "10/11/2023",
+      "clientName": "Elena Martínez"
+    },
+    {
+      "product": "Calcetines deportivos",
+      "totalPrice": 3.00,
+      "saleDate": "11/11/2023",
+      "clientName": "Marta Jiménez"
+    },
+    {
+      "product": "Barra olímpica",
+      "totalPrice": 50.00,
+      "saleDate": "12/11/2023",
+      "clientName": "David Ruiz"
+    },
+    {
+      "product": "Mancuernas ajustables",
+      "totalPrice": 40.00,
+      "saleDate": "13/11/2023",
+      "clientName": "Nuria González"
+    },
+    {
+      "product": "Chaleco lastrado",
+      "totalPrice": 30.00,
+      "saleDate": "14/11/2023",
+      "clientName": "Javier López"
+    },
+    {
+      "product": "Bandas de resistencia",
+      "totalPrice": 7.00,
+      "saleDate": "15/11/2023",
+      "clientName": "Paula Martín"
+    },
+    {
+      "product": "Bolso deportivo",
+      "totalPrice": 20.00,
+      "saleDate": "16/11/2023",
+      "clientName": "Alejandro Soto"
+    },
+    {
+      "product": "Cuerda de saltar",
+      "totalPrice": 8.00,
+      "saleDate": "17/11/2023",
+      "clientName": "Silvia Navarro"
+    },
+    {
+      "product": "Rodillo de espuma",
+      "totalPrice": 12.00,
+      "saleDate": "18/11/2023",
+      "clientName": "Antonio García"
+    },
+    {
+      "product": "Sudadera deportiva",
+      "totalPrice": 25.00,
+      "saleDate": "19/11/2023",
+      "clientName": "Carmen Torres"
+    },
+    {
+      "product": "Pesas rusas",
+      "totalPrice": 35.00,
+      "saleDate": "20/11/2023",
+      "clientName": "Raul Ramírez"
+    },
+    {
+      "product": "Pelota de yoga",
+      "totalPrice": 10.00,
+      "saleDate": "21/11/2023",
+      "clientName": "Isabel Díaz"
+    }
+  ]
+  

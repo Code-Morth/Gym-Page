@@ -4,7 +4,7 @@ import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
 import productos from "@/../json/productos.json";
 
-export default function page() {
+export default function Page() {
   const [customers, setCustomers] = useState<any>([]);
   const [name, setname] = useState("")
 
