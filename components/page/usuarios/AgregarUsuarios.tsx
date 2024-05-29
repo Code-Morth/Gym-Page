@@ -1,64 +1,79 @@
-"use client"
+"use client";
 import apisPeticion from "@/api/apisPeticion";
-import React from "react"
+import React, { useRef } from "react";
+import { baseApi } from "@/../lib/baseApi";
+import getConfig from "@/../utils/getConfig";
+import { useAlerts } from "../../../hook/useAlerts";
+import { Toast } from "primereact/toast";
 
 const AgregarUsuarios = () => {
-
   const { postUser } = apisPeticion();
-
+  const dataRef = useRef<any>(null)
+  const { show, toast } = useAlerts();
 
   const handleLogin = (event: any) => {
+    event.preventDefault();
 
-    event.preventDefault()
+    const dataForm = Object.fromEntries(new FormData(event.target));
+    baseApi
+      .post(`${postUser}`, dataForm, getConfig())
+      .then((res) => {
+        if(res.data.success){
+          show("Usuario Creado Exitosamente");
+          dataRef.current.reset()
+        }
 
-    const dataForm = Object.fromEntries(new FormData(event.target))
+      })
+      .catch((err) => console.log(err));
 
-  }
+    console.log(dataForm);
+  };
 
   return (
     <div className="AgregarUsuarios">
       <div className="agregar-usuarios-container">
         <h1>Agregar Usuario</h1>
-        <form onSubmit={handleLogin} className="form-container">
+        <form ref={dataRef} onSubmit={handleLogin} className="form-container">
           <div className="data-container">
             <div className="form-left">
               <label htmlFor="userName">Nombre de usuario</label>
-              <input name="userName" type="text" />
+              <input required name="username" type="text" />
               <label htmlFor="firstSurname">Primer apellido</label>
-              <input name="firstSurname" type="text" />
+              <input required name="last_name1" type="text" />
               <label htmlFor="email">Email</label>
-              <input name="email" type="email" />
+              <input required name="email" type="email" />
               <label htmlFor="finalDate">Fecha final</label>
-              <input name="finalDate" type="date" />
+              <input required name="final_date" type="date" />
               <label htmlFor="closingHour">Horario de salida</label>
-              <input name="closingHour" type="time" />
+              <input required name="final_time" type="time" />
               <label htmlFor="address">Direccion</label>
-              <input name="address" type="text" />
+              <input required name="address" type="text" />
               <label htmlFor="salary">Sueldo</label>
-              <input name="salary" type="number" />
+              <input required name="income" type="number" />
             </div>
             <div className="form-rigth">
               <label htmlFor="fullName">Nombre completo</label>
-              <input name="fullName" type="text" />
+              <input required name="first_name" type="text" />
               <label htmlFor="secondSurname">Segundo apellido</label>
-              <input name="secondSurname" type="text" />
+              <input required name="last_name2" type="text" />
               <label htmlFor="startDate">Fecha inicio</label>
-              <input name="startDate" type="date" />
+              <input required name="initial_date" type="date" />
               <label htmlFor="entryTime">Horario entrada</label>
-              <input name="entryTime" type="time" />
+              <input required name="initial_time" type="time" />
               <label htmlFor="ci">Ci</label>
-              <input name="ci" type="text" />
+              <input required name="ci" type="text" />
               <label htmlFor="password">Contraseña</label>
-              <input name="password" type="password" />
+              <input required name="password" type="password" />
               <label htmlFor="userType">Rol</label>
-              <input name="userType" type="text" />
+              <input required name="fk_typeuser" type="text" />
             </div>
           </div>
-          <button className='button-default'>Agregar usuario</button>
+          <button className="button-default">Agregar usuario</button>
         </form>
       </div>
+      <Toast ref={toast} position="top-center" />
     </div>
-  )
-}
+  );
+};
 
-export default AgregarUsuarios
+export default AgregarUsuarios;

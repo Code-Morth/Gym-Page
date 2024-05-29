@@ -25,6 +25,7 @@ const Formularios = () => {
       .then((res) => {
         if (res.data.success) {
           agregarLocal("fk_typeuser", res.data.data?.fk_typeuser);
+          agregarLocal("token", res.data.data?.token);
           if (res.data.data?.fk_typeuser === 1) {
             show("Bienvenido Admin");
             setTimeout(() => {
