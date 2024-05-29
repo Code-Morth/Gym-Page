@@ -3,20 +3,29 @@
 import { useRef } from "react";
 import { useAlerts } from "../../../../../../hook/useAlerts";
 import { Toast } from "primereact/toast";
+import axios from "axios";
+import getConfig from "../../../../../../utils/getConfig";
+import apisPeticion from "@/api/apisPeticion";
 
 export default function page() {
   const { show, toast } = useAlerts();
+  const { url } = apisPeticion()
   const formRef = useRef<any>(null);
+
+
   const handleMenbresia = (event: any) => {
     event.preventDefault();
 
     const dataMenbresia = Object.fromEntries(new FormData(event.target));
-    if (dataMenbresia) {
-      show("Menbresía  Agregada");
-      return formRef.current?.reset();
-    } else {
-      show("Complete los campos");
-    }
+
+    axios.post(`${url}/membership`,dataMenbresia,getConfig()).then(res => 
+      {
+        if(res.data.success){
+          show("Menbresia Creada")
+          formRef.current.resert()
+        }
+      }
+    ).catch(err => console.log(err))
   };
 
   return (
@@ -29,7 +38,7 @@ export default function page() {
             required
             type="text"
             placeholder="title mebresia"
-            name="title_menbresia"
+            name="name"
             id="nombre"
           />
         </div>
@@ -46,12 +55,12 @@ export default function page() {
         </div>
 
         <div className="content_box_inputs">
-          <label htmlFor="precio">Description</label>
+          <label htmlFor="precio">Precio</label>
           <input
             required
             type="text"
             placeholder="$5000"
-            name="precio"
+            name="price"
             id="precio"
           />
         </div>
@@ -62,7 +71,7 @@ export default function page() {
             required
             type="text"
             placeholder="1mes"
-            name="duracion"
+            name="duration"
             id="duracion"
           />
         </div>

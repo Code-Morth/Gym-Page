@@ -25,8 +25,6 @@ const AgregarCliente = () => {
         }
       })
       .catch((err) => console.log(err))
-
-    console.log(dataForm)
   }
 
   return (

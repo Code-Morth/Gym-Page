@@ -3,13 +3,22 @@ import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
 import menbresia from "@/../json/menbresia.json";
+import axios from "axios";
+import getConfig from "../../../../../../utils/getConfig";
+import apisPeticion from "@/api/apisPeticion";
 
 export default function page () {
 
   const [customers, setCustomers] = useState<any>([]);
+  const { url } = apisPeticion()
 
   useEffect(() => {
-    setCustomers(menbresia);
+
+    axios.get(`${url}/membership`,getConfig()).then(res => {
+      setCustomers(res.data.data)
+    
+    }).catch(err => console.log(err))
+    
   }, []);
 
     return (
@@ -28,7 +37,7 @@ export default function page () {
         >
           <Column
             className="column "
-            field="nombre"
+            field="name"
             header="Nombre"
             style={{ width: "8%" }}
           ></Column>
@@ -40,7 +49,7 @@ export default function page () {
           ></Column>
           <Column
             className="column"
-            field="precio"
+            field="price"
             header="Precio"
             style={{ width: "8%" }}
           ></Column>
@@ -58,7 +67,7 @@ export default function page () {
           ></Column>
           <Column
             className="column"
-            field="acciones"
+            field="status"
             header="Acciones"
             style={{ width: "8%" }}
           ></Column>
