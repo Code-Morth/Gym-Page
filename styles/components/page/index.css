@@ -1,3 +1,4 @@
 @import './usuario/';
-@import './admin/';;
+@import './admin/';
 @import './cliente/';
+@import './ventas/';

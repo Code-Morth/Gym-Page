@@ -1,0 +1,83 @@
+[
+    {
+      "name": "Botella de agua",
+      "code": "BA"
+    },
+    {
+      "name": "Papel higiénico",
+      "code": "PH"
+    },
+    {
+      "name": "Barra de proteína",
+      "code": "BP"
+    },
+    {
+      "name": "Bebida isotónica",
+      "code": "BI"
+    },
+    {
+      "name": "Toalla pequeña",
+      "code": "TP"
+    },
+    {
+      "name": "Geles energéticos",
+      "code": "GE"
+    },
+    {
+      "name": "Snacks saludables",
+      "code": "SS"
+    },
+    {
+      "name": "Camiseta deportiva",
+      "code": "CD"
+    },
+    {
+      "name": "Guantes de gimnasio",
+      "code": "GG"
+    },
+    {
+      "name": "Banda elástica",
+      "code": "BE"
+    },
+    {
+      "name": "Esterilla de yoga",
+      "code": "EY"
+    },
+    {
+      "name": "Cuerda para saltar",
+      "code": "CS"
+    },
+    {
+      "name": "Botella shaker",
+      "code": "BS"
+    },
+    {
+      "name": "Proteína en polvo",
+      "code": "PP"
+    },
+    {
+      "name": "Multivitamínicos",
+      "code": "MV"
+    },
+    {
+      "name": "Batido de recuperación",
+      "code": "BR"
+    },
+    {
+      "name": "Tapones para los oídos",
+      "code": "TE"
+    },
+    {
+      "name": "Gafas de natación",
+      "code": "GN"
+    },
+    {
+      "name": "Botella de desinfectante",
+      "code": "BD"
+    },
+    {
+      "name": "Rodillera",
+      "code": "R"
+    }
+  ]
+  

@@ -1,0 +1,83 @@
+[
+    {
+      "productName": "Botella de agua",
+      "price": 1.5
+    },
+    {
+      "productName": "Papel higiénico",
+      "price": 1.0
+    },
+    {
+      "productName": "Barra de proteína",
+      "price": 2.5
+    },
+    {
+      "productName": "Bebida isotónica",
+      "price": 2.0
+    },
+    {
+      "productName": "Toalla pequeña",
+      "price": 5.0
+    },
+    {
+      "productName": "Geles energéticos",
+      "price": 1.8
+    },
+    {
+      "productName": "Snacks saludables",
+      "price": 3.0
+    },
+    {
+      "productName": "Camiseta deportiva",
+      "price": 10.0
+    },
+    {
+      "productName": "Guantes de gimnasio",
+      "price": 12.0
+    },
+    {
+      "productName": "Banda elástica",
+      "price": 8.0
+    },
+    {
+      "productName": "Esterilla de yoga",
+      "price": 15.0
+    },
+    {
+      "productName": "Cuerda para saltar",
+      "price": 7.0
+    },
+    {
+      "productName": "Botella shaker",
+      "price": 6.0
+    },
+    {
+      "productName": "Proteína en polvo",
+      "price": 25.0
+    },
+    {
+      "productName": "Multivitamínicos",
+      "price": 20.0
+    },
+    {
+      "productName": "Batido de recuperación",
+      "price": 3.5
+    },
+    {
+      "productName": "Tapones para los oídos",
+      "price": 1.2
+    },
+    {
+      "productName": "Gafas de natación",
+      "price": 15.0
+    },
+    {
+      "productName": "Botella de desinfectante",
+      "price": 4.0
+    },
+    {
+      "productName": "Rodillera",
+      "price": 10.0
+    }
+  ]
+  
