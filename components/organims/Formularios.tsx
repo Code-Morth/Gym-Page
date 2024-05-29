@@ -35,7 +35,7 @@ const Formularios = () => {
             show(`Bienvenido empleaducho`);
             setTimeout(() => {
               router.push("/dashboard/user");
-            }, 1500);
+            }, 1000);
           }
         } else {
           show("Ingresar Cuenta");

@@ -11,16 +11,11 @@ const ProtectedRoute = ({ children }: any) => {
 
   useEffect(() => {
     const type = obtenerLocal("fk_typeuser");
-    
+
     if (type === "1") {
-      
-        router.push("/dashboard/admin");
-    
+      router.push("/dashboard/admin");
     } else if (type === "2") {
-      
-        router.push("/dashboard/user");
-      
-      
+      router.push("/dashboard/user");
     } else {
       // Manejar otros casos, por ejemplo redirigir al login o mostrar un error
       router.push("/");
@@ -29,14 +24,7 @@ const ProtectedRoute = ({ children }: any) => {
     setLoading(false);
   }, [router, obtenerLocal]);
 
-
-  return <>
-  {
-    loading ?  <Snipet/> : <> {children} </>
-  }
- 
-  
-  </>;
+  return <>{loading ? <Snipet /> : <> {children} </>}</>;
 };
 
 export default ProtectedRoute;

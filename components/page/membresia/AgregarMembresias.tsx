@@ -68,7 +68,7 @@ const AgregarMembresias = () => {
           <input
             required
             type="text"
-            placeholder="1mes"
+            placeholder="Dias de Duracion"
             name="duration"
             id="duracion"
           />
@@ -79,7 +79,7 @@ const AgregarMembresias = () => {
           <input
             required
             type="text"
-            placeholder="Toda las Maquinas"
+            placeholder="Dias de permiso"
             name="permisos"
             id="permisos"
           />

@@ -4,9 +4,9 @@ import ProtectedRoute from "../../../../components/protecte/ProtecteRouter";
 const index = () => {
   return (
     <ProtectedRoute>
-      <div>
-        <h2>soy el user</h2>
-      </div>
+<div className="w-full h-screen bg-[url('/fondo2.webp')] bg-cover">
+        
+        </div>
       </ProtectedRoute>
    
   );
