@@ -3,30 +3,34 @@ import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
 import productos from "@/../json/productos.json";
+import axios from "axios";
+import apisPeticion from "@/api/apisPeticion";
+import getConfig from "../../../../../../utils/getConfig";
 
 export default function Page() {
   const [customers, setCustomers] = useState<any>([]);
-  const [name, setname] = useState("")
+  const { url } = apisPeticion();
+  const [names, setname] = useState("");
 
   useEffect(() => {
-    setCustomers(productos);
+    axios
+      .get(`${url}/product`, getConfig())
+      .then((res) => setCustomers(res.data.data))
+      .catch((err) => console.log(err));
   }, []);
+  const capture = (e: any) => {
+    setname(e.target.value);
+  };
 
-  const capture = (e:any) => {
-     setname(e.target.value)
-  }
-
-
-  const filterCustomers = customers.filter((custon:any) => {
-
-    const names = custon?.nombre.toLowerCase().includes(name.toLowerCase());
-    return names;
-  })
+  const filterCustomers = customers.filter((custon: any) => {
+    const namesss = custon?.name.toLowerCase().includes(names.toLowerCase());
+    return namesss;
+  });
 
   return (
     <div className="box_all_producs main-page ">
       <h3>Todo Los Productos</h3>
-      <input  onChange={capture} type="text" placeholder="Producto" />
+      <input onChange={capture} type="text" placeholder="Producto" />
 
       <div className="tabla-container">
         <DataTable
@@ -39,13 +43,13 @@ export default function Page() {
         >
           <Column
             className="column "
-            field="nombre"
+            field="name"
             header="Nombre"
             style={{ width: "8%" }}
           ></Column>
           <Column
             className="column"
-            field="precio"
+            field="price_buy"
             header="Precio"
             style={{ width: "8%" }}
           ></Column>
@@ -57,7 +61,7 @@ export default function Page() {
           ></Column>
           <Column
             className="column"
-            field="acciones"
+            field="status"
             header="Acciones"
             style={{ width: "8%" }}
           ></Column>

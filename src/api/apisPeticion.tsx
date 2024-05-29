@@ -6,5 +6,5 @@ export default function apisPeticion() {
 
 
     
-    return { login , postUser , allUser}
+    return { login , postUser , allUser , url}
   }
