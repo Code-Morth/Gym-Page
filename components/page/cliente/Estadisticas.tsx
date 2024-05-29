@@ -8,8 +8,8 @@ import { getMonthsBetweenDates } from "../../../utils/getDates"
 
 const Estadisticas = () => {
   const [chartData, setChartData] = useState({})
-  const [dateStart, setDateStart] = useState<string>("")
-  const [dateEnd, setDateEnd] = useState<string>("")
+  const [dateStart, setDateStart] = useState<string>(new Date().toISOString())
+  const [dateEnd, setDateEnd] = useState<string>(new Date().toISOString())
   const { url } = apisPeticion()
 
   const handleSearchClick = () => {
@@ -32,6 +32,11 @@ const Estadisticas = () => {
       setChartData(data)
     })
   }
+
+  useEffect(() => {
+    handleSearchClick();
+  }, [])
+  
 
   return (
     <div className="Estadisticas">

@@ -1,66 +1,93 @@
 "use client"
 import { DataTable } from "primereact/datatable"
-import getConfig from "@/../utils/getConfig";
+import getConfig from "@/../utils/getConfig"
 import { Column } from "primereact/column"
 import { useEffect, useState } from "react"
 import apisPeticion from "@/api/apisPeticion"
 import axios from "axios"
-import useOpenModal from "../../../hook/useOpenModal";
-import UpdateUserModal from "./modals/UpdateUserModal";
-import AddUserModal from "./modals/AddUserModal";
+import useOpenModal from "../../../hook/useOpenModal"
+import UpdateUserModal from "./modals/UpdateUserModal"
+import AddUserModal from "./modals/AddUserModal"
 
 const TodosLosUsuarios = () => {
-  const [customers, setCustomers] = useState<any>([]);
-  const { allUser } = apisPeticion();
-  const {Open ,closeModal ,openModal} = useOpenModal();
+  const [customers, setCustomers] = useState<any>([])
+  const { allUser, url } = apisPeticion()
+  const { Open, closeModal, openModal } = useOpenModal()
   const [addUserModal, setaddUserModal] = useState<boolean>(false)
-  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [selectedUser, setSelectedUser] = useState<any>(null)
 
   const closeModal2 = () => {
     setaddUserModal(false)
   }
- 
-        const filterCustomer = customers.filter((user:any)=>{
-          const statusUser= user?.status !== "active";
-          return statusUser;
-        })
 
-        const filterCustomeractive = customers.filter((user:any)=>{
-          const statusUser= user?.status === "active";
-          return statusUser;
-        })
+  const filterCustomer =  customers && customers.length > 0
+  ? customers?.filter((user: any) => {
+      const statusUser = user?.status !== "active"
+      return statusUser
+    })
+  : [customers]?.filter((user: any) => {
+      const statusUser = user?.status !== "active"
+      return statusUser
+    })
 
-        const openUserModal = (user: any) => {
-          setSelectedUser(user);
-          openModal();
-        }
+  const filterCustomeractive =  customers && customers.length > 0
+  ? customers?.filter((user: any) => {
+      const statusUser = user?.status === "active"
+      return statusUser
+    })
+  : [customers]?.filter((user: any) => {
+      const statusUser = user?.status === "active"
+      return statusUser
+    })
 
-        const openUserModalAdd = (user: any) => {
-          setSelectedUser(user);
-          setaddUserModal(true);
-        }
+  const openUserModal = (user: any) => {
+    setSelectedUser(user)
+    openModal()
+  }
 
-        const accionUser = (rowData: any) => {
-          return <button onClick={()=>openUserModal(rowData)}>{rowData?.status}</button>
-        }
-        const accionUserAdd = (rowData: any) => {
-          return <button onClick={()=>openUserModalAdd(rowData)}>{rowData?.status}</button>
-        }
+  const openUserModalAdd = (user: any) => {
+    setSelectedUser(user)
+    setaddUserModal(true)
+  }
 
-        useEffect(() => {
-          axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
-        }, [ ])
+  const accionUser = (rowData: any) => {
+    return (
+      <button onClick={() => openUserModal(rowData)}>{rowData?.status}</button>
+    )
+  }
+  const accionUserAdd = (rowData: any) => {
+    return (
+      <button onClick={() => openUserModalAdd(rowData)}>
+        {rowData?.status}
+      </button>
+    )
+  }
 
+  useEffect(() => {
+    axios
+      .get(`${allUser}`, getConfig())
+      .then((res) => setCustomers(res.data.data))
+      .catch((err) => console.log(err))
+  }, [])
 
-        useEffect(() => {
-         
-        }, [filterCustomeractive , filterCustomer])
-        
+  const searchById = (data: any) => {
+    console.log(data.target.value)
+    axios
+      .get(`${url}/user/${data.target.value}`, getConfig())
+      .then((res) => setCustomers(res.data.data))
+      .catch((err) => console.log(err))
+  }
+
   return (
     <>
       <div className="TodosLosUsuarios">
         <div className="todos-los-usarios-container">
-        <input className='search-client' type="text" placeholder='Buscar Usuario' />
+          <input
+            onChange={searchById}
+            className="search-client"
+            type="text"
+            placeholder="Buscar Usuario"
+          />
 
           <div className="table-1 ">
             <h1>Usuarios activos</h1>
@@ -154,7 +181,11 @@ const TodosLosUsuarios = () => {
                 ></Column>
               </DataTable>
             </div>
-            <UpdateUserModal customers={selectedUser} visible={Open} closeModal={closeModal}/>
+            <UpdateUserModal
+              customers={selectedUser}
+              visible={Open}
+              closeModal={closeModal}
+            />
           </div>
           <div className="table-2">
             <h1>Usuarios inactivos</h1>
@@ -247,7 +278,11 @@ const TodosLosUsuarios = () => {
                   style={{ width: "10%" }}
                 ></Column>
               </DataTable>
-              <AddUserModal customers={selectedUser} visible={addUserModal} closeModal={closeModal2}/>
+              <AddUserModal
+                customers={selectedUser}
+                visible={addUserModal}
+                closeModal={closeModal2}
+              />
             </div>
           </div>
         </div>

@@ -64,7 +64,7 @@ const AgregarCliente = () => {
               <label htmlFor="phone">Telefono</label>
               <input required name="phone" type="number" />
               <label htmlFor="fk_membership">Membresia</label>
-              <select name="fk_membership" id="">
+              <select required name="fk_membership" id="">
                 <option value="">Seleccione su membresia</option>
                 {memberShip?.map((data: any) => (
                   <option key={data.id} value={data.id}>
@@ -81,7 +81,7 @@ const AgregarCliente = () => {
               <label htmlFor="address">Direccion</label>
               <input name="address" type="text" />
               <label htmlFor="ci">Ci</label>
-              <input name="ci" type="number" />
+              <input required name="ci" type="number" />
             </div>
           </div>
           <button className="button-default">Agregar cliente</button>
