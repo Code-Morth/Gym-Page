@@ -19,10 +19,12 @@ const generateColorPalette = (numColors: any) => {
   return colors
 }
 
-export default function page () {
+export default function Page () {
 
 
   const [chartData, setChartData] = useState({})
+  const [dateStart, setdateStart] = useState<any>()
+  const [dateEnd, setdateEnd] = useState<any>()
 
   useEffect(() => {
     const numDataPoints = 14 // Número de puntos de datos
@@ -68,6 +70,18 @@ export default function page () {
     return (
       <div className="Estadisticas">
       <div className="estadisticas-container">
+      <div className="dates-container">
+            <h1>Fecha de inicio </h1>
+            <input
+              onChange={(e: any) => setdateStart(e.target.value)}
+              type="date"
+            />
+            <h1>Fecha fin</h1>
+            <input
+              onChange={(e: any) => setdateEnd(e.target.value)}
+              type="date"
+            />
+          </div>
         <div className="card">
           <Chart
             type="bar"

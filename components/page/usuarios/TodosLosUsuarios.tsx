@@ -19,6 +19,8 @@ console.log(customers)
     <>
       <div className="TodosLosUsuarios">
         <div className="todos-los-usarios-container">
+        <input className='search-client' type="text" placeholder='Buscar cliente' />
+
           <div className="table-1">
             <h1>Usuarios activos</h1>
             <div className="tabla-container">

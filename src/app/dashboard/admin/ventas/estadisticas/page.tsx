@@ -1,7 +1,10 @@
+import Estadisticas from '../../../../../../components/page/ventas/Estadisticas';
 
 export default function page () {
     return (
-      <div>Soy estadisticas</div>
+      <>
+      <Estadisticas/>
+      </>
     )
   }
   
