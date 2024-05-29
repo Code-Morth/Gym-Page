@@ -15,6 +15,9 @@ const AgregarUsuarios = () => {
     event.preventDefault();
 
     const dataForm = Object.fromEntries(new FormData(event.target));
+
+    console.log("dataForm",dataForm)
+
     baseApi
       .post(`${postUser}`, dataForm, getConfig())
       .then((res) => {
