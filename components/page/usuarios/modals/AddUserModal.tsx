@@ -70,7 +70,7 @@ const AddUserModal = ({
               <input type="date" required name="final_date"  />
               </div>
               
-              {/* <div className="content_box_inputs">
+               <div className="content_box_inputs">
               <label htmlFor="initial_time">Hora de Entrada</label>
               <input type="time" required name="initial_time"  />
               </div>
@@ -78,7 +78,7 @@ const AddUserModal = ({
               <div className="content_box_inputs">
               <label htmlFor="final_time">Hora de Salida</label>
               <input type="time" required name="final_time"  />
-              </div> */}
+              </div> 
               
               <div className="content_box_inputs">
               <label htmlFor="address">Dirrecion</label>

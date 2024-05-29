@@ -59,12 +59,12 @@ const TodosLosUsuarios = () => {
 
   const accionUser = (rowData: any) => {
     return (
-      <button style={{width:"5rem",backgroundColor: "red"}} onClick={() => openUserModal(rowData)}>{rowData?.status}</button>
+      <button onClick={() => openUserModal(rowData)}>{rowData?.status}</button>
     )
   }
   const accionUserAdd = (rowData: any) => {
     return (
-      <button style={{width:"5rem",backgroundColor: "red"}}  onClick={() => openUserModalAdd(rowData)}>
+      <button   onClick={() => openUserModalAdd(rowData)}>
         {rowData?.status}
       </button>
     )

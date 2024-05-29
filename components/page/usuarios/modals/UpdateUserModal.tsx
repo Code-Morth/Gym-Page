@@ -32,7 +32,7 @@ const UpdateUserModal = ({
         if (res.data.success) {
           show("Usuario actualizado Correctamente");
           dataRed.current.reset();
-          // closeModal();
+          closeModal();
         }
       })
       .catch((err) => console.log(err));

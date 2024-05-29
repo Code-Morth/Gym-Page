@@ -1,20 +1,19 @@
-"use client"
-import React from "react"
-import Link from "next/link"
-import Image from "next/image"
-import useSidebar from "../../hook/useSidebar"
-import { usePathname } from "next/navigation"
+"use client";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import useSidebar from "../../hook/useSidebar";
+import { usePathname } from "next/navigation";
+import userLocalStoras from "../../hook/userLocalStoras";
 
 const SidebarGym = () => {
-  const { optionSelect, selectedOption } = useSidebar()
+  const { optionSelect, selectedOption } = useSidebar();
+  const { eliminarLocal } = userLocalStoras();
 
-  const path = usePathname()
+  const path = usePathname();
 
-  const isAdminRoute = path.startsWith("/dashboard/admin")
-  const isUserRoute = path.startsWith("/dashboard/user")
-
-  console.log("isAdminRoute", isAdminRoute)
-  console.log("isUserRoute", isUserRoute)
+  const isAdminRoute = path.startsWith("/dashboard/admin");
+  const isUserRoute = path.startsWith("/dashboard/user");
 
   return (
     <div>
@@ -206,11 +205,18 @@ const SidebarGym = () => {
         </div>
 
         <div className="box_text_sidebar">
-          <Link href="/">Salir</Link>
+          <Link
+            href="#"
+            onClick={() => {
+              eliminarLocal("fk_typeuser"), eliminarLocal("token");
+            }}
+          >
+            Salir
+          </Link>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SidebarGym
+export default SidebarGym;
