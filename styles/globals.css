@@ -25,7 +25,9 @@ textarea {
     @apply hidden;
   }
 }
-
+.p-dialog-header-icons {
+  @apply  hidden;
+}
 .main-page {
   animation-name: fadeIn;
   animation-duration: 0.6s;

@@ -5,14 +5,21 @@ import { Column } from "primereact/column"
 import { useEffect, useState } from "react"
 import apisPeticion from "@/api/apisPeticion"
 import axios from "axios"
+import useOpenModal from "../../../hook/useOpenModal";
+import UpdateUserModal from "./modals/UpdateUserModal";
+import AddUserModal from "./modals/AddUserModal";
 
 const TodosLosUsuarios = () => {
   const [customers, setCustomers] = useState<any>([]);
   const { allUser } = apisPeticion();
+  const {Open ,closeModal ,openModal} = useOpenModal();
+  const [addUserModal, setaddUserModal] = useState<boolean>(false)
+  const [selectedUser, setSelectedUser] = useState<any>(null);
 
-  useEffect(() => {
-    axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
-  }, [])
+  const closeModal2 = () => {
+    setaddUserModal(false)
+  }
+ 
         const filterCustomer = customers.filter((user:any)=>{
           const statusUser= user?.status !== "active";
           return statusUser;
@@ -23,7 +30,32 @@ const TodosLosUsuarios = () => {
           return statusUser;
         })
 
+        const openUserModal = (user: any) => {
+          setSelectedUser(user);
+          openModal();
+        }
 
+        const openUserModalAdd = (user: any) => {
+          setSelectedUser(user);
+          setaddUserModal(true);
+        }
+
+        const accionUser = (rowData: any) => {
+          return <button onClick={()=>openUserModal(rowData)}>{rowData?.status}</button>
+        }
+        const accionUserAdd = (rowData: any) => {
+          return <button onClick={()=>openUserModalAdd(rowData)}>{rowData?.status}</button>
+        }
+
+        useEffect(() => {
+          axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
+        }, [ ])
+
+
+        useEffect(() => {
+         
+        }, [filterCustomeractive , filterCustomer])
+        
   return (
     <>
       <div className="TodosLosUsuarios">
@@ -118,9 +150,11 @@ const TodosLosUsuarios = () => {
                   field="status"
                   header="Acciones"
                   style={{ width: "10%" }}
+                  body={accionUser}
                 ></Column>
               </DataTable>
             </div>
+            <UpdateUserModal customers={selectedUser} visible={Open} closeModal={closeModal}/>
           </div>
           <div className="table-2">
             <h1>Usuarios inactivos</h1>
@@ -209,9 +243,11 @@ const TodosLosUsuarios = () => {
                   className="column"
                   field="status"
                   header="Acciones"
+                  body={accionUserAdd}
                   style={{ width: "10%" }}
                 ></Column>
               </DataTable>
+              <AddUserModal customers={selectedUser} visible={addUserModal} closeModal={closeModal2}/>
             </div>
           </div>
         </div>
