@@ -19,4 +19,10 @@
 
   }
 
+  .search-client{
+
+    @apply w-fit ;
+
+  }
+
 }
