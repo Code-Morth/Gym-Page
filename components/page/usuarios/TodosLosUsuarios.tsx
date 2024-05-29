@@ -15,14 +15,21 @@ const TodosLosUsuarios = () => {
   const { Open, closeModal, openModal } = useOpenModal()
   const [addUserModal, setaddUserModal] = useState<boolean>(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
+  const [selectedUserAdd, setSelectedUserAdd] = useState<any>(null);
 
   const closeModal2 = () => {
     setaddUserModal(false)
   }
 
+  useEffect(() => {
+    axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
+  }, [ ])
+
+  console.log(setCustomers)
+
   const filterCustomer =  customers && customers.length > 0
   ? customers?.filter((user: any) => {
-      const statusUser = user?.status !== "active"
+      const statusUser = user?.status === "deleted"
       return statusUser
     })
   : [customers]?.filter((user: any) => {
@@ -32,7 +39,7 @@ const TodosLosUsuarios = () => {
 
   const filterCustomeractive =  customers && customers.length > 0
   ? customers?.filter((user: any) => {
-      const statusUser = user?.status === "active"
+      const statusUser = user?.status == "active"
       return statusUser
     })
   : [customers]?.filter((user: any) => {
@@ -46,18 +53,18 @@ const TodosLosUsuarios = () => {
   }
 
   const openUserModalAdd = (user: any) => {
-    setSelectedUser(user)
+    setSelectedUserAdd(user)
     setaddUserModal(true)
   }
 
   const accionUser = (rowData: any) => {
     return (
-      <button onClick={() => openUserModal(rowData)}>{rowData?.status}</button>
+      <button style={{width:"5rem",backgroundColor: "red"}} onClick={() => openUserModal(rowData)}>{rowData?.status}</button>
     )
   }
   const accionUserAdd = (rowData: any) => {
     return (
-      <button onClick={() => openUserModalAdd(rowData)}>
+      <button style={{width:"5rem",backgroundColor: "red"}}  onClick={() => openUserModalAdd(rowData)}>
         {rowData?.status}
       </button>
     )
@@ -281,7 +288,7 @@ const TodosLosUsuarios = () => {
                 ></Column>
               </DataTable>
               <AddUserModal
-                customers={selectedUser}
+                customers={selectedUserAdd}
                 visible={addUserModal}
                 closeModal={closeModal2}
               />

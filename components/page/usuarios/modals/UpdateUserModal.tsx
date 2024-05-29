@@ -25,15 +25,14 @@ const UpdateUserModal = ({
     event?.preventDefault();
 
     const userUpdate = Object.fromEntries(new FormData(event.target));
-
-    axios
-      .put(`${url}/user/${customers?.id}`, userUpdate, getConfig())
+    console.log("esta lad ata",userUpdate);
+    axios.put(`${url}/user/${customers?.id}`, userUpdate, getConfig())
       .then((res) => {
+        
         if (res.data.success) {
           show("Usuario actualizado Correctamente");
           dataRed.current.reset();
-
-          closeModal();
+          // closeModal();
         }
       })
       .catch((err) => console.log(err));
@@ -58,7 +57,8 @@ const UpdateUserModal = ({
             <label htmlFor="">Cambiar estado</label>
 
             <select name="status">
-              <option>Eliminar</option>
+              <option >Elija</option>
+              <option value={"deleted"}>Eliminar</option>
             </select>
             <button className="button-default" type="submit">
               Actulizar
