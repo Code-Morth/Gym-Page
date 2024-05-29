@@ -23,7 +23,7 @@ export default function page () {
 
     return (
       <div className="box_all_producs main-page ">
-      <h3>Todo Los Productos</h3>
+      <h3>Todas Las Menbresía</h3>
       
 
       <div className="tabla-container">

@@ -17,18 +17,25 @@ const TodosLosUsuarios = () => {
           const statusUser= user?.status !== "active";
           return statusUser;
         })
+
+        const filterCustomeractive = customers.filter((user:any)=>{
+          const statusUser= user?.status === "active";
+          return statusUser;
+        })
+
+
   return (
     <>
       <div className="TodosLosUsuarios">
         <div className="todos-los-usarios-container">
-        <input className='search-client' type="text" placeholder='Buscar cliente' />
+        <input className='search-client' type="text" placeholder='Buscar Usuario' />
 
           <div className="table-1 ">
             <h1>Usuarios activos</h1>
             <div className="tabla-container">
               <DataTable
                 className="data-table"
-                value={customers}
+                value={filterCustomeractive}
                 paginator
                 rows={5}
                 rowsPerPageOptions={[5, 10, 25, 50]}
