@@ -8,7 +8,7 @@ import { Toast } from "primereact/toast";
 
 const AgregarUsuarios = () => {
   const { postUser } = apisPeticion();
-  const dataRef = useRef<any>(null)
+  const dataRef = useRef<any>(null);
   const { show, toast } = useAlerts();
 
   const handleLogin = (event: any) => {
@@ -18,15 +18,12 @@ const AgregarUsuarios = () => {
     baseApi
       .post(`${postUser}`, dataForm, getConfig())
       .then((res) => {
-        if(res.data.success){
+        if (res.data.success) {
           show("Usuario Creado Exitosamente");
-          dataRef.current.reset()
+          dataRef.current.reset();
         }
-
       })
       .catch((err) => console.log(err));
-
-    console.log(dataForm);
   };
 
   return (

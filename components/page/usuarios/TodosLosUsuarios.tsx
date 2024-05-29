@@ -1,16 +1,20 @@
 "use client"
 import { DataTable } from "primereact/datatable"
+import getConfig from "@/../utils/getConfig";
 import { Column } from "primereact/column"
 import { useEffect, useState } from "react"
 import todosLosUsuarios from "../../../json/todosLosUsuarios.json"
+import apisPeticion from "@/api/apisPeticion"
+import axios from "axios"
 
 const TodosLosUsuarios = () => {
-  const [customers, setCustomers] = useState<any>([])
+  const [customers, setCustomers] = useState<any>([]);
+  const { allUser } = apisPeticion();
 
   useEffect(() => {
-    setCustomers(todosLosUsuarios)
+    axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
   }, [])
-
+console.log(customers)
   return (
     <>
       <div className="TodosLosUsuarios">
@@ -28,19 +32,19 @@ const TodosLosUsuarios = () => {
               >
                 <Column
                   className="column"
-                  field="fullName"
+                  field="username"
                   header="Nombre completo"
                   style={{ width: "8%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="firstSurname"
+                  field="first_name"
                   header="Primer apellido"
                   style={{ width: "8%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="secondSurname"
+                  field="last_name2"
                   header="Segundo apellido"
                   style={{ width: "8%" }}
                 ></Column>
@@ -52,25 +56,25 @@ const TodosLosUsuarios = () => {
                 ></Column>
                 <Column
                   className="column"
-                  field="startDate"
+                  field="initial_date"
                   header="Fecha de inicio"
                   style={{ width: "8%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="finalDate"
+                  field="final_date"
                   header="Fecha final"
                   style={{ width: "8%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="entryTime"
+                  field="initial_time"
                   header="Horario de entrada"
                   style={{ width: "10%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="closingHour"
+                  field="final_time"
                   header="Horario de salida"
                   style={{ width: "10%" }}
                 ></Column>
@@ -94,13 +98,13 @@ const TodosLosUsuarios = () => {
                 ></Column>
                 <Column
                   className="column"
-                  field="userType"
+                  field="fk_typeuser"
                   header="Rol"
                   style={{ width: "10%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="actions"
+                  field="status"
                   header="Acciones"
                   style={{ width: "10%" }}
                 ></Column>
@@ -120,19 +124,19 @@ const TodosLosUsuarios = () => {
               >
                 <Column
                   className="column"
-                  field="fullName"
+                  field="username"
                   header="Nombre completo"
                   style={{ width: "8%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="firstSurname"
+                  field="last_name1"
                   header="Primer apellido"
                   style={{ width: "8%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="secondSurname"
+                  field="last_name2"
                   header="Segundo apellido"
                   style={{ width: "8%" }}
                 ></Column>
@@ -144,25 +148,25 @@ const TodosLosUsuarios = () => {
                 ></Column>
                 <Column
                   className="column"
-                  field="startDate"
+                  field="initial_date"
                   header="Fecha de inicio"
                   style={{ width: "8%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="finalDate"
+                  field="final_date"
                   header="Fecha final"
                   style={{ width: "8%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="entryTime"
+                  field="initial_time"
                   header="Horario de entrada"
                   style={{ width: "10%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="closingHour"
+                  field="final_time"
                   header="Horario de salida"
                   style={{ width: "10%" }}
                 ></Column>
@@ -186,13 +190,13 @@ const TodosLosUsuarios = () => {
                 ></Column>
                 <Column
                   className="column"
-                  field="userType"
+                  field="fk_typeuser"
                   header="Rol"
                   style={{ width: "10%" }}
                 ></Column>
                 <Column
                   className="column"
-                  field="actions"
+                  field="status"
                   header="Acciones"
                   style={{ width: "10%" }}
                 ></Column>

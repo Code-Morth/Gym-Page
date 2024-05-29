@@ -1,5 +1,10 @@
 export default function apisPeticion() {
-    const login = "https://powergym-api-eex9.onrender.com/api/v1/user/login"
-    const postUser = "https://powergym-api-eex9.onrender.com/api/v1/user"
-    return { login , postUser}
+  const url ="https://powergym-api-eex9.onrender.com/api/v1"
+    const login = `${url}/user/login`
+    const postUser = `${url}/user`
+    const allUser = `${url}/user`
+
+
+    
+    return { login , postUser , allUser}
   }
