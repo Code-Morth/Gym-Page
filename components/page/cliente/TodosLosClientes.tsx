@@ -27,15 +27,28 @@ const TodosLosClientes = () => {
       .then((res) => setmemberShip(res.data.data))
       .catch((err) => console.log(err))
   }, [])
-  const filterCustomerExpired = customers.filter((user: any) => {
-    const statusUser = user?.status !== "active"
-    return statusUser
-  })
 
-  const filterCustomerActive = customers.filter((user: any) => {
-    const statusUser = user?.status === "active"
-    return statusUser
-  })
+  const filterCustomerExpired =
+    customers && customers.length > 0
+      ? customers?.filter((user: any) => {
+          const statusUser = user?.status !== "active"
+          return statusUser
+        })
+      : [customers]?.filter((user: any) => {
+          const statusUser = user?.status !== "active"
+          return statusUser
+        })
+
+  const filterCustomerActive =
+    customers && customers.length > 0
+      ? customers?.filter((user: any) => {
+          const statusUser = user?.status === "active"
+          return statusUser
+        })
+      : [customers]?.filter((user: any) => {
+          const statusUser = user?.status === "active"
+          return statusUser
+        })
 
   const accionUser = (rowData: any) => {
     return <button onClick={() => console.log(rowData.id)}>Editar</button>
@@ -57,12 +70,19 @@ const TodosLosClientes = () => {
     )
   }
 
-  console.log("memberShip", memberShip)
+  const searchById = (data: any) => {
+    axios
+      .get(`${url}/client/${data.target.value}`, getConfig())
+      .then((res) => setCustomers(res.data.data))
+      .catch((err) => console.log(err))
+  }
+
+  console.log("customers", customers)
 
   return (
     <div className="TodosLosClientes">
       <div className="todos-los-clientes-container">
-        <input type="text" placeholder="Buscar cliente" />
+        <input onChange={searchById} type="text" placeholder="Buscar cliente" />
         <div className="table-1">
           <h1>Clientes activos</h1>
           <div className="tabla-container">
