@@ -64,8 +64,15 @@ const AgregarUsuarios = () => {
               <input required name="ci" type="text" />
               <label htmlFor="password">Contraseña</label>
               <input required name="password" type="password" />
-              <label htmlFor="userType">Rol</label>
-              <input required name="fk_typeuser" type="text" />
+              {/* <label htmlFor="userType">Rol</label>
+              <input required name="fk_typeuser" type="text" /> */}
+              <div className="select-_">
+                <select name="fk_typeuser" >
+                  <option value="">Elegir el Rol</option>
+                  <option value="1">Adminitrador</option>
+                  <option value="2">Trabajador</option>
+                </select>
+              </div>
             </div>
           </div>
           <button className="button-default">Agregar usuario</button>

@@ -158,6 +158,12 @@ input {
 .content_box_inputs{
   @apply flex flex-col gap-[1.5rem] ;
 }
+.select-_{
+  @apply mt-[4.4rem] ;
+  & select {
+    @apply  py-[.4rem] ;
+  }
+}
 
 
 .contex_box_all_inputs{

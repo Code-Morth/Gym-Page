@@ -32,7 +32,7 @@ const Formularios = () => {
               router.push("/dashboard/admin");
             }, 1000);
           } else {
-            show(`Bienvenido empleaducho`);
+            show(`Bienvenido Usuario Trabajador`);
             setTimeout(() => {
               router.push("/dashboard/user");
             }, 1000);
