@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import apisPeticion from "@/api/apisPeticion"
 import getConfig from "../../../utils/getConfig"
 import { useAlerts } from "../../../hook/useAlerts"
@@ -10,11 +10,34 @@ const AgregarCliente = () => {
   const { url } = apisPeticion()
   const dataRef = useRef<any>(null)
   const { show, toast } = useAlerts()
+  const [memberShip, setmemberShip] = useState<any>()
+
+  useEffect(() => {
+    axios
+      .get(`${url}/membership`, getConfig())
+      .then((res) => {
+        const transformedData = res.data.data
+          .map((item: any) => ({
+            name: item.name,
+            id: item.id.toString(),
+            status: item.status,
+          }))
+          .filter((data: any) => data.status === "active")
+        setmemberShip(transformedData)
+      })
+      .catch((err) => console.log(err))
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  console.log("memberShip", memberShip)
 
   const handleLogin = (event: any) => {
     event.preventDefault()
 
     const dataForm = Object.fromEntries(new FormData(event.target))
+
+    console.log("dataForm",dataForm)
 
     axios
       .post(`${url}/client`, dataForm, getConfig())
@@ -41,7 +64,14 @@ const AgregarCliente = () => {
               <label htmlFor="phone">Telefono</label>
               <input required name="phone" type="number" />
               <label htmlFor="fk_membership">Membresia</label>
-              <input name="fk_membership" type="number" />
+              <select name="fk_membership" id="">
+                <option value="">Seleccione su membresia</option>
+                {memberShip?.map((data: any) => (
+                  <option key={data.id} value={data.id}>
+                    {data?.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="form-rigth">
               <label htmlFor="last_name1">Primer apellido</label>
