@@ -3,7 +3,6 @@ import { DataTable } from "primereact/datatable"
 import getConfig from "@/../utils/getConfig";
 import { Column } from "primereact/column"
 import { useEffect, useState } from "react"
-import todosLosUsuarios from "../../../json/todosLosUsuarios.json"
 import apisPeticion from "@/api/apisPeticion"
 import axios from "axios"
 
@@ -14,7 +13,10 @@ const TodosLosUsuarios = () => {
   useEffect(() => {
     axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
   }, [])
-console.log(customers)
+        const filterCustomer = customers.filter((user:any)=>{
+          const statusUser= user?.status !== "active";
+          return statusUser;
+        })
   return (
     <>
       <div className="TodosLosUsuarios">
@@ -118,7 +120,7 @@ console.log(customers)
             <div className="tabla-container">
               <DataTable
                 className="data-table"
-                value={customers}
+                value={filterCustomer}
                 paginator
                 rows={5}
                 rowsPerPageOptions={[5, 10, 25, 50]}
