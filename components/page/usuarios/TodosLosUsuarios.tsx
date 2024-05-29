@@ -15,18 +15,25 @@ const TodosLosUsuarios = () => {
   const {Open ,closeModal ,openModal} = useOpenModal();
   const [addUserModal, setaddUserModal] = useState<boolean>(false)
   const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [selectedUserAdd, setSelectedUserAdd] = useState<any>(null);
 
   const closeModal2 = () => {
     setaddUserModal(false)
   }
+
+  useEffect(() => {
+    axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
+  }, [ ])
+
+  console.log(setCustomers)
  
         const filterCustomer = customers.filter((user:any)=>{
-          const statusUser= user?.status !== "active";
+          const statusUser= user?.status === "deleted";
           return statusUser;
         })
 
         const filterCustomeractive = customers.filter((user:any)=>{
-          const statusUser= user?.status === "active";
+          const statusUser= user?.status == "active";
           return statusUser;
         })
 
@@ -36,25 +43,22 @@ const TodosLosUsuarios = () => {
         }
 
         const openUserModalAdd = (user: any) => {
-          setSelectedUser(user);
+          setSelectedUserAdd(user);
           setaddUserModal(true);
         }
 
         const accionUser = (rowData: any) => {
-          return <button onClick={()=>openUserModal(rowData)}>{rowData?.status}</button>
+          return <button style={{width:"5rem",backgroundColor: "red"}} onClick={()=>openUserModal(rowData)}>{rowData?.status}</button>
         }
         const accionUserAdd = (rowData: any) => {
-          return <button onClick={()=>openUserModalAdd(rowData)}>{rowData?.status}</button>
+          return <button style={{width:"5rem",backgroundColor: "red"}}  onClick={()=>openUserModalAdd(rowData)}>{rowData?.status}</button>
         }
 
-        useEffect(() => {
-          axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
-        }, [ ])
+        
 
 
-        useEffect(() => {
-         
-        }, [filterCustomeractive , filterCustomer])
+       console.log("active",filterCustomeractive)
+       console.log("delect",filterCustomer)
         
   return (
     <>
@@ -247,7 +251,7 @@ const TodosLosUsuarios = () => {
                   style={{ width: "10%" }}
                 ></Column>
               </DataTable>
-              <AddUserModal customers={selectedUser} visible={addUserModal} closeModal={closeModal2}/>
+              <AddUserModal customers={selectedUserAdd} visible={addUserModal} closeModal={closeModal2}/>
             </div>
           </div>
         </div>

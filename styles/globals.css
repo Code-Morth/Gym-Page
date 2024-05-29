@@ -159,6 +159,10 @@ input {
   @apply flex flex-col gap-[1.5rem] ;
 }
 
+
+.contex_box_all_inputs{
+  @apply grid grid-cols-2 grid-rows-3  gap-[1rem];
+}
 /*-----------------------------Form---------------------------------*/
 
 
