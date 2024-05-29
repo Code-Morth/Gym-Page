@@ -38,7 +38,7 @@ const TodosLosClientes = () => {
   })
 
   const accionUser = (rowData: any) => {
-    return <button onClick={()=>console.log(rowData.id)}>Editar</button>
+    return <button onClick={() => console.log(rowData.id)}>Editar</button>
   }
 
   const columnMemberShip = (rowData: any) => {
@@ -48,7 +48,13 @@ const TodosLosClientes = () => {
       return member
     })
 
-    return <span>{filterMemberShip[0].name}</span>
+    return (
+      <span>
+        {filterMemberShip && filterMemberShip.length > 0
+          ? filterMemberShip[0].name
+          : "Membresia"}
+      </span>
+    )
   }
 
   console.log("memberShip", memberShip)
@@ -144,7 +150,7 @@ const TodosLosClientes = () => {
               rowsPerPageOptions={[5, 10, 25, 50]}
               tableStyle={{ minWidth: "50rem" }}
             >
-               <Column
+              <Column
                 className="column"
                 field="first_name"
                 header="Nombre completo"
