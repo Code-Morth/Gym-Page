@@ -24,10 +24,10 @@ const AddUserModal = ({
   const handleUpdateUser = (event: any) => {
     event?.preventDefault();
 
-    const userUpdate = Object.fromEntries(new FormData(event.target));
+    const userUpdateadd = Object.fromEntries(new FormData(event.target));
 
     axios
-      .put(`${url}/user/${customers?.id}`, userUpdate, getConfig())
+      .put(`${url}/user/${customers?.id}`, userUpdateadd, getConfig())
       .then((res) => {
         if (res.data.success) {
           show("Usuario actualizado Correctamente");
@@ -39,7 +39,6 @@ const AddUserModal = ({
       .catch((err) => console.log(err));
   };
 
-  console.log(customers)
   return (
     <div>
       <Modal
@@ -56,19 +55,52 @@ const AddUserModal = ({
             ref={dataRed}
             onSubmit={handleUpdateUser}
           >
-            <div>
+            <div className="contex_box_all_inputs">
+              <div className="content_box_inputs">
               <label htmlFor="email">Email</label>
               <input type="email" required name="email" placeholder="maria@gmail.com" />
-              <label htmlFor="email">Fecha de inicio</label>
-              <input type="email" required name="email" placeholder="maria@gmail.com" />
-            </div>
-            
-           <div>
+              </div>
+              
+              <div className="content_box_inputs">
+              <label htmlFor="initial_date">Fecha de inicio</label>
+              <input type="date" required name="initial_date"  />
+              </div>
+              
+              <div className="content_box_inputs">
+              <label htmlFor="final_date">Fecha de Final</label>
+              <input type="date" required name="final_date"  />
+              </div>
+              
+              <div className="content_box_inputs">
+              <label htmlFor="initial_time">Hora de Entrada</label>
+              <input type="time" required name="initial_time"  />
+              </div>
+              
+              <div className="content_box_inputs">
+              <label htmlFor="final_time">Hora de Salida</label>
+              <input type="time" required name="final_time"  />
+              </div>
+              
+              <div className="content_box_inputs">
+              <label htmlFor="address">Dirrecion</label>
+              <input type="text" required name="address" placeholder="bolivia la paz" />
+              </div>
+              
+              <div className="content_box_inputs">
+              <label htmlFor="fk_typeuser">Rol</label>
+              <input type="number" required name="fk_typeuser" placeholder="admin" />
+              </div>
+
+              <div className="content_box_inputs">
            <label htmlFor="">Cambiar estado</label>
             <select name="status">
-              <option>Agregar</option>
+              <option value="" >Elegir</option>
+              <option value={"active"} >active</option>
             </select>
            </div>
+            </div>
+            
+          
             <button className="button-default" type="submit">
               Actulizar
             </button>

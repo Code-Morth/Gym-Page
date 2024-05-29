@@ -58,7 +58,8 @@ const UpdateUserModal = ({
             <label htmlFor="">Cambiar estado</label>
 
             <select name="status">
-              <option>Eliminar</option>
+              <option >Elija</option>
+              <option value={"deleted"}>Eliminar</option>
             </select>
             <button className="button-default" type="submit">
               Actulizar
