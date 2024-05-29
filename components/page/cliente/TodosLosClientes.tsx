@@ -14,10 +14,6 @@ const TodosLosClientes = () => {
   const { url } = apisPeticion()
 
   useEffect(() => {
-    setCustomers(todosLosUsuarios)
-  }, [])
-
-  useEffect(() => {
     axios
       .get(`${url}/client`, getConfig())
       .then((res) => setCustomers(res.data.data))
@@ -28,6 +24,12 @@ const TodosLosClientes = () => {
       .then((res) => setmemberShip(res.data.data))
       .catch((err) => console.log(err))
   }, [])
+
+  useEffect(() => {
+    setCustomers(todosLosUsuarios)
+  }, [])
+
+
 
   const filterCustomerExpired =
     customers && customers.length > 0
@@ -51,8 +53,26 @@ const TodosLosClientes = () => {
           return statusUser
         })
 
-  const accionUser = (rowData: any) => {
-    return <button onClick={() => console.log(rowData.id)}>Editar</button>
+  const putStatusDeleted = (rowData: any) => {
+    const putData = () => {
+      axios
+        .put(`${url}/client/${rowData.id}`, { status: "deleted" }, getConfig())
+        .then((res) => setCustomers(res.data.data))
+        .catch((err) => console.log(err))
+    }
+
+    return <button onClick={putData}>Desactivar</button>
+  }
+
+  const putStatusActive = (rowData: any) => {
+    const putData = () => {
+      axios
+        .put(`${url}/client/${rowData.id}`, { status: "active" }, getConfig())
+        .then((res) => setCustomers(res.data.data))
+        .catch((err) => console.log(err))
+    }
+
+    return <button onClick={putData}>Activar</button>
   }
 
   const columnMemberShip = (rowData: any) => {
@@ -77,6 +97,18 @@ const TodosLosClientes = () => {
       .then((res) => setCustomers(res.data.data))
       .catch((err) => console.log(err))
   }
+
+  useEffect(() => {
+    axios
+      .get(`${url}/client`, getConfig())
+      .then((res) => setCustomers(res.data.data))
+      .catch((err) => console.log(err))
+
+    axios
+      .get(`${url}/membership`, getConfig())
+      .then((res) => setmemberShip(res.data.data))
+      .catch((err) => console.log(err))
+  }, [putStatusDeleted,putStatusActive])
 
   return (
     <div className="TodosLosClientes">
@@ -153,7 +185,7 @@ const TodosLosClientes = () => {
                 field="id"
                 header="Acciones"
                 style={{ width: "10%" }}
-                body={accionUser}
+                body={putStatusDeleted}
               ></Column>
             </DataTable>
           </div>
@@ -229,7 +261,7 @@ const TodosLosClientes = () => {
                 field="id"
                 header="Acciones"
                 style={{ width: "10%" }}
-                body={accionUser}
+                body={putStatusActive}
               ></Column>
             </DataTable>
           </div>
