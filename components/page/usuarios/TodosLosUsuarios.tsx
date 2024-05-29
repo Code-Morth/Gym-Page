@@ -85,6 +85,8 @@ const TodosLosUsuarios = () => {
       .catch((err) => console.log(err))
   }
 
+  console.log("customers",customers)
+
   return (
     <>
       <div className="TodosLosUsuarios">
