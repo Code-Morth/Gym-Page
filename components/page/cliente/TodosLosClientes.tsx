@@ -5,6 +5,7 @@ import todosLosUsuarios from "../../../json/todosLosUsuarios.json"
 import { useEffect, useState } from "react"
 import apisPeticion from "@/api/apisPeticion"
 import getConfig from "../../../utils/getConfig"
+
 import axios from "axios"
 
 const TodosLosClientes = () => {
@@ -76,8 +77,6 @@ const TodosLosClientes = () => {
       .then((res) => setCustomers(res.data.data))
       .catch((err) => console.log(err))
   }
-
-  console.log("customers", customers)
 
   return (
     <div className="TodosLosClientes">

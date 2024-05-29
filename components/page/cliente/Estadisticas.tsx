@@ -4,50 +4,32 @@ import axios from "axios"
 import { Chart } from "primereact/chart"
 import React, { useEffect, useState } from "react"
 import getConfig from "../../../utils/getConfig"
-import {
-  getMonthsBetweenDates,
-  getUsersCreatedByMonth,
-} from "../../../utils/getDates"
+import { getMonthsBetweenDates } from "../../../utils/getDates"
 
 const Estadisticas = () => {
   const [chartData, setChartData] = useState({})
   const [dateStart, setDateStart] = useState<string>("")
   const [dateEnd, setDateEnd] = useState<string>("")
-  const [months, setmonths] = useState([])
-  const [dataTransform, setdataTransform] = useState()
-  const { url } = apisPeticion();
+  const { url } = apisPeticion()
 
+  const handleSearchClick = () => {
+    axios.get(`${url}/client`, getConfig()).then((res) => {
+      const dataMonthUsers = getMonthsBetweenDates(dateStart, dateEnd, res?.data?.data)
 
-  const handleSearchClick =  () => {
-    setmonths(getMonthsBetweenDates(dateStart, dateEnd))
+      const data = {
+        labels: dataMonthUsers?.months,
+        datasets: [
+          {
+            label: "Clientes",
+            backgroundColor: "rgba(22, 239, 236, 0.6)",
+            data: dataMonthUsers?.userCounts,
+          },
+        ],
+      }
 
-    const data = {
-      labels: months,
-      datasets: [
-        {
-          label: "Clientes",
-          backgroundColor: "rgba(22, 239, 236, 0.6)",
-          data: [65, 59, 80],
-        },
-      ],
-    }
-
-    setChartData(data)
-
-    axios
-      .get(`${url}/client`, getConfig())
-      .then((res) =>setdataTransform(res?.data?.data))
-
-      const finalData = getUsersCreatedByMonth(dataTransform)
-
-      console.log("dataTransform",dataTransform)
-
-      console.log("finalData",finalData)
-    
-
+      setChartData(data)
+    })
   }
-
-  
 
   return (
     <div className="Estadisticas">
