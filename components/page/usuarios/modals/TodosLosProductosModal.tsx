@@ -52,7 +52,7 @@ const TodosLosProductosModal = ({
         className="p-[3rem] main-page "
       >
         <div className="box_modal_info">
-          <h2>Actulizar Usuario</h2>
+          <h2>Actulizar Producto</h2>
 
           <form
             className="box_modal_formu"
