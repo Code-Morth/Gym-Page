@@ -8,14 +8,17 @@ import axios from "axios"
 import useOpenModal from "../../../hook/useOpenModal"
 import UpdateUserModal from "./modals/UpdateUserModal"
 import AddUserModal from "./modals/AddUserModal"
+import UpdatePassword from "./modals/UpdatePassword"
 
 const TodosLosUsuarios = () => {
   const [customers, setCustomers] = useState<any>([])
   const { allUser, url } = apisPeticion()
   const { Open, closeModal, openModal } = useOpenModal()
   const [addUserModal, setaddUserModal] = useState<boolean>(false)
+  const [modalPassword, setModalPassword] = useState<boolean>(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const [selectedUserAdd, setSelectedUserAdd] = useState<any>(null);
+  const [selectedPassword, setSelectedPassword] = useState<any>(null);
   const [Ci, setci] = useState<any>("");
   const [CiT, setciT] = useState<any>("");
 
@@ -38,12 +41,27 @@ const TodosLosUsuarios = () => {
     setSelectedUserAdd(user)
     setaddUserModal(true)
   }
+  const openUserModalPassword = (user: any) => {
+    setSelectedPassword(user)
+    setModalPassword(true)
+  }
+
+  const closeModalPassword = () => {
+    setModalPassword(false)
+  }
 
   const accionUser = (rowData: any) => {
     return (
       <button onClick={() => openUserModal(rowData)}>{rowData?.status}</button>
     )
   }
+
+  const accionPassword = (rowData: any) => {
+    return (
+      <button onClick={() => openUserModalPassword(rowData)}>{rowData?.password}</button>
+    )
+  }
+
   const accionUserAdd = (rowData: any) => {
     return (
       <button   onClick={() => openUserModalAdd(rowData)}>
@@ -166,6 +184,7 @@ const TodosLosUsuarios = () => {
                   field="password"
                   header="Contraseña"
                   style={{ width: "10%" }}
+                  body={accionPassword}
                 ></Column>
                 <Column
                   className="column"
@@ -187,6 +206,7 @@ const TodosLosUsuarios = () => {
               visible={Open}
               closeModal={closeModal}
             />
+            <UpdatePassword customers={selectedPassword} visible={modalPassword} closeModal={closeModalPassword}/>
           </div>
           <div className="table-2">
 
