@@ -83,8 +83,8 @@ const ExpiredCustomer = ({ visible, closeModal, customers }: Modalxd) => {
                 <label htmlFor="">Cambiar estado</label>
                 <select name="status">
                   <option value="">Elegir</option>
-                  {menbre?.map((op: any) => (
-                    <option value={op?.name}>{op?.name}</option>
+                  {menbre?.map((op: any, index:number) => (
+                    <option key={index} value={op?.name}>{op?.name}</option>
                   ))}
                 </select>
               </div>

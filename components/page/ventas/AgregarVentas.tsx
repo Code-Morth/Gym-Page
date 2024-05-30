@@ -30,6 +30,9 @@ const AgregarVentas = () => {
     axios
       .get(`${url}/client?page=0&size=999999999999999`, getConfig())
       .then((res) => {
+        if (res.data.success) {
+          console.log(res.data.success)
+        }
         setdataUsers(res.data.data)
       })
       .catch((err) => console.log(err))
@@ -60,22 +63,25 @@ const AgregarVentas = () => {
   const postSale = () => {
     const id = selectedUserID === undefined ? "anonymous" : selectedUserID
 
+    console.log("selectedUserID", selectedUserID)
+
     const dataProductTableFinal = productTableArray.map((data: any) => {
       return { fk_product: data.id, quantity: data.amount }
     })
 
     const finalDataPost = {
       fk_client: id,
-      detail: [dataProductTableFinal],
+      detail: dataProductTableFinal,
     }
 
     console.log("finalDataPost", finalDataPost)
 
     axios
       .post(`${url}/order`, finalDataPost, getConfig())
-      .then((res) => {
+      .then((res) => {        
         if (res.data.success) {
           show("Producto Agregado")
+          console.log(res.data.success)
         }
       })
       .catch((err) => console.log(err))
@@ -182,7 +188,7 @@ const AgregarVentas = () => {
                         />
                       </td>
                       <button
-                      className='trash-button'
+                        className="trash-button"
                         onClick={() =>
                           setproductTableArray((prev: any) =>
                             prev.filter((data: any, i: number) => i !== index)
@@ -208,7 +214,7 @@ const AgregarVentas = () => {
             </div>
             <button onClick={postSale} className="button-default">
               Realizar Venta
-            </button >
+            </button>
             <p>Total:${totalPrice}</p>
           </div>
         </div>

@@ -8,8 +8,8 @@ import getConfig from "../../../utils/getConfig"
 
 const TodasLasVentas = () => {
   const [customers, setCustomers] = useState<any>([])
-  const [dateStart, setdateStart] = useState<any>('')
-  const [dateEnd, setdateEnd] = useState<any>('')
+  const [dateStart, setdateStart] = useState<any>("")
+  const [dateEnd, setdateEnd] = useState<any>("")
   const { url } = apisPeticion()
 
   function formatDate(dateString: any) {
@@ -28,8 +28,7 @@ const TodasLasVentas = () => {
     params,
   }
 
-  useEffect(() => {   
-
+  useEffect(() => {
     axios
       .get(`${url}/order?page=0&size=999999999999999`, configWithParams)
       .then((res) => {
@@ -41,8 +40,7 @@ const TodasLasVentas = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const searchByDate = () =>{
-
+  const searchByDate = () => {
     axios
       .get(`${url}/order?page=0&size=999999999999999`, configWithParams)
       .then((res) => {
@@ -50,17 +48,22 @@ const TodasLasVentas = () => {
         setCustomers(res.data.data)
       })
       .catch((err) => console.log(err))
-
   }
-
-  console.log("dateStart", dateStart)
-  console.log("dateEnd", dateEnd)
-  console.log("customers", customers)
 
   const firstNameColumn = (data: any) => {
     return (
       <span>{`${data.client[0].first_name} ${data.client[0].last_name1} ${data.client[0].last_name2}`}</span>
     )
+  }
+
+  const totalProducts = (data: any) => {
+    const newData = data.detail.map((e: any) => e.product_name)
+
+    console.log(newData)
+
+    return newData.map((name: any, index: any) => (
+      <span key={index}>{`${name} ${index === newData.length -1 ? "": " - "}`}</span>
+    ))
   }
 
   return (
@@ -95,6 +98,7 @@ const TodasLasVentas = () => {
                 field="product"
                 header="Productos"
                 style={{ width: "8%" }}
+                body={totalProducts}
               ></Column>
               <Column
                 className="column"
