@@ -89,7 +89,11 @@ const AddUserModal = ({
               
               <div className="content_box_inputs">
               <label htmlFor="fk_typeuser">Rol</label>
-              <input type="number" required name="fk_typeuser" placeholder="admin" />
+              <select name="fk_typeuser" >
+                  <option value="">Elegir el Rol</option>
+                  <option value="1">Adminitrador</option>
+                  <option value="2">Trabajador</option>
+                </select>
               </div>
 
               <div className="content_box_inputs">

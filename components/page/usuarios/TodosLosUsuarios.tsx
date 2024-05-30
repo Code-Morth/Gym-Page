@@ -95,7 +95,13 @@ const TodosLosUsuarios = () => {
     return dat && xdd
   })
 
- 
+ const admminOrUser = (data:any) =>{
+
+  const adOrUs = data.fk_typeuser === 1 ? "Admin" : "User"
+
+  return(<span>{adOrUs}</span>)
+
+ }
 
   return (
     <>
@@ -191,6 +197,7 @@ const TodosLosUsuarios = () => {
                   field="fk_typeuser"
                   header="Rol"
                   style={{ width: "10%" }}
+                  body={admminOrUser}
                 ></Column>
                 <Column
                   className="column"
@@ -294,6 +301,8 @@ const TodosLosUsuarios = () => {
                   field="fk_typeuser"
                   header="Rol"
                   style={{ width: "10%" }}
+                  body={admminOrUser}
+
                 ></Column>
                 <Column
                   className="column"
