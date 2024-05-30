@@ -165,17 +165,8 @@ const SidebarGym = () => {
                     Agregar gastos extras
                   </Link>
                   <Link href={"/dashboard/admin/contabilidad/sueldos"}>
-                    Sueldos
-                  </Link>
-                  <Link href={"/dashboard/admin/contabilidad/ingresos"}>
-                    Ingresos
-                  </Link>
-                  <Link href={"/dashboard/admin/contabilidad/egresos"}>
-                    Egresos
-                  </Link>
-                  <Link href={"/dashboard/admin/contabilidad/ganancias"}>
-                    Ganancias
-                  </Link>
+                    Sueldos/Ingresos/Egresos
+                  </Link>                 
                 </ul>
               )}
               {isUserRoute && (

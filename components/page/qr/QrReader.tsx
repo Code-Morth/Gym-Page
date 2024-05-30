@@ -1,11 +1,41 @@
 "use client"
-import React, { useState } from "react"
+import apisPeticion from "@/api/apisPeticion"
+import React, { useEffect, useState } from "react"
 import { QrReader } from "react-qr-reader"
+import { useAlerts } from "../../../hook/useAlerts"
+import axios from "axios"
+import getConfig from "../../../utils/getConfig"
+import { Toast } from 'primereact/toast'
 
 const QRComponent = () => {
-  const [data, setData] = useState("No result")
+  const [data, setData] = useState()
+  const { url } = apisPeticion()
+  const { show, toast } = useAlerts()
 
   console.log("data",data)
+
+  useEffect(() => {
+    show("Dia contado Correctamente")
+
+    axios
+      .put(
+        `${url}/client_assist/${data}`,
+        {
+          email: "ivan.tapia@diurvanconsultores.com",
+          password: "P@ssw0rd",
+        },
+        getConfig()
+      )
+      .then((res: any) => {
+        show("Dia contado Correctamente")
+        console.log("Dia contado Correctamente")
+        if (res.data.success) {
+          show("Dia contado Correctamente")
+        }
+      })
+      .catch((err) => console.log(err))
+
+  }, [data])
 
   return (
     <div
@@ -25,18 +55,19 @@ const QRComponent = () => {
         }}
       >
         <QrReader
-          onResult={(result:any, error:any) => {
+          onResult={(result: any, error: any) => {
             if (!!result) {
               setData(result?.text)
             }
 
             if (!!error) {
-              console.info(error)
             }
           }}
           style={{ width: "100%" }}
         />
       </div>
+      <Toast ref={toast} position="top-center" />
+
     </div>
   )
 }
