@@ -17,7 +17,7 @@ const QRComponent = () => {
         height: "100vh",
       }}
     >
-      <div
+      {/* <div
         style={{
           width: "50rem",
           height: "50rem",
@@ -36,7 +36,7 @@ const QRComponent = () => {
           }}
           style={{ width: "100%" }}
         />
-      </div>
+      </div> */}
     </div>
   )
 }

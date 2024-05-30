@@ -1,7 +1,6 @@
 "use client"
 import { DataTable } from "primereact/datatable"
 import { Column } from "primereact/column"
-import todosLosUsuarios from "../../../json/todosLosUsuarios.json"
 import { useEffect, useState } from "react"
 import apisPeticion from "@/api/apisPeticion"
 import getConfig from "../../../utils/getConfig"
@@ -11,6 +10,7 @@ import axios from "axios"
 const TodosLosClientes = () => {
   const [customers, setCustomers] = useState<any>([])
   const [memberShip, setmemberShip] = useState<any>()
+  const [inputData, setinputData] = useState("")
   const { url } = apisPeticion()
 
   useEffect(() => {
@@ -25,12 +25,6 @@ const TodosLosClientes = () => {
       .catch((err) => console.log(err))
   }, [])
 
-  useEffect(() => {
-    setCustomers(todosLosUsuarios)
-  }, [])
-
-
-
   const filterCustomerExpired =
     customers && customers.length > 0
       ? customers?.filter((user: any) => {
@@ -44,14 +38,24 @@ const TodosLosClientes = () => {
 
   const filterCustomerActive =
     customers && customers.length > 0
-      ? customers?.filter((user: any) => {
-          const statusUser = user?.status === "active"
-          return statusUser
-        })
-      : [customers]?.filter((user: any) => {
-          const statusUser = user?.status === "active"
-          return statusUser
-        })
+      ? customers
+          ?.filter((user: any) => {
+            const statusUser = user?.status === "active"
+            return statusUser
+          })
+          .filter((custon: any) => {
+            const namesss = custon?.ci.includes(inputData)
+            return namesss
+          })
+      : [customers]
+          ?.filter((user: any) => {
+            const statusUser = user?.status === "active"
+            return statusUser
+          })
+          .filter((custon: any) => {
+            const namesss = custon?.ci.includes(inputData)
+            return namesss
+          })
 
   const putStatusDeleted = (rowData: any) => {
     const putData = () => {
@@ -92,23 +96,9 @@ const TodosLosClientes = () => {
   }
 
   const searchById = (data: any) => {
-    axios
-      .get(`${url}/client/${data.target.value}`, getConfig())
-      .then((res) => setCustomers(res.data.data))
-      .catch((err) => console.log(err))
+    setinputData(data.target.value)
   }
-
-  useEffect(() => {
-    axios
-      .get(`${url}/client`, getConfig())
-      .then((res) => setCustomers(res.data.data))
-      .catch((err) => console.log(err))
-
-    axios
-      .get(`${url}/membership`, getConfig())
-      .then((res) => setmemberShip(res.data.data))
-      .catch((err) => console.log(err))
-  }, [putStatusDeleted,putStatusActive])
+  console.log("filterCustomerActive", filterCustomerActive)
 
   return (
     <div className="TodosLosClientes">
@@ -125,6 +115,12 @@ const TodosLosClientes = () => {
               rowsPerPageOptions={[5, 10, 25, 50]}
               tableStyle={{ minWidth: "50rem" }}
             >
+              <Column
+                className="column"
+                field="ci"
+                header="CI"
+                style={{ width: "8%" }}
+              ></Column>
               <Column
                 className="column"
                 field="first_name"
@@ -201,6 +197,12 @@ const TodosLosClientes = () => {
               rowsPerPageOptions={[5, 10, 25, 50]}
               tableStyle={{ minWidth: "50rem" }}
             >
+              <Column
+                className="column"
+                field="ci"
+                header="CI"
+                style={{ width: "8%" }}
+              ></Column>
               <Column
                 className="column"
                 field="first_name"
