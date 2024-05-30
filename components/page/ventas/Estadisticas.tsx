@@ -66,7 +66,7 @@ const Estadisticas = () => {
   }, [])
 
   return (
-    <div className="Estadisticas">
+    <div className="Estadisticas main-page">
       <div className="estadisticas-container">
       <h1 className="tittle">Lista de Ventas</h1>
           <div className="dates-container">

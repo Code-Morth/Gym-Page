@@ -18,7 +18,7 @@ const TodasLasVentas = () => {
 
   return (
     <>
-      <div className="TodasLasVentas">
+      <div className="TodasLasVentas main-page">
         <div className="todas-las-ventas-container">
           <h1 className="tittle">Lista de Ventas</h1>
           <div className="dates-container">

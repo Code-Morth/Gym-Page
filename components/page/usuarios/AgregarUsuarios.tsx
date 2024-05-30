@@ -30,7 +30,7 @@ const AgregarUsuarios = () => {
   };
 
   return (
-    <div className="AgregarUsuarios">
+    <div className="AgregarUsuarios main-page">
       <div className="agregar-usuarios-container">
         <h1>Agregar Usuario</h1>
         <form ref={dataRef} onSubmit={handleLogin} className="form-container">

@@ -216,3 +216,9 @@ input {
 @keyframes l15{ 
   100%{transform: rotate(1turn)}
 }
+
+.content_sniper___{
+  @apply  w-full h-screen grid place-content-center place-items-center  ;
+}
+
+

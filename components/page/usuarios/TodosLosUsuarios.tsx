@@ -17,6 +17,7 @@ const TodosLosUsuarios = () => {
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const [selectedUserAdd, setSelectedUserAdd] = useState<any>(null);
   const [Ci, setci] = useState<any>("");
+  const [CiT, setciT] = useState<any>("");
 
   const closeModal2 = () => {
     setaddUserModal(false)
@@ -26,27 +27,7 @@ const TodosLosUsuarios = () => {
     axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
   }, [ ])
 
-  console.log(setCustomers)
 
-  const filterCustomer =  customers && customers.length > 0
-  ? customers?.filter((user: any) => {
-      const statusUser = user?.status === "deleted"
-      return statusUser
-    })
-  : [customers]?.filter((user: any) => {
-      const statusUser = user?.status !== "active"
-      return statusUser
-    })
-
-  const filterCustomeractive =  customers && customers.length > 0
-  ? customers?.filter((user: any) => {
-      const statusUser = user?.status == "active"
-      return statusUser
-    })
-  : [customers]?.filter((user: any) => {
-      const statusUser = user?.status === "active"
-      return statusUser
-    })
 
   const openUserModal = (user: any) => {
     setSelectedUser(user)
@@ -79,15 +60,24 @@ const TodosLosUsuarios = () => {
   }, [])
 
   const searchById = (e: any) => {
-   setci(e.target.value)
+   setci(e.target.value);
+   setciT(e.target.value)
   }
+  
 
   const filterUser = customers.filter((user:any) => {
     const dat  = user?.ci.toLowerCase().includes(Ci.toLowerCase());
-    return dat
+    const xd = user?.status == "active";
+    return dat && xd
   })
 
-  console.log("customers",customers)
+  const filterUserCi = customers.filter((user:any)=> {
+    const dat  = user?.ci.toLowerCase().includes(CiT.toLowerCase());
+    const xdd =  user?.status === "deleted"
+    return dat && xdd
+  })
+
+ 
 
   return (
     <>
@@ -199,11 +189,15 @@ const TodosLosUsuarios = () => {
             />
           </div>
           <div className="table-2">
+
+          
+
             <h1>Usuarios inactivos</h1>
+            
             <div className="tabla-container">
               <DataTable
                 className="data-table"
-                value={filterCustomer}
+                value={filterUserCi}
                 paginator
                 rows={5}
                 rowsPerPageOptions={[5, 10, 25, 50]}
