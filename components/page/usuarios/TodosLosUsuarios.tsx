@@ -16,6 +16,7 @@ const TodosLosUsuarios = () => {
   const [addUserModal, setaddUserModal] = useState<boolean>(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const [selectedUserAdd, setSelectedUserAdd] = useState<any>(null);
+  const [Ci, setci] = useState<any>("");
 
   const closeModal2 = () => {
     setaddUserModal(false)
@@ -77,13 +78,14 @@ const TodosLosUsuarios = () => {
       .catch((err) => console.log(err))
   }, [])
 
-  const searchById = (data: any) => {
-    console.log(data.target.value)
-    axios
-      .get(`${url}/user/${data.target.value}`, getConfig())
-      .then((res) => setCustomers(res.data.data))
-      .catch((err) => console.log(err))
+  const searchById = (e: any) => {
+   setci(e.target.value)
   }
+
+  const filterUser = customers.filter((user:any) => {
+    const dat  = user?.ci.toLowerCase().includes(Ci.toLowerCase());
+    return dat
+  })
 
   console.log("customers",customers)
 
@@ -103,7 +105,7 @@ const TodosLosUsuarios = () => {
             <div className="tabla-container">
               <DataTable
                 className="data-table"
-                value={filterCustomeractive}
+                value={filterUser}
                 paginator
                 rows={5}
                 rowsPerPageOptions={[5, 10, 25, 50]}
