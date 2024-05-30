@@ -91,7 +91,7 @@ const TodosLosUsuarios = () => {
 
   return (
     <>
-      <div className="TodosLosUsuarios">
+      <div className="TodosLosUsuarios main-page">
         <div className="todos-los-usarios-container">
           <input
             onChange={searchById}
