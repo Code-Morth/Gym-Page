@@ -40,7 +40,7 @@ const AgregarVentas = () => {
   const addProductTable = (data: any) => {
     setselectedData(data.target.value.productName)
 
-    console.log("data",data)
+    console.log("data", data)
 
     setproductTableArray((prev: any) => [
       ...prev,
@@ -48,7 +48,10 @@ const AgregarVentas = () => {
         productName: data.target.value.name,
         price: data.target.value.price_sell,
         amount: 1,
-        totalPrice: data.target.value.price_sell,
+        totalPrice:
+          prev.totalPrice !== undefined
+            ? Number(prev.totalPrice) + Number(data.target.value.price_sell)
+            : 0 + Number(data.target.value.price_sell),
         id: data.target.value.id,
       },
     ])
@@ -66,7 +69,7 @@ const AgregarVentas = () => {
       detail: [dataProductTableFinal],
     }
 
-    console.log("finalDataPost",finalDataPost)
+    console.log("finalDataPost", finalDataPost)
 
     axios
       .post(`${url}/order`, finalDataPost, getConfig())
@@ -85,8 +88,9 @@ const AgregarVentas = () => {
     )
 
     settotalPrice(totalPriceSum)
-
   }, [productTableArray])
+
+  console.log("productTableArray", productTableArray)
 
   return (
     <>
@@ -139,6 +143,7 @@ const AgregarVentas = () => {
                     <th>Precio del producto</th>
                     <th>Cantidad del producto</th>
                     <th>Precio total</th>
+                    <th>Eliminar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -176,6 +181,26 @@ const AgregarVentas = () => {
                           value={data?.totalPrice}
                         />
                       </td>
+                      <button
+                      className='trash-button'
+                        onClick={() =>
+                          setproductTableArray((prev: any) =>
+                            prev.filter((data: any, i: number) => i !== index)
+                          )
+                        }
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="32"
+                          height="32"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M18 19a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7H4V4h4.5l1-1h4l1 1H19v3h-1zM6 7v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V7zm12-1V5h-4l-1-1h-3L9 5H5v1zM8 9h1v10H8zm6 0h1v10h-1z"
+                          />
+                        </svg>
+                      </button>
                     </tr>
                   ))}
                 </tbody>
@@ -183,7 +208,7 @@ const AgregarVentas = () => {
             </div>
             <button onClick={postSale} className="button-default">
               Realizar Venta
-            </button>
+            </button >
             <p>Total:${totalPrice}</p>
           </div>
         </div>
