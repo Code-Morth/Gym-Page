@@ -1,4 +1,5 @@
 import SidebarGym from "../../../../components/organims/SidebarGym"
+import ProtectedRoute from "../../../../components/protecte/ProtecteRouter"
 
 export default function RootLayout({
   children,
@@ -8,8 +9,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex ">
+      <ProtectedRoute>
+
         <SidebarGym />
         {children}
+      </ProtectedRoute>
       </body>
     </html>
   )
