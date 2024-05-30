@@ -2,35 +2,80 @@
 import { useEffect, useState } from "react"
 import { Dropdown } from "primereact/dropdown"
 import "primereact/resources/themes/lara-light-cyan/theme.css"
-import todosLosProductos from "../../../json/todosLosProductos.json"
-import todosLosUsuarios from "../../../json/todosLosUsuarios.json"
+import getConfig from "../../../utils/getConfig"
+import axios from "axios"
+import apisPeticion from "@/api/apisPeticion"
+import { Toast } from "primereact/toast"
+import { useAlerts } from "../../../hook/useAlerts"
 
 const AgregarVentas = () => {
-  const [products, setproducts] = useState<any>([])
-  const [userName, setuserName] = useState<any>([])
   const [selectedData, setselectedData] = useState(null)
-  const [selectedUser, setselectedUser] = useState<any>(null)
   const [productTableArray, setproductTableArray] = useState<any>([])
   const [totalPrice, settotalPrice] = useState<any>()
+  const [dataUsers, setdataUsers] = useState<any>([])
+  const [dataProducts, setdataProducts] = useState()
+  const [selectedUserName, setselectedUserName] = useState()
+  const [selectedUserID, setselectedUserID] = useState()
+  const [selectedProductName, setselectedProductName] = useState()
+
+  const { url } = apisPeticion()
+  const { show, toast } = useAlerts()
+
+  useEffect(() => {
+    axios
+      .get(`${url}/product?page=0&size=999999999999999`, getConfig())
+      .then((res) => setdataProducts(res.data.data))
+      .catch((err) => console.log(err))
+
+    axios
+      .get(`${url}/client?page=0&size=999999999999999`, getConfig())
+      .then((res) => {
+        setdataUsers(res.data.data)
+      })
+      .catch((err) => console.log(err))
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const addProductTable = (data: any) => {
     setselectedData(data.target.value.productName)
 
+    console.log("data",data)
+
     setproductTableArray((prev: any) => [
       ...prev,
       {
-        productName: data.target.value.productName,
-        price: data.target.value.price,
+        productName: data.target.value.name,
+        price: data.target.value.price_sell,
         amount: 1,
-        totalPrice: data.target.value.price,
+        totalPrice: data.target.value.price_sell,
+        id: data.target.value.id,
       },
     ])
   }
 
   const postSale = () => {
-    const id = selectedUser?.ci === undefined ? "anonymous" : selectedUser?.ci
+    const id = selectedUserID === undefined ? "anonymous" : selectedUserID
 
-    console.log("dataFinal", { [id]: [productTableArray] })
+    const dataProductTableFinal = productTableArray.map((data: any) => {
+      return { fk_product: data.id, quantity: data.amount }
+    })
+
+    const finalDataPost = {
+      fk_client: id,
+      detail: [dataProductTableFinal],
+    }
+
+    console.log("finalDataPost",finalDataPost)
+
+    axios
+      .post(`${url}/order`, finalDataPost, getConfig())
+      .then((res) => {
+        if (res.data.success) {
+          show("Producto Agregado")
+        }
+      })
+      .catch((err) => console.log(err))
   }
 
   useEffect(() => {
@@ -40,12 +85,8 @@ const AgregarVentas = () => {
     )
 
     settotalPrice(totalPriceSum)
-  }, [productTableArray])
 
-  useEffect(() => {
-    setproducts(todosLosProductos)
-    setuserName(todosLosUsuarios)
-  }, [])
+  }, [productTableArray])
 
   return (
     <>
@@ -60,10 +101,13 @@ const AgregarVentas = () => {
                   fontSize: "16px",
                   padding: "0.7rem",
                 }}
-                optionLabel="fullName"
-                value={selectedUser}
-                onChange={(e) => setselectedUser(e.value)}
-                options={userName}
+                value={selectedUserName}
+                onChange={(e) => {
+                  setselectedUserID(e.target.value.id)
+                  setselectedUserName(e.target.value.first_name)
+                }}
+                optionLabel="first_name"
+                options={dataUsers}
                 editable
                 placeholder="Cliente"
                 className="w-full md:w-14rem custom-dropdown"
@@ -74,10 +118,13 @@ const AgregarVentas = () => {
                   fontSize: "16px",
                   padding: "0.7rem",
                 }}
-                value={selectedData}
-                onChange={(e) => addProductTable(e)}
-                options={products}
-                optionLabel="productName"
+                value={selectedProductName}
+                onChange={(e) => {
+                  setselectedProductName(e.target.value.name)
+                  addProductTable(e)
+                }}
+                options={dataProducts}
+                optionLabel="name"
                 editable
                 placeholder="Producto"
                 className="w-full md:w-14rem custom-dropdown"
@@ -140,6 +187,7 @@ const AgregarVentas = () => {
             <p>Total:${totalPrice}</p>
           </div>
         </div>
+        <Toast ref={toast} position="top-center" />
       </div>
     </>
   )

@@ -2,19 +2,38 @@
 import { Column } from "primereact/column"
 import { DataTable } from "primereact/datatable"
 import React, { useEffect, useState } from "react"
-import todasLasVentas from "../../../json/todasLasVentas.json"
+import axios from 'axios'
+import apisPeticion from '@/api/apisPeticion'
+import getConfig from '../../../utils/getConfig'
 
 const TodasLasVentas = () => {
   const [customers, setCustomers] = useState<any>([])
   const [dateStart, setdateStart] = useState<any>()
   const [dateEnd, setdateEnd] = useState<any>()
+  const { url } = apisPeticion()
 
   useEffect(() => {
-    setCustomers(todasLasVentas)
+
+    axios
+      .get(`${url}/order?page=0&size=999999999999999`, getConfig())
+      .then((res) => {
+        console.log(res.data.data)
+        setCustomers(res.data.data)
+      })
+      .catch((err) => console.log(err))
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   console.log("dateStart", dateStart)
   console.log("dateEnd", dateEnd)
+  console.log("customers",customers)
+
+  const firstNameColumn = (data:any) =>{
+
+    return(<span>{`${data.client[0].first_name} ${data.client[0].last_name1} ${data.client[0].last_name2}`}</span>)
+
+  }
 
   return (
     <>
@@ -50,21 +69,22 @@ const TodasLasVentas = () => {
               ></Column>
               <Column
                 className="column"
-                field="totalPrice"
+                field="order_total"
                 header="Precio total"
                 style={{ width: "8%" }}
               ></Column>
               <Column
                 className="column"
-                field="saleDate"
+                field="order_date"
                 header="Fecha de Venta"
                 style={{ width: "8%" }}
               ></Column>
               <Column
                 className="column"
-                field="clientName"
+                field="first_name"
                 header="Nombre del cliente"
                 style={{ width: "10%" }}
+                body={firstNameColumn}
               ></Column>
             </DataTable>
           </div>
