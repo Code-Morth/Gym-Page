@@ -51,7 +51,7 @@ const AgregarCliente = () => {
   }
 
   return (
-    <div className="AgregarCliente">
+    <div className="AgregarCliente main-page">
       <div className="agregar-cliente-container">
         <h1>Registro de cliente</h1>
         <form ref={dataRef} onSubmit={handleLogin} className="form-container">

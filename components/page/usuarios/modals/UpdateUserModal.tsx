@@ -46,7 +46,7 @@ const UpdateUserModal = ({
         widthModal="w-[90%]  phone:w-[45rem] py-[3rem] h-[50rem] !bg-[black] "
         className="p-[3rem] main-page "
       >
-        <div className="box_modal_info">
+        <div className="box_modal_info main-page">
           <h2>Actulizar Usuario</h2>
 
           <form

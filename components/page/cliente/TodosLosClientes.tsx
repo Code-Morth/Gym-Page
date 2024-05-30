@@ -4,14 +4,21 @@ import { Column } from "primereact/column"
 import { useEffect, useState } from "react"
 import apisPeticion from "@/api/apisPeticion"
 import getConfig from "../../../utils/getConfig"
-
 import axios from "axios"
 
+import useOpenModal from "../../../hook/useOpenModal"
+import ExpiredCustomer from "./modals/ExpiredCustomer"
+
 const TodosLosClientes = () => {
+
+  const { Open , openModal , closeModal} = useOpenModal()
+  const [selectedUser, setSelectedUser] = useState<any>(null)
   const [customers, setCustomers] = useState<any>([])
   const [memberShip, setmemberShip] = useState<any>()
   const [inputData, setinputData] = useState("")
   const { url } = apisPeticion()
+
+  
 
   useEffect(() => {
     axios
@@ -68,21 +75,20 @@ const TodosLosClientes = () => {
     return <button onClick={putData}>Desactivar</button>
   }
 
-  const putStatusActive = (rowData: any) => {
-    const putData = () => {
-      axios
-        .put(`${url}/client/${rowData.id}`, { status: "active" }, getConfig())
-        .then((res) => setCustomers(res.data.data))
-        .catch((err) => console.log(err))
-    }
 
-    return <button onClick={putData}>Activar</button>
+  const openUserModal = (user: any) => {
+    setSelectedUser(user)
+    openModal()
+  }
+
+  const putStatusActive = (data:any) => {
+
+    return <button onClick={()=>openUserModal(data)}>Activar</button>
   }
 
   const columnMemberShip = (rowData: any) => {
     const filterMemberShip = memberShip?.filter((data: any) => {
-      const member = data.id === rowData.fk_membership
-
+      const member = data.id === rowData.fk_membership;
       return member
     })
 
@@ -98,7 +104,8 @@ const TodosLosClientes = () => {
   const searchById = (data: any) => {
     setinputData(data.target.value)
   }
-  console.log("filterCustomerActive", filterCustomerActive)
+ 
+  console.log(filterCustomerActive)
 
   return (
     <div className="TodosLosClientes">
@@ -265,10 +272,13 @@ const TodosLosClientes = () => {
                 style={{ width: "10%" }}
                 body={putStatusActive}
               ></Column>
+              
             </DataTable>
+           
           </div>
         </div>
       </div>
+      <ExpiredCustomer customers={selectedUser} visible={Open} closeModal={closeModal}/>
     </div>
   )
 }

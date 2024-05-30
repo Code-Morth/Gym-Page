@@ -49,7 +49,7 @@ const AgregarVentas = () => {
 
   return (
     <>
-      <div className="AgregarVentas">
+      <div className="AgregarVentas main-page">
         <div className="agregar-ventas-container">
           <h1>Formulario de venta</h1>
           <div className="form-container">
