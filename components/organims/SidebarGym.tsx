@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import useSidebar from "../../hook/useSidebar";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import userLocalStoras from "../../hook/userLocalStoras";
 
 const SidebarGym = () => {
@@ -11,6 +11,13 @@ const SidebarGym = () => {
   const { eliminarLocal } = userLocalStoras();
 
   const path = usePathname();
+
+  const salir = () => {
+    eliminarLocal("fk_typeuser");
+    eliminarLocal("token");
+
+    window.location.reload();
+  };
 
   const isAdminRoute = path.startsWith("/dashboard/admin");
   const isUserRoute = path.startsWith("/dashboard/user");
@@ -166,7 +173,7 @@ const SidebarGym = () => {
                   </Link>
                   <Link href={"/dashboard/admin/contabilidad/sueldos"}>
                     Sueldos/Ingresos/Egresos
-                  </Link>                 
+                  </Link>
                 </ul>
               )}
               {isUserRoute && (
@@ -196,12 +203,7 @@ const SidebarGym = () => {
         </div>
 
         <div className="box_text_sidebar">
-          <Link
-            href="#"
-            onClick={() => {
-              eliminarLocal("fk_typeuser"), eliminarLocal("token");
-            }}
-          >
+          <Link href="#" onClick={salir}>
             Salir
           </Link>
         </div>

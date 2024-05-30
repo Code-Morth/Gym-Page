@@ -156,7 +156,10 @@ input {
 }
 
 .content_box_inputs{
-  @apply flex flex-col gap-[1.5rem] ;
+  @apply flex flex-col gap-[1.5rem] text-center ;
+  & h3 {
+    @apply font-bold text-[1.5rem] underline;
+  }
 }
 .select-_{
   @apply mt-[4.4rem] ;
@@ -222,3 +225,6 @@ input {
 }
 
 
+.button_gastos_{
+  @apply  py-[1rem] flex justify-center;
+}

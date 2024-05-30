@@ -43,26 +43,26 @@ const TodosLosClientes = () => {
           return statusUser
         })
 
-  const filterCustomerActive =
-    customers && customers.length > 0
-      ? customers
-          ?.filter((user: any) => {
-            const statusUser = user?.status === "active"
-            return statusUser
-          })
-          .filter((custon: any) => {
-            const namesss = custon?.ci.includes(inputData)
-            return namesss
-          })
-      : [customers]
-          ?.filter((user: any) => {
-            const statusUser = user?.status === "active"
-            return statusUser
-          })
-          .filter((custon: any) => {
-            const namesss = custon?.ci.includes(inputData)
-            return namesss
-          })
+        const filterCustomerActive =
+        customers && customers.length > 0
+          ? customers
+              ?.filter((user: any) => {
+                const statusUser = user?.status === "active"
+                return statusUser
+              })
+              .filter((custon: any) => {
+                const namesss = custon?.ci.includes(inputData)
+                return namesss
+              })
+          : [customers]
+              ?.filter((user: any) => {
+                const statusUser = user?.status === "active"
+                return statusUser
+              })
+              .filter((custon: any) => {
+                const namesss = custon?.ci.includes(inputData)
+                return namesss
+              })
 
   const putStatusDeleted = (rowData: any) => {
     const putData = () => {
