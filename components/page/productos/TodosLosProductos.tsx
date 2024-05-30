@@ -4,17 +4,23 @@ import { DataTable } from "primereact/datatable"
 import { useEffect, useState } from "react"
 import getConfig from "../../../utils/getConfig"
 import axios from "axios"
+import useOpenModal from '../../../hook/useOpenModal'
+import TodosLosProductosModal from '../usuarios/modals/TodosLosProductosModal'
 
 const TodosLosProductos = () => {
   const [customers, setCustomers] = useState<any>([])
   const { url } = apisPeticion()
   const [names, setname] = useState("")
+  const { Open, closeModal, openModal } = useOpenModal()
+  const [selectedUser, setSelectedUser] = useState<any>(null)
 
   useEffect(() => {
     axios
-      .get(`${url}/product`, getConfig())
+      .get(`${url}/product?page=0&size=999999999999999`, getConfig())
       .then((res) => setCustomers(res.data.data))
       .catch((err) => console.log(err))
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const capture = (e: any) => {
     setname(e.target.value)
@@ -24,6 +30,12 @@ const TodosLosProductos = () => {
     const namesss = custon?.name.toLowerCase().includes(names.toLowerCase())
     return namesss
   })
+
+  const editData = (data:any) =>{    
+
+    return(<button onClick={()=>{openModal(),setSelectedUser(data)}} >Editar</button>)
+
+  }
 
   return (
     <div className="box_all_producs main-page ">
@@ -59,11 +71,16 @@ const TodosLosProductos = () => {
           ></Column>
           <Column
             className="column"
-            field="status"
             header="Acciones"
             style={{ width: "8%" }}
+            body={editData}
           ></Column>
         </DataTable>
+        <TodosLosProductosModal
+                customers={selectedUser}
+                visible={Open}
+                closeModal={closeModal}
+              />
       </div>
     </div>
   )

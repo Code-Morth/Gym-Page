@@ -21,6 +21,8 @@ const AddUserModal = ({
   const { show, toast } = useAlerts();
   const dataRed = useRef<any>(null);
 
+  console.log("customers",customers)
+
   const handleUpdateUser = (event: any) => {
     event?.preventDefault();
 
@@ -101,7 +103,7 @@ const AddUserModal = ({
             
           
             <button className="button-default" type="submit">
-              Actulizar
+              Actualizar
             </button>
           </form>
         </div>

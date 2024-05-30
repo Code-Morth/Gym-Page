@@ -5,7 +5,7 @@ import { QrReader } from "react-qr-reader"
 const QRComponent = () => {
   const [data, setData] = useState("No result")
 
-  alert(data)
+  console.log("data",data)
 
   return (
     <div
@@ -17,7 +17,7 @@ const QRComponent = () => {
         height: "100vh",
       }}
     >
-      {/* <div
+      <div
         style={{
           width: "50rem",
           height: "50rem",
@@ -25,7 +25,7 @@ const QRComponent = () => {
         }}
       >
         <QrReader
-          onResult={(result, error) => {
+          onResult={(result:any, error:any) => {
             if (!!result) {
               setData(result?.text)
             }
@@ -36,7 +36,7 @@ const QRComponent = () => {
           }}
           style={{ width: "100%" }}
         />
-      </div> */}
+      </div>
     </div>
   )
 }

@@ -61,7 +61,7 @@ const UpdateUserModal = ({
               <option value={"deleted"}>Eliminar</option>
             </select>
             <button className="button-default" type="submit">
-              Actulizar
+              Actualizar
             </button>
           </form>
         </div>
