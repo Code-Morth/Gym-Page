@@ -21,8 +21,8 @@ const QRComponent = () => {
       .put(
         `${url}/client_assist/${data}`,
         {
-          email: "ivan.tapia@diurvanconsultores.com",
-          password: "P@ssw0rd",
+          email: "maria.villagomezl2121@gmail.com",
+          password: "maria1",
         },
         getConfig()
       )

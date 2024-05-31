@@ -80,7 +80,7 @@ const AgregarMembresias = () => {
             required
             type="text"
             placeholder="Dias de permiso"
-            name="permisos"
+            name="permission"
             id="permisos"
           />
         </div>
