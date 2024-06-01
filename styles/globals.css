@@ -234,3 +234,23 @@ input {
 .button_gastos_{
   @apply  py-[1rem] flex justify-center;
 }
+
+
+.pdf-download-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pdf-download-link a {
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  background-color: #007bff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.pdf-download-link a:hover {
+  background-color: #0056b3;
+}
