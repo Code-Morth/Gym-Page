@@ -26,7 +26,11 @@ const UpdateUserModal = ({
   const handleUpdateUser = (event: any) => {
     event?.preventDefault()
 
-    const userUpdate = Object.fromEntries(new FormData(event.target))
+    const userUpdate = Object.fromEntries(
+      Array.from(new FormData(event.target)).filter(
+        ([key, value]) => value !== ""
+      )
+    )
 
     if (userUpdate.status === "delete") {
       axios
@@ -89,7 +93,7 @@ const UpdateUserModal = ({
             ref={dataRed}
             onSubmit={handleUpdateUser}
           >
-            <label htmlFor="">Cambiar estado</label>
+            <label htmlFor="status">Cambiar estado</label>
 
             <select name="status">
               <option>Elija</option>

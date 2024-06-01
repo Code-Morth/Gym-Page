@@ -10,10 +10,15 @@ interface ModalUpdateUser {
   closeModal: any
   setlogin?: any
   customers?: any
-  setupdateCounter?:any
+  setupdateCounter?: any
 }
 
-const AddUserModal = ({ visible, closeModal, customers,setupdateCounter }: ModalUpdateUser) => {
+const AddUserModal = ({
+  visible,
+  closeModal,
+  customers,
+  setupdateCounter,
+}: ModalUpdateUser) => {
   const { url } = apisPeticion()
   const { show, toast } = useAlerts()
   const dataRed = useRef<any>(null)
@@ -23,20 +28,26 @@ const AddUserModal = ({ visible, closeModal, customers,setupdateCounter }: Modal
   const handleUpdateUser = (event: any) => {
     event?.preventDefault()
 
-    const userUpdateadd = Object.fromEntries(new FormData(event.target))
+    const userUpdateadd = Object.fromEntries(
+      Array.from(new FormData(event.target)).filter(
+        ([key, value]) => value !== ""
+      )
+    )
 
-    axios
-      .put(`${url}/user/${customers?.id}`, userUpdateadd, getConfig())
-      .then((res) => {
-        if (res.data.success) {
-          show("Usuario actualizado Correctamente")
-          dataRed.current.reset()
-          closeModal()
-        }
-      })
-      .catch((err) => console.log(err))
+    console.log("userUpdateadd", userUpdateadd)
 
-      setupdateCounter((prev:any)=>prev +1)
+    // axios
+    //   .put(`${url}/user/${customers?.id}`, userUpdateadd, getConfig())
+    //   .then((res) => {
+    //     if (res.data.success) {
+    //       show("Usuario actualizado Correctamente")
+    //       dataRed.current.reset()
+    //       closeModal()
+    //     }
+    //   })
+    //   .catch((err) => console.log(err))
+
+    setupdateCounter((prev: any) => prev + 1)
   }
 
   const deleteUser = () => {
@@ -57,8 +68,7 @@ const AddUserModal = ({ visible, closeModal, customers,setupdateCounter }: Modal
       })
       .catch((err) => console.log(err))
 
-      setupdateCounter((prev:any)=>prev +1)
-
+    setupdateCounter((prev: any) => prev + 1)
   }
 
   return (
@@ -79,10 +89,33 @@ const AddUserModal = ({ visible, closeModal, customers,setupdateCounter }: Modal
           >
             <div className="contex_box_all_inputs">
               <div className="content_box_inputs">
+                <label htmlFor="first_name">Nombre de usuario</label>
+                <input name="first_name" type="text" />
+              </div>
+              <div className="content_box_inputs">
+                <label htmlFor="last_name1">Primer apellido</label>
+                <input name="last_name1" type="text" />
+              </div>
+              <div className="content_box_inputs">
+                <label htmlFor="last_name2">Segundo apellido</label>
+                <input name="last_name2" type="text" />
+              </div>
+              <div className="content_box_inputs">
+                <label htmlFor="address">Direccion</label>
+                <input type="text" name="address" placeholder="address" />
+              </div>
+              <div className="content_box_inputs">
+                <label htmlFor="phone">Telefono</label>
+                <input type="number" name="phone" />
+              </div>
+              <div className="content_box_inputs">
+                <label htmlFor="ci">Ci</label>
+                <input name="ci" type="number" />
+              </div>
+              <div className="content_box_inputs">
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
-                  required
                   name="email"
                   placeholder="maria@gmail.com"
                 />
@@ -90,29 +123,28 @@ const AddUserModal = ({ visible, closeModal, customers,setupdateCounter }: Modal
 
               <div className="content_box_inputs">
                 <label htmlFor="initial_date">Fecha de inicio</label>
-                <input type="date" required name="initial_date" />
+                <input type="date" name="initial_date" />
               </div>
 
               <div className="content_box_inputs">
                 <label htmlFor="final_date">Fecha de Final</label>
-                <input type="date" required name="final_date" />
+                <input type="date" name="final_date" />
               </div>
 
               <div className="content_box_inputs">
                 <label htmlFor="initial_time">Hora de Entrada</label>
-                <input type="time" required name="initial_time" />
+                <input type="time" name="initial_time" />
               </div>
 
               <div className="content_box_inputs">
                 <label htmlFor="final_time">Hora de Salida</label>
-                <input type="time" required name="final_time" />
+                <input type="time" name="final_time" />
               </div>
 
               <div className="content_box_inputs">
                 <label htmlFor="address">Dirrecion</label>
                 <input
                   type="text"
-                  required
                   name="address"
                   placeholder="bolivia la paz"
                 />
@@ -136,13 +168,17 @@ const AddUserModal = ({ visible, closeModal, customers,setupdateCounter }: Modal
               </div>
             </div>
 
-            <div className='button-container'>
-            <button className="button-default" type="submit">
-              Actualizar
-            </button>
-            <button className="button-default" type="button" onClick={deleteUser}>
-              Eliminar
-            </button>
+            <div className="button-container">
+              <button className="button-default" type="submit">
+                Actualizar
+              </button>
+              <button
+                className="button-default"
+                type="button"
+                onClick={deleteUser}
+              >
+                Eliminar
+              </button>
             </div>
           </form>
         </div>
