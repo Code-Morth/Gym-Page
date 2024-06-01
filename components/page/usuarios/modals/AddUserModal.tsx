@@ -1,44 +1,65 @@
-import React, { useRef } from "react";
-import Modal from "../../../globals/Modal";
-import axios from "axios";
-import apisPeticion from "@/api/apisPeticion";
-import getConfig from "../../../../utils/getConfig";
-import { useAlerts } from "../../../../hook/useAlerts";
-import { Toast } from "primereact/toast";
+import React, { useRef } from "react"
+import Modal from "../../../globals/Modal"
+import axios from "axios"
+import apisPeticion from "@/api/apisPeticion"
+import getConfig from "../../../../utils/getConfig"
+import { useAlerts } from "../../../../hook/useAlerts"
+import { Toast } from "primereact/toast"
 interface ModalUpdateUser {
-  visible: boolean;
-  closeModal: () => void;
-  setlogin?: React.Dispatch<React.SetStateAction<boolean>>;
-  customers?: any;
+  visible: any
+  closeModal: any
+  setlogin?: any
+  customers?: any
+  setupdateCounter?:any
 }
 
-const AddUserModal = ({
-  visible,
-  closeModal,
-  customers,
-}: ModalUpdateUser) => {
-  const { url } = apisPeticion();
-  const { show, toast } = useAlerts();
-  const dataRed = useRef<any>(null);
+const AddUserModal = ({ visible, closeModal, customers,setupdateCounter }: ModalUpdateUser) => {
+  const { url } = apisPeticion()
+  const { show, toast } = useAlerts()
+  const dataRed = useRef<any>(null)
 
-  console.log("customers",customers)
+  console.log("customers", customers)
 
   const handleUpdateUser = (event: any) => {
-    event?.preventDefault();
+    event?.preventDefault()
 
-    const userUpdateadd = Object.fromEntries(new FormData(event.target));
+    const userUpdateadd = Object.fromEntries(new FormData(event.target))
 
     axios
       .put(`${url}/user/${customers?.id}`, userUpdateadd, getConfig())
       .then((res) => {
         if (res.data.success) {
-          show("Usuario actualizado Correctamente");
-          dataRed.current.reset();
-          closeModal();
+          show("Usuario actualizado Correctamente")
+          dataRed.current.reset()
+          closeModal()
         }
       })
-      .catch((err) => console.log(err));
-  };
+      .catch((err) => console.log(err))
+
+      setupdateCounter((prev:any)=>prev +1)
+  }
+
+  const deleteUser = () => {
+    axios
+      .put(
+        `${url}/user/${customers?.id}`,
+        {
+          status: "pending",
+        },
+        getConfig()
+      )
+      .then((res) => {
+        if (res.data.success) {
+          show("Usuario actualizado Correctamente")
+          dataRed.current.reset()
+          closeModal()
+        }
+      })
+      .catch((err) => console.log(err))
+
+      setupdateCounter((prev:any)=>prev +1)
+
+  }
 
   return (
     <div>
@@ -58,38 +79,48 @@ const AddUserModal = ({
           >
             <div className="contex_box_all_inputs">
               <div className="content_box_inputs">
-              <label htmlFor="email">Email</label>
-              <input type="email" required name="email" placeholder="maria@gmail.com" />
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  required
+                  name="email"
+                  placeholder="maria@gmail.com"
+                />
               </div>
-              
+
               <div className="content_box_inputs">
-              <label htmlFor="initial_date">Fecha de inicio</label>
-              <input type="date" required name="initial_date"  />
+                <label htmlFor="initial_date">Fecha de inicio</label>
+                <input type="date" required name="initial_date" />
               </div>
-              
+
               <div className="content_box_inputs">
-              <label htmlFor="final_date">Fecha de Final</label>
-              <input type="date" required name="final_date"  />
+                <label htmlFor="final_date">Fecha de Final</label>
+                <input type="date" required name="final_date" />
               </div>
-              
-               <div className="content_box_inputs">
-              <label htmlFor="initial_time">Hora de Entrada</label>
-              <input type="time" required name="initial_time"  />
+
+              <div className="content_box_inputs">
+                <label htmlFor="initial_time">Hora de Entrada</label>
+                <input type="time" required name="initial_time" />
               </div>
-              
+
               <div className="content_box_inputs">
-              <label htmlFor="final_time">Hora de Salida</label>
-              <input type="time" required name="final_time"  />
-              </div> 
-              
-              <div className="content_box_inputs">
-              <label htmlFor="address">Dirrecion</label>
-              <input type="text" required name="address" placeholder="bolivia la paz" />
+                <label htmlFor="final_time">Hora de Salida</label>
+                <input type="time" required name="final_time" />
               </div>
-              
+
               <div className="content_box_inputs">
-              <label htmlFor="fk_typeuser">Rol</label>
-              <select name="fk_typeuser" >
+                <label htmlFor="address">Dirrecion</label>
+                <input
+                  type="text"
+                  required
+                  name="address"
+                  placeholder="bolivia la paz"
+                />
+              </div>
+
+              <div className="content_box_inputs">
+                <label htmlFor="fk_typeuser">Rol</label>
+                <select name="fk_typeuser">
                   <option value="">Elegir el Rol</option>
                   <option value="1">Adminitrador</option>
                   <option value="2">Trabajador</option>
@@ -97,24 +128,28 @@ const AddUserModal = ({
               </div>
 
               <div className="content_box_inputs">
-           <label htmlFor="">Cambiar estado</label>
-            <select name="status">
-              <option value="" >Elegir</option>
-              <option value={"active"} >active</option>
-            </select>
-           </div>
+                <label htmlFor="">Cambiar estado</label>
+                <select name="status">
+                  <option value="">Elegir</option>
+                  <option value={"active"}>active</option>
+                </select>
+              </div>
             </div>
-            
-          
+
+            <div className='button-container'>
             <button className="button-default" type="submit">
               Actualizar
             </button>
+            <button className="button-default" type="button" onClick={deleteUser}>
+              Eliminar
+            </button>
+            </div>
           </form>
         </div>
         <Toast ref={toast} position="top-center" />
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default AddUserModal;
+export default AddUserModal

@@ -17,6 +17,7 @@ const TodosLosClientes = () => {
   const [memberShip, setmemberShip] = useState<any>()
   const [inputData, setinputData] = useState("")
   const { url } = apisPeticion()
+  const [updateCounter, setupdateCounter] = useState(0)
 
   
 
@@ -30,7 +31,7 @@ const TodosLosClientes = () => {
       .get(`${url}/membership`, getConfig())
       .then((res) => setmemberShip(res.data.data))
       .catch((err) => console.log(err))
-  }, [])
+  }, [updateCounter,url])
 
   const filterCustomerExpired =
     customers && customers.length > 0
@@ -69,7 +70,9 @@ const TodosLosClientes = () => {
       axios
         .put(`${url}/client/${rowData.id}`, { status: "deleted" }, getConfig())
         .then((res) => setCustomers(res.data.data))
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err)).finally(() => {
+          setupdateCounter((prev: any) => prev + 1)
+        })
     }
 
     return <button onClick={putData}>Desactivar</button>
@@ -88,7 +91,7 @@ const TodosLosClientes = () => {
 
   const columnMemberShip = (rowData: any) => {
     const filterMemberShip = memberShip?.filter((data: any) => {
-      const member = data.id === rowData.fk_membership;
+      const member = data.id === rowData.fk_membership; 
       return member
     })
 
@@ -278,7 +281,7 @@ const TodosLosClientes = () => {
           </div>
         </div>
       </div>
-      <ExpiredCustomer customers={selectedUser} visible={Open} closeModal={closeModal}/>
+      <ExpiredCustomer setupdateCounter={setupdateCounter} customers={selectedUser} visible={Open} closeModal={closeModal}/>
     </div>
   )
 }

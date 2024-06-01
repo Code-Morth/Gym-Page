@@ -1,42 +1,77 @@
-import React, { useRef } from "react";
-import Modal from "../../../globals/Modal";
-import axios from "axios";
-import apisPeticion from "@/api/apisPeticion";
-import getConfig from "../../../../utils/getConfig";
-import { useAlerts } from "../../../../hook/useAlerts";
-import { Toast } from "primereact/toast";
+import React, { useRef } from "react"
+import Modal from "../../../globals/Modal"
+import axios from "axios"
+import apisPeticion from "@/api/apisPeticion"
+import getConfig from "../../../../utils/getConfig"
+import { useAlerts } from "../../../../hook/useAlerts"
+import { Toast } from "primereact/toast"
 interface ModalUpdateUser {
-  visible: boolean;
-  closeModal: () => void;
-  setlogin?: React.Dispatch<React.SetStateAction<boolean>>;
-  customers?: any;
+  visible: boolean
+  closeModal: () => void
+  setlogin?: React.Dispatch<React.SetStateAction<boolean>>
+  customers?: any
+  setupdateCounter?: any
 }
 
 const UpdateUserModal = ({
   visible,
   closeModal,
   customers,
+  setupdateCounter,
 }: ModalUpdateUser) => {
-  const { url } = apisPeticion();
-  const { show, toast } = useAlerts();
-  const dataRed = useRef<any>(null);
+  const { url } = apisPeticion()
+  const { show, toast } = useAlerts()
+  const dataRed = useRef<any>(null)
 
   const handleUpdateUser = (event: any) => {
-    event?.preventDefault();
+    event?.preventDefault()
 
-    const userUpdate = Object.fromEntries(new FormData(event.target));
-    console.log("esta lad ata",userUpdate);
-    axios.put(`${url}/user/${customers?.id}`, userUpdate, getConfig())
-      .then((res) => {
-        
-        if (res.data.success) {
-          show("Usuario actualizado Correctamente");
-          dataRed.current.reset();
-          closeModal();
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+    const userUpdate = Object.fromEntries(new FormData(event.target))
+
+    if (userUpdate.status === "delete") {
+      axios
+        .put(
+          `${url}/user/${customers?.id}`,
+          {
+            status: "pending",
+          },
+          getConfig()
+        )
+        .then((res) => {
+          if (res.data.success) {
+            show("Usuario actualizado Correctamente")
+            dataRed.current.reset()
+            closeModal()
+          }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setupdateCounter((prev: any) => prev + 1)
+        })
+    }
+
+    if (userUpdate.status === "deactivate") {
+      axios
+        .put(
+          `${url}/user/${customers?.id}`,
+          {
+            status: "deleted",
+          },
+          getConfig()
+        )
+        .then((res) => {
+          if (res.data.success) {
+            show("Usuario actualizado Correctamente")
+            dataRed.current.reset()
+            closeModal()
+          }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setupdateCounter((prev: any) => prev + 1)
+        })
+    }
+  }
 
   return (
     <div>
@@ -57,8 +92,9 @@ const UpdateUserModal = ({
             <label htmlFor="">Cambiar estado</label>
 
             <select name="status">
-              <option >Elija</option>
-              <option value={"deleted"}>Eliminar</option>
+              <option>Elija</option>
+              <option value={"deactivate"}>Desactivar</option>
+              <option value={"delete"}>Eliminar</option>
             </select>
             <button className="button-default" type="submit">
               Actualizar
@@ -68,7 +104,7 @@ const UpdateUserModal = ({
         <Toast ref={toast} position="top-center" />
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default UpdateUserModal;
+export default UpdateUserModal

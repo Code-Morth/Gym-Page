@@ -17,20 +17,22 @@ const TodosLosUsuarios = () => {
   const [addUserModal, setaddUserModal] = useState<boolean>(false)
   const [modalPassword, setModalPassword] = useState<boolean>(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
-  const [selectedUserAdd, setSelectedUserAdd] = useState<any>(null);
-  const [selectedPassword, setSelectedPassword] = useState<any>(null);
-  const [Ci, setci] = useState<any>("");
-  const [CiT, setciT] = useState<any>("");
+  const [selectedUserAdd, setSelectedUserAdd] = useState<any>(null)
+  const [selectedPassword, setSelectedPassword] = useState<any>(null)
+  const [Ci, setci] = useState<any>("")
+  const [CiT, setciT] = useState<any>("")
+  const [updateCounter, setupdateCounter] = useState(0)
 
   const closeModal2 = () => {
     setaddUserModal(false)
   }
 
   useEffect(() => {
-    axios.get(`${allUser}`,getConfig()).then(res => setCustomers(res.data.data)).catch(err => console.log(err))
-  }, [ ])
-
-
+    axios
+      .get(`${allUser}`, getConfig())
+      .then((res) => setCustomers(res.data.data))
+      .catch((err) => console.log(err))
+  }, [updateCounter])
 
   const openUserModal = (user: any) => {
     setSelectedUser(user)
@@ -52,20 +54,22 @@ const TodosLosUsuarios = () => {
 
   const accionUser = (rowData: any) => {
     return (
-      <button onClick={() => openUserModal(rowData)}>{rowData?.status}</button>
+      <button onClick={() => openUserModal(rowData)}>Activo</button>
     )
   }
 
   const accionPassword = (rowData: any) => {
     return (
-      <button onClick={() => openUserModalPassword(rowData)}>{rowData?.password}</button>
+      <button onClick={() => openUserModalPassword(rowData)}>
+        {rowData?.password}
+      </button>
     )
   }
 
   const accionUserAdd = (rowData: any) => {
     return (
-      <button   onClick={() => openUserModalAdd(rowData)}>
-        {rowData?.status}
+      <button onClick={() => openUserModalAdd(rowData)}>
+        Inactivo
       </button>
     )
   }
@@ -78,31 +82,28 @@ const TodosLosUsuarios = () => {
   }, [])
 
   const searchById = (e: any) => {
-   setci(e.target.value);
-   setciT(e.target.value)
+    setci(e.target.value)
+    setciT(e.target.value)
   }
-  
 
-  const filterUser = customers.filter((user:any) => {
-    const dat  = user?.ci.toLowerCase().includes(Ci.toLowerCase());
-    const xd = user?.status == "active";
+  const filterUser = customers.filter((user: any) => {
+    const dat = user?.ci.toLowerCase().includes(Ci.toLowerCase())
+    const xd = user?.status == "active"
     return dat && xd
   })
 
-  const filterUserCi = customers.filter((user:any)=> {
-    const dat  = user?.ci.toLowerCase().includes(CiT.toLowerCase());
-    const xdd =  user?.status === "deleted"
+  const filterUserCi = customers.filter((user: any) => {
+    const dat = user?.ci.toLowerCase().includes(CiT.toLowerCase())
+    const xdd = user?.status === "deleted"
     return dat && xdd
   })
 
- const admminOrUser = (data:any) =>{
+  const admminOrUser = (data: any) => {
+    const adOrUs = data.fk_typeuser === 1 ? "Admin" : "User"
 
-  const adOrUs = data.fk_typeuser === 1 ? "Admin" : "User"
-
-  return(<span>{adOrUs}</span>)
-
- }
-
+    return <span>{adOrUs}</span>
+  }
+  
   return (
     <>
       <div className="TodosLosUsuarios main-page">
@@ -212,15 +213,18 @@ const TodosLosUsuarios = () => {
               customers={selectedUser}
               visible={Open}
               closeModal={closeModal}
+              setupdateCounter={setupdateCounter}
             />
-            <UpdatePassword customers={selectedPassword} visible={modalPassword} closeModal={closeModalPassword}/>
+            <UpdatePassword
+              customers={selectedPassword}
+              visible={modalPassword}
+              closeModal={closeModalPassword}
+              setupdateCounter={setupdateCounter}
+            />
           </div>
           <div className="table-2">
-
-          
-
             <h1>Usuarios inactivos</h1>
-            
+
             <div className="tabla-container">
               <DataTable
                 className="data-table"
@@ -302,7 +306,6 @@ const TodosLosUsuarios = () => {
                   header="Rol"
                   style={{ width: "10%" }}
                   body={admminOrUser}
-
                 ></Column>
                 <Column
                   className="column"
@@ -316,6 +319,7 @@ const TodosLosUsuarios = () => {
                 customers={selectedUserAdd}
                 visible={addUserModal}
                 closeModal={closeModal2}
+                setupdateCounter={setupdateCounter}
               />
             </div>
           </div>

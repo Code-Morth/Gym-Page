@@ -59,6 +59,12 @@ body {
   border-radius: 5px; /* Radio de borde del pulgar de la barra */
 }
 
+.button-container{
+
+  @apply flex gap-[2rem] ;
+
+}
+
 .button-default{
 
   @apply bg-colorButon text-[white] w-fit px-[2.5rem] py-[1rem] rounded-[1.5rem] duration-300 ease-in-out hover:bg-hoverButon text-[1.6rem];

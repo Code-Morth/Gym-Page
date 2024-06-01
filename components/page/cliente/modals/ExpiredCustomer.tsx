@@ -1,51 +1,63 @@
-import { Toast } from "primereact/toast";
-import React, { useEffect, useRef, useState } from "react";
-import Modal from "../../../globals/Modal";
-import { useAlerts } from "../../../../hook/useAlerts";
-import axios from "axios";
-import apisPeticion from "@/api/apisPeticion";
-import getConfig from "../../../../utils/getConfig";
+import { Toast } from "primereact/toast"
+import React, { useEffect, useRef, useState } from "react"
+import Modal from "../../../globals/Modal"
+import { useAlerts } from "../../../../hook/useAlerts"
+import axios from "axios"
+import apisPeticion from "@/api/apisPeticion"
+import getConfig from "../../../../utils/getConfig"
 
 interface Modalxd {
-  visible: boolean;
-  closeModal: () => void;
-  customers?: any;
+  visible: boolean
+  closeModal: () => void
+  customers?: any
+  setupdateCounter?: any
 }
 
-const ExpiredCustomer = ({ visible, closeModal, customers }: Modalxd) => {
-  const { url } = apisPeticion();
+const ExpiredCustomer = ({
+  visible,
+  closeModal,
+  customers,
+  setupdateCounter,
+}: Modalxd) => {
+  const { url } = apisPeticion()
 
-  const { show, toast } = useAlerts();
-  const dataRed = useRef<any>(null);
-  const [menbre, setmenbre] = useState<any>();
+  const { show, toast } = useAlerts()
+  const dataRed = useRef<any>(null)
+  const [menbre, setmenbre] = useState<any>()
 
   useEffect(() => {
     axios
       .get(`${url}/membership?page=0&size=20`, getConfig())
       .then((res) => {
-        setmenbre(res.data.data);
+        setmenbre(res.data.data)
       })
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setupdateCounter((prev: any) => prev + 1)
+      })
+  }, [])
 
   const handleUpdateUser = (event: any) => {
-    event?.preventDefault();
+    event?.preventDefault()
 
-    const userUpdateadd = Object.fromEntries(new FormData(event.target));
+    const userUpdateadd = Object.fromEntries(new FormData(event.target))
 
-    userUpdateadd.status = "active";
+    userUpdateadd.status = "active"
 
     axios
       .put(`${url}/client/${customers?.id}`, userUpdateadd, getConfig())
       .then((res) => {
         if (res.data.success) {
-          show("Usuario actualizado Correctamente");
-          dataRed.current.reset();
-          closeModal();
+          show("Usuario actualizado Correctamente")
+          dataRed.current.reset()
+          closeModal()
         }
       })
-      .catch((err) => console.log(err));
-  };
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setupdateCounter((prev: any) => prev + 1)
+      })
+  }
 
   return (
     <div>
@@ -83,8 +95,10 @@ const ExpiredCustomer = ({ visible, closeModal, customers }: Modalxd) => {
                 <label htmlFor="">Cambiar estado</label>
                 <select name="status">
                   <option value="">Elegir</option>
-                  {menbre?.map((op: any, index:number) => (
-                    <option key={index} value={op?.name}>{op?.name}</option>
+                  {menbre?.map((op: any, index: number) => (
+                    <option key={index} value={op?.name}>
+                      {op?.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -98,7 +112,7 @@ const ExpiredCustomer = ({ visible, closeModal, customers }: Modalxd) => {
         <Toast ref={toast} position="top-center" />
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default ExpiredCustomer;
+export default ExpiredCustomer
