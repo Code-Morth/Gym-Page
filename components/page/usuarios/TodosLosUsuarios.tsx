@@ -98,6 +98,7 @@ const TodosLosUsuarios = () => {
     return dat && xdd
   })
 
+
   const admminOrUser = (data: any) => {
     const adOrUs = data.fk_typeuser === 1 ? "Admin" : "User"
 
