@@ -161,6 +161,18 @@ input {
   @apply px-[0.5rem] rounded-[0.3rem] py-[.5rem] text-center outline-none;
 }
 
+select{
+
+  @apply px-[0.5rem] rounded-[0.3rem] py-[.5rem] text-center outline-none;
+
+
+  border-color: #071429!important;
+  border: solid;
+  border-width: 0.2rem
+
+
+}
+
 .content_box_inputs{
   @apply flex flex-col gap-[1.5rem] text-center ;
   & h3 {

@@ -11,6 +11,8 @@ const AgregarCliente = () => {
   const dataRef = useRef<any>(null)
   const { show, toast } = useAlerts()
   const [memberShip, setmemberShip] = useState<any>()
+  const [membershipSelected, setmembershipSelected] = useState<any>()
+  const [finalDate, setfinalDate] = useState<any>()
 
   useEffect(() => {
     axios
@@ -37,7 +39,11 @@ const AgregarCliente = () => {
 
     const dataForm = Object.fromEntries(new FormData(event.target))
 
-    console.log("dataForm",dataForm)
+    delete dataForm.price
+    delete dataForm.initial_date
+    delete dataForm.final_date
+    delete dataForm.number_entries
+    delete dataForm.permissions
 
     axios
       .post(`${url}/client`, dataForm, getConfig())
@@ -48,6 +54,34 @@ const AgregarCliente = () => {
         }
       })
       .catch((err) => console.log(err))
+  }
+
+  const handleMembreshipChange = (event: any) => {
+    const selectedId = event.target.value
+    const selectedMembreship = memberShip.find(
+      (item: any) => item.id === selectedId
+    )
+
+    console.log("membreshipSelected", selectedMembreship)
+
+    axios
+      .get(`${url}/membership/${selectedMembreship.id}`, getConfig())
+      .then((res) => {
+        setmembershipSelected(res.data.data), console.log("res", res.data.data)
+      })
+      .catch((err) => console.log(err))
+  }
+
+  const handleDate = (event: any) => {
+    const date = new Date(event.target.value)
+
+    date.setDate(date.getDate() + membershipSelected?.duration + 1)
+
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, "0") // Los meses en JavaScript son base 0
+    const day = String(date.getDate()).padStart(2, "0")
+
+    setfinalDate(`${month}/${day}/${year}`)
   }
 
   return (
@@ -64,7 +98,12 @@ const AgregarCliente = () => {
               <label htmlFor="phone">Telefono</label>
               <input required name="phone" type="number" />
               <label htmlFor="fk_membership">Membresia</label>
-              <select required name="fk_membership" id="">
+              <select
+                onChange={handleMembreshipChange}
+                required
+                name="fk_membership"
+                id=""
+              >
                 <option value="">Seleccione su membresia</option>
                 {memberShip?.map((data: any) => (
                   <option key={data.id} value={data.id}>
@@ -72,6 +111,29 @@ const AgregarCliente = () => {
                   </option>
                 ))}
               </select>
+              <label htmlFor="price">Precio</label>
+              <input
+                required
+                readOnly
+                value={membershipSelected?.price ?? "0"}
+                name="price"
+                type="text"
+              />
+              <label htmlFor="initial_date">Desde</label>
+              <input
+                onChange={handleDate}
+                required
+                name="initial_date"
+                type="date"
+              />
+              <label htmlFor="permissions">Permisos</label>
+              <input
+                required
+                readOnly
+                value={membershipSelected?.permission ?? "0"}
+                name="permissions"
+                type="text"
+              />
             </div>
             <div className="form-rigth">
               <label htmlFor="last_name1">Primer apellido</label>
@@ -82,6 +144,16 @@ const AgregarCliente = () => {
               <input name="address" type="text" />
               <label htmlFor="ci">Ci</label>
               <input required name="ci" type="number" />
+              <label htmlFor="final_date">Hasta</label>
+              <input value={finalDate} readOnly name="final_date" type="text" />
+              <label htmlFor="number_entries">Numero de entradas</label>
+              <input
+                required
+                readOnly
+                value={membershipSelected?.duration ?? "0"}
+                name="number_entries"
+                type="text"
+              />
             </div>
           </div>
           <button className="button-default">Agregar cliente</button>
