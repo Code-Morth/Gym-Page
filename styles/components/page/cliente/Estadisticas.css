@@ -1,6 +1,6 @@
 .Estadisticas{
 
-    @apply w-full flex justify-center items-center text-[2.4rem] font-semibold;
+    @apply w-full flex justify-center items-center text-[2.4rem] font-semibold bg-[white];
 
     .estadisticas-container{
 

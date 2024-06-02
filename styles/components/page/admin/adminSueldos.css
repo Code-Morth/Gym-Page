@@ -2,49 +2,55 @@
     @apply flex flex-col gap-[1rem];
    
 }
+.box_content_stadisticas{
+  @apply flex  justify-center ;
+  @screen laptop {
+    gap: calc(20rem * var(--scale));
+  }
+}
 
 .main_principal_{
-    @apply   w-full max-h-full min-h-screen bg-slate-600 flex flex-col justify-center 
-    px-[10rem] gap-[5rem];
+    @apply   w-full max-h-full min-h-screen bg-white flex flex-col  
+    px-[10rem] py-[2rem] gap-[5rem];
     & h2 {
         @apply text-[3rem] font-bold  ;
     }
 }
 
-.main_principal_ {
-  padding: 20px;
+
+.box_information_stadisticas{
+  @apply flex justify-evenly ;
+}
+.box_information_stadisticas_{
+  @apply   flex justify-around w-full h-[11.5rem] ;
 }
 
-.box_content_sueldos {
-  margin-bottom: 20px;
+.info_ganancias_stadisticas{
+  @apply flex justify-between w-[30rem] px-[2rem] py-[1rem] border-2 border-[#afafaf] rounded-xl shadow-[1px_1px_2.5px_#a3a3a3] bg-[#F1F1F1];
 }
 
-.tabla-container-1 {
-  overflow-x: auto;
-  
+.conten_card_info_stadisticas{
+  @apply flex flex-col justify-around gap-[1rem]    ;
+  & h3 {
+    @apply text-[#a3a3a3] font-semibold text-[1.7rem];
+  }
+  & h2 {
+    @apply text-[#a3a3a3];
+  }
 }
 
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.data-table th,
-.data-table td {
-    width: 20%;
-  border: 1px solid #ddd;
-  padding: 8px;
-  
-}
-
-.data-table th {
-  background-color: #f2f2f2;
-  color: black;
-  
+.conten-img-stadisticas{
+  @apply  w-[10rem] h-[10rem] ;
 }
 
 
+.all {
+  @apply w-full h-full ;
+}
 
-.data-table .cursor-pointer {
-  cursor: pointer;
+.box_content_sueldos{
+  & input{
+    @apply  py-[1rem] border-2 border-[#a3a3a3] text-[2rem] text-[#a3a3a3];
+    
+  }
 }

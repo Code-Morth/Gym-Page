@@ -22,7 +22,7 @@ const TodosLosClientes = () => {
 
   useEffect(() => {
     axios
-      .get(`${url}/client`, getConfig())
+      .get(`${url}/client?page=0&size=99999999`, getConfig())
       .then((res) => setCustomers(res.data.data))
       .catch((err) => console.log(err))
 

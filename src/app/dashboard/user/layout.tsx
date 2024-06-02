@@ -1,20 +1,15 @@
-import SidebarGym from "../../../../components/organims/SidebarGym"
-import ProtectedRoute from "../../../../components/protecte/ProtecteRouter"
+import SidebarGym from "../../../../components/organims/SidebarGym";
+import ProtectedRoute from "../../../../components/protecte/ProtecteRouter";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }:any) {
   return (
-    <html lang="en">
-      <body className="flex ">
+    <html lang="en"> {/* Ensure consistent language */}
+        <body className="flex">
       <ProtectedRoute>
-
-        <SidebarGym />
-        {children}
+          <SidebarGym />
+          {children}
       </ProtectedRoute>
-      </body>
+        </body>
     </html>
-  )
+  );
 }
