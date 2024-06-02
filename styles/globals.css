@@ -326,12 +326,59 @@ select{
   @apply text-[white] w-[80%] p-[2rem] border-2 rounded-md bg-[#ff000050] border-[#f81818] ; 
   & p {
     @apply text-[#f0fdf0] font-medium text-[1.5rem] ;
+    @screen laptop{
+      font-size: calc(1.6rem * var(--scale));
+    }
   }
   & strong {
     @apply text-[#4fff3f] text-[1.6rem] font-bold ;
+    @screen laptop{
+      font-size: calc(1.6rem * var(--scale));
+    }
   }
 }
 
 .loader_2{
   @apply border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600 ;
+}
+
+.box_content_notify_client{
+  @apply bg-black text-textoSideBar flex flex-col min-w-[35rem] max-w-full h-full  overflow-y-scroll max-h-screen pt-[4rem];
+}
+
+.box-notification_context{
+  @apply w-full min-h-screen max-h-full bg-[white] flex  justify-around;
+}
+.box-notification_context_two{
+  @apply w-[100%]  min-h-screen max-h-full flex flex-col gap-[10rem]  items-center;
+}
+
+.box-notification_context_thre{
+  @apply  w-full h-[10rem] bg-[black] flex gap-[2rem] justify-between items-center px-[10rem];
+}
+.box-notification_context_for{
+  @apply  flex gap-[3rem] text-[white] items-center justify-center font-extrabold;
+  & h2{
+    @apply  text-[2rem]  ;
+    @screen laptop {
+      font-size: calc(3rem * var(--scale));
+    }
+  }
+}
+
+
+
+.text-notify{
+  @apply   text-[2rem] text-[white] font-extrabold;
+  @screen laptop {
+    font-size: calc(3rem * var(--scale));
+  }
+}
+
+.dashboard_statistics  canvas{
+  @apply !w-[100%]  !h-[70rem];
+
+  @screen tablet {
+@apply !h-[100%] ;
+  }
 }

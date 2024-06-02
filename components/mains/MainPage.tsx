@@ -68,21 +68,21 @@ const MainPage = () => {
     };
 
   return (
-    <div className="w-full min-h-screen max-h-auto bg-[white] flex  justify-around">
-    <div className="w-[100%]  max-h-auto min-h-screen flex flex-col gap-[10rem]  items-center ">
-      <div className="w-full h-[10rem] bg-[black] flex gap-[2rem] justify-between items-center px-[10rem]">
-        <div className="flex gap-[3rem] text-[white] items-center justify-center font-extrabold">
-          <h2 className="text-[3rem]">Bienvenido</h2>
-          <h2 className="text-[3rem] underline">{userData?.first_name}</h2>
+    <div className="box-notification_context">
+    <div className="box-notification_context_two">
+      <div className="box-notification_context_thre ">
+        <div className="box-notification_context_for ">
+          <h2 >Bienvenido</h2>
+          <h2 >{userData?.first_name}</h2>
         </div>
 
         {load ? (
           userData?.fk_typeuser === 2 ? (
-            <h2 className="text-[3rem] text-[white] font-extrabold ">
+            <h2 className="text-notify ">
               Usuario : Trabajador
             </h2>
           ) : userData?.fk_typeuser === 1 ? (
-            <h2 className="text-[3rem] text-[white] font-extrabold ">
+            <h2 className="text-notify ">
               Usuario : Administrador
             </h2>
           ) : null
@@ -93,14 +93,17 @@ const MainPage = () => {
 
       <div className="dahsboard_stadisticas ">
         <DashboardUser />
+       
       </div>
-    </div>
 
-    <div className="bg-black text-textoSideBar flex flex-col min-w-[35rem] max-w-full h-full  overflow-y-scroll max-h-screen pt-[4rem]">
-      {clientesPorRenovar.length > 0 && (
-        <ClienteNotifiy clients={clientesPorRenovar} load={load}/>
-      )}
+      
     </div>
+    {clientesPorRenovar.length > 0 && (
+    <div className="box_content_notify_client">
+        <ClienteNotifiy clients={clientesPorRenovar} load={load}/>
+    </div>
+      )}
+      
   </div>
   )
 }

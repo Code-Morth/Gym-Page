@@ -1,10 +1,11 @@
 .box_sidebar_{
-    @apply flex flex-col  gap-[5rem] w-[70%] bg-black min-h-screen max-h-[auto]  text-textoSideBar font-bold text-[1.8rem];
+    @apply flex flex-col  gap-[5rem] w-[70%] bg-black min-h-screen max-h-[auto]  text-textoSideBar font-bold text-[1.3rem];
     @screen tablet {
         @apply w-[50%];
     }
     @screen laptop {
-        width: calc(30rem * var(--scale));
+        width: calc(25rem * var(--scale));
+        font-size: calc(1.8rem * var(--scale));
     }
     .box_image{
         @apply  w-full  flex justify-center;
@@ -27,3 +28,4 @@
     }
    
 }
+
