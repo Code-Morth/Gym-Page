@@ -321,6 +321,7 @@ const TodosLosUsuarios = () => {
                   visible={addUserModal}
                   closeModal={closeModal2}
                   setupdateCounter={setupdateCounter}
+                  setloader={setloader}
                 />
               </div>
             </div>

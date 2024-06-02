@@ -1,7 +1,7 @@
 "use client"
 import { DataTable } from "primereact/datatable"
 import { Column } from "primereact/column"
-import { useEffect, useState } from "react"
+import { act, useEffect, useRef, useState } from "react"
 import apisPeticion from "@/api/apisPeticion"
 import getConfig from "../../../utils/getConfig"
 import axios from "axios"
@@ -9,6 +9,7 @@ import axios from "axios"
 import useOpenModal from "../../../hook/useOpenModal"
 import ExpiredCustomer from "./modals/ExpiredCustomer"
 import Snipet from "../../loader/Snipet"
+import Permissions from "./modals/Permissions"
 
 const TodosLosClientes = () => {
   const { Open, openModal, closeModal } = useOpenModal()
@@ -19,6 +20,13 @@ const TodosLosClientes = () => {
   const { url } = apisPeticion()
   const [updateCounter, setupdateCounter] = useState(0)
   const [loader, setloader] = useState(false)
+  const [visible2, setvisible2] = useState(false)
+  const [value, setValue] = useState(0)
+
+  const closeModal2 = () => {
+    setvisible2(false)
+    setValue(0)
+  }
 
   useEffect(() => {
     axios
@@ -65,9 +73,10 @@ const TodosLosClientes = () => {
           })
 
   const putStatusDeleted = (rowData: any) => {
-    const putData = () => {
-      setloader(true)
-      console.log("Seteo true al loader 🥵🥵🥵🥵🥵")
+    console.log("rowData.id", rowData.id)
+    console.log("rowData", rowData)
+
+    if (rowData.quantity === rowData.duration + 1) {
       axios
         .put(`${url}/client/${rowData.id}`, { status: "deleted" }, getConfig())
         .then((res) => {
@@ -75,9 +84,20 @@ const TodosLosClientes = () => {
         })
         .catch((err) => console.log(err))
         .finally(() => {
-          setloader(false),
-            setupdateCounter((prev: any) => prev + 1),
-            console.log("Seteo false al loader 🥵🥵🥵🥵🥵")
+          setloader(false), setupdateCounter((prev: any) => prev + 1)
+        })
+    }
+
+    const putData = () => {
+      setloader(true)
+      axios
+        .put(`${url}/client/${rowData.id}`, { status: "deleted" }, getConfig())
+        .then((res) => {
+          setCustomers(res.data.data)
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setloader(false), setupdateCounter((prev: any) => prev + 1)
         })
     }
 
@@ -89,8 +109,23 @@ const TodosLosClientes = () => {
     openModal()
   }
 
+  const openUserModalPermission = (user: any) => {
+    setSelectedUser(user)
+    setvisible2(true)
+  }
+
   const putStatusActive = (data: any) => {
     return <button onClick={() => openUserModal(data)}>Activar</button>
+  }
+
+  const permissionButton = (data: any) => {
+    const dataPermission = data?.permission
+
+    return (
+      <button onClick={() => openUserModalPermission(data)}>
+        {dataPermission}
+      </button>
+    )
   }
 
   const columnMemberShip = (rowData: any) => {
@@ -112,8 +147,25 @@ const TodosLosClientes = () => {
     setinputData(data.target.value)
   }
 
-  console.log(filterCustomerActive)
-  console.log("loader", loader)
+  const ticketsAvailable = (data: any) => {
+    const ticketA = data.duration - data.quantity ?? "0"
+
+    return <span>{ticketA}</span>
+  }
+
+  const finalDayRegistration = (data: any) => {
+    const ticketA = data.duration - data.quantity ?? "0"
+
+    const actualDate = new Date()
+
+    actualDate.setDate(actualDate.getDate() + ticketA)
+
+    const year = actualDate.getFullYear()
+    const month = String(actualDate.getMonth() + 1).padStart(2, "0") // Los meses en JavaScript son base 0
+    const day = String(actualDate.getDate()).padStart(2, "0")
+
+    return <span>{`${month}/${day}/${year}`}</span>
+  }
 
   return (
     <div className="TodosLosClientes">
@@ -189,6 +241,26 @@ const TodosLosClientes = () => {
                   field="createdAt"
                   header="Fecha de registro"
                   style={{ width: "10%" }}
+                ></Column>
+                <Column
+                  className="column"
+                  field="permission"
+                  header="Permisos"
+                  style={{ width: "3%" }}
+                  body={permissionButton}
+                ></Column>
+                <Column
+                  className="column"
+                  field="duration"
+                  header="Entradas disponibles"
+                  style={{ width: "3%" }}
+                  body={ticketsAvailable}
+                ></Column>
+                <Column
+                  className="column"
+                  header="Fecha final de inscripcion"
+                  style={{ width: "15%" }}
+                  body={finalDayRegistration}
                 ></Column>
                 <Column
                   className="column"
@@ -296,6 +368,16 @@ const TodosLosClientes = () => {
         customers={selectedUser}
         visible={Open}
         closeModal={closeModal}
+        setloader={setloader}
+      />
+      <Permissions
+        visible={visible2}
+        closeModal={closeModal2}
+        setupdateCounter={setupdateCounter}
+        customers={selectedUser}
+        setValue={setValue}
+        value={value}
+        setloader={setloader}
       />
     </div>
   )
