@@ -1,5 +1,5 @@
 .box_sidebar_{
-    @apply flex flex-col  gap-[5rem] w-[70%] bg-sidebarColor min-h-screen max-h-[auto]  text-textoSideBar font-bold text-[1.8rem];
+    @apply flex flex-col  gap-[5rem] w-[70%] bg-black min-h-screen max-h-[auto]  text-textoSideBar font-bold text-[1.8rem];
     @screen tablet {
         @apply w-[50%];
     }

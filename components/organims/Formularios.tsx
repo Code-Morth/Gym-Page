@@ -23,9 +23,11 @@ const Formularios = () => {
     axios
       .post(`${login}`, dataForm)
       .then((res) => {
+        console.log(res.data.data)
         if (res.data.success) {
           agregarLocal("fk_typeuser", res.data.data?.fk_typeuser);
           agregarLocal("token", res.data.data?.token);
+          agregarLocal("user", res.data.data?.userid);
           if (res.data.data?.fk_typeuser === 1) {
             show("Bienvenido Admin");
             setTimeout(() => {

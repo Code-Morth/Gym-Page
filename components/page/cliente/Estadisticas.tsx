@@ -43,7 +43,7 @@ const Estadisticas = () => {
   }, [])
 
   return (
-    <div className="Estadisticas main-page">
+    <div className="Estadisticas  main-page">
       <div className="estadisticas-container">
         <div className="dates-container">
           <h1>Fecha de inicio</h1>

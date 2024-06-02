@@ -24,7 +24,7 @@ const SidebarGym = () => {
 
   return (
     <div>
-      <div className="box_sidebar_ ">
+      <div className="box_sidebar_  ">
         <div className="box_image">
           <div className="image_next_box">
             <Image

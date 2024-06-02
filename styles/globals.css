@@ -266,3 +266,65 @@ select{
 .pdf-download-link a:hover {
   background-color: #0056b3;
 }
+
+
+.dahsboard_stadisticas{
+  @apply w-full px-[4rem] h-[65rem] ;
+}
+
+/* styles/Home.module.css */
+.date-filters {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+}
+
+.date-filters label {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.date-filters input {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.warning {
+  color: red;
+}
+
+.box-notification{
+  @apply flex  flex-col gap-[2rem] justify-center items-center ; 
+}
+
+.notifications {
+  @apply flex flex-col items-center ;
+ 
+
+}
+
+.notification{
+  @apply text-[white] w-[80%] p-[2rem] border-2 rounded-md bg-[#ff000050] border-[#f81818] ; 
+  & p {
+    @apply text-[#f0fdf0] font-medium text-[1.5rem] ;
+  }
+  & strong {
+    @apply text-[#4fff3f] text-[1.6rem] font-bold ;
+  }
+}
+
+.loader_2{
+  @apply border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600 ;
+}

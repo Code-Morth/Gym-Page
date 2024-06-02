@@ -15,7 +15,6 @@ export default function Page() {
   const [chartOptions, setChartOptions] = useState({});
   const [dateStart, setDateStart] = useState<string>('');
     const [dateEnd, setDateEnd] = useState<string>('');
-    const [originalData, setOriginalData] = useState<any>([]);
 
   useEffect(() => {
     setCustomers(sueldos);
