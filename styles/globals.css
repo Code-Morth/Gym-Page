@@ -76,7 +76,7 @@ body {
 /*-------------------------Tablas Generales-------------------------*/
 
 .tabla-container {
-  @apply border-[0.2rem] border-[white];
+  @apply border-[0.2rem] border-[white] max-h-[32rem] overflow-auto;
 }
 
 .column {

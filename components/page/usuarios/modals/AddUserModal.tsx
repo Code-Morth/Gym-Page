@@ -36,16 +36,16 @@ const AddUserModal = ({
 
     console.log("userUpdateadd", userUpdateadd)
 
-    // axios
-    //   .put(`${url}/user/${customers?.id}`, userUpdateadd, getConfig())
-    //   .then((res) => {
-    //     if (res.data.success) {
-    //       show("Usuario actualizado Correctamente")
-    //       dataRed.current.reset()
-    //       closeModal()
-    //     }
-    //   })
-    //   .catch((err) => console.log(err))
+    axios
+      .put(`${url}/user/${customers?.id}`, userUpdateadd, getConfig())
+      .then((res) => {
+        if (res.data.success) {
+          show("Usuario actualizado Correctamente")
+          dataRed.current.reset()
+          closeModal()
+        }
+      })
+      .catch((err) => console.log(err))
 
     setupdateCounter((prev: any) => prev + 1)
   }

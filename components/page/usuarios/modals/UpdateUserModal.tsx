@@ -11,6 +11,7 @@ interface ModalUpdateUser {
   setlogin?: React.Dispatch<React.SetStateAction<boolean>>
   customers?: any
   setupdateCounter?: any
+  setloader?: any
 }
 
 const UpdateUserModal = ({
@@ -18,6 +19,7 @@ const UpdateUserModal = ({
   closeModal,
   customers,
   setupdateCounter,
+  setloader,
 }: ModalUpdateUser) => {
   const { url } = apisPeticion()
   const { show, toast } = useAlerts()
@@ -25,6 +27,7 @@ const UpdateUserModal = ({
 
   const handleUpdateUser = (event: any) => {
     event?.preventDefault()
+    setloader(true)
 
     const userUpdate = Object.fromEntries(
       Array.from(new FormData(event.target)).filter(
@@ -43,14 +46,15 @@ const UpdateUserModal = ({
         )
         .then((res) => {
           if (res.data.success) {
-            show("Usuario actualizado Correctamente")
             dataRed.current.reset()
-            closeModal()
           }
         })
         .catch((err) => console.log(err))
         .finally(() => {
-          setupdateCounter((prev: any) => prev + 1)
+          setupdateCounter((prev: any) => prev + 1),
+            setloader(false),
+            closeModal(),
+            show("Usuario actualizado Correctamente")
         })
     }
 
@@ -65,14 +69,15 @@ const UpdateUserModal = ({
         )
         .then((res) => {
           if (res.data.success) {
-            show("Usuario actualizado Correctamente")
             dataRed.current.reset()
-            closeModal()
           }
         })
         .catch((err) => console.log(err))
         .finally(() => {
-          setupdateCounter((prev: any) => prev + 1)
+          setupdateCounter((prev: any) => prev + 1),
+            setloader(false),
+            closeModal(),
+            show("Usuario actualizado Correctamente")
         })
     }
   }
