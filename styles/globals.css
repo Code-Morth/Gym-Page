@@ -319,9 +319,15 @@ select{
   @apply text-[white] w-[80%] p-[2rem] border-2 rounded-md bg-[#ff000050] border-[#f81818] ; 
   & p {
     @apply text-[#f0fdf0] font-medium text-[1.5rem] ;
+    @screen laptop{
+      font-size: calc(1.6rem * var(--scale));
+    }
   }
   & strong {
     @apply text-[#4fff3f] text-[1.6rem] font-bold ;
+    @screen laptop{
+      font-size: calc(1.6rem * var(--scale));
+    }
   }
 }
 
@@ -346,12 +352,26 @@ select{
 .box-notification_context_for{
   @apply  flex gap-[3rem] text-[white] items-center justify-center font-extrabold;
   & h2{
-    @apply  text-[3rem]  ;
+    @apply  text-[2rem]  ;
+    @screen laptop {
+      font-size: calc(3rem * var(--scale));
+    }
   }
 }
 
 
 
 .text-notify{
-  @apply   text-[3rem] text-[white] font-extrabold;
+  @apply   text-[2rem] text-[white] font-extrabold;
+  @screen laptop {
+    font-size: calc(3rem * var(--scale));
+  }
+}
+
+.dashboard_statistics  canvas{
+  @apply !w-[100%]  !h-[70rem];
+
+  @screen tablet {
+@apply !h-[100%] ;
+  }
 }

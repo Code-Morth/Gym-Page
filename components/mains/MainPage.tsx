@@ -93,14 +93,17 @@ const MainPage = () => {
 
       <div className="dahsboard_stadisticas ">
         <DashboardUser />
+       
       </div>
-    </div>
 
-    <div className="box_content_notify_client">
-      {clientesPorRenovar.length > 0 && (
-        <ClienteNotifiy clients={clientesPorRenovar} load={load}/>
-      )}
+      
     </div>
+    {clientesPorRenovar.length > 0 && (
+    <div className="box_content_notify_client">
+        <ClienteNotifiy clients={clientesPorRenovar} load={load}/>
+    </div>
+      )}
+      
   </div>
   )
 }

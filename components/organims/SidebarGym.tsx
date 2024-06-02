@@ -8,7 +8,9 @@ import userLocalStoras from "../../hook/userLocalStoras";
 
 const SidebarGym = () => {
   const { optionSelect, selectedOption } = useSidebar();
-  const { eliminarLocal } = userLocalStoras();
+  const { eliminarLocal  , obtenerLocal} = userLocalStoras();
+
+  const router =useRouter()
 
   const path = usePathname();
 
@@ -22,12 +24,23 @@ const SidebarGym = () => {
   const isAdminRoute = path.startsWith("/dashboard/admin");
   const isUserRoute = path.startsWith("/dashboard/user");
 
+  const user :any = obtenerLocal("fk_typeuser")
+  const navegar = () => {
+    
+    if(user  === 1){
+      router.push("/dashboard/admin")
+    }else{
+      router.push("/dashboard/user")
+    }
+  }
+
   return (
-    <div>
+    <div className="box_box_box_sidebar">
       <div className="box_sidebar_  ">
         <div className="box_image">
           <div className="image_next_box">
             <Image
+            onClick={navegar}
               className="w-full  h-full"
               src={"/logo.png"}
               alt="logo"
