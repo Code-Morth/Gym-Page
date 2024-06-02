@@ -25,6 +25,10 @@ const AgregarUsuarios = () => {
           show("Usuario Creado Exitosamente");
           dataRef.current.reset();
         }
+        console.log("res",res.data.succes)
+
+        if(res.data.succes === undefined){show("El correo ya existe")}
+
       })
       .catch((err) => console.log(err));
   };
@@ -69,7 +73,7 @@ const AgregarUsuarios = () => {
               <div className="select-_">
                 <select name="fk_typeuser" >
                   <option value="">Elegir el Rol</option>
-                  <option value="1">Adminitrador</option>
+                  <option value="1">Administrador</option>
                   <option value="2">Trabajador</option>
                 </select>
               </div>

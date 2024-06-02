@@ -41,23 +41,25 @@ const AgregarVentas = () => {
   }, [])
 
   const addProductTable = (data: any) => {
-    setselectedData(data.target.value.productName)
+    if (data.value.id) {
+      setselectedData(data.target.value.productName)
 
-    console.log("data", data)
+      console.log("data", data)
 
-    setproductTableArray((prev: any) => [
-      ...prev,
-      {
-        productName: data.target.value.name,
-        price: data.target.value.price_sell,
-        amount: 1,
-        totalPrice:
-          prev.totalPrice !== undefined
-            ? Number(prev.totalPrice) + Number(data.target.value.price_sell)
-            : 0 + Number(data.target.value.price_sell),
-        id: data.target.value.id,
-      },
-    ])
+      setproductTableArray((prev: any) => [
+        ...prev,
+        {
+          productName: data.target.value.name,
+          price: data.target.value.price_sell,
+          amount: 1,
+          totalPrice:
+            prev.totalPrice !== undefined
+              ? Number(prev.totalPrice) + Number(data.target.value.price_sell)
+              : 0 + Number(data.target.value.price_sell),
+          id: data.target.value.id,
+        },
+      ])
+    }
   }
 
   const postSale = () => {
@@ -78,7 +80,7 @@ const AgregarVentas = () => {
 
     axios
       .post(`${url}/order`, finalDataPost, getConfig())
-      .then((res) => {        
+      .then((res) => {
         if (res.data.success) {
           show("Producto Agregado")
           console.log(res.data.success)
@@ -96,8 +98,9 @@ const AgregarVentas = () => {
     settotalPrice(totalPriceSum)
   }, [productTableArray])
 
-  console.log("productTableArray", productTableArray)
+  // console.log("productTableArray", productTableArray)
 
+  
   return (
     <>
       <div className="AgregarVentas main-page">
@@ -115,6 +118,7 @@ const AgregarVentas = () => {
                 onChange={(e) => {
                   setselectedUserID(e.target.value.id)
                   setselectedUserName(e.target.value.first_name)
+                  console.log("Soy el evento del Dropdown ", e)
                 }}
                 optionLabel="first_name"
                 options={dataUsers}
@@ -130,7 +134,7 @@ const AgregarVentas = () => {
                 }}
                 value={selectedProductName}
                 onChange={(e) => {
-                  setselectedProductName(e.target.value.name)
+                  setselectedProductName(e.target.value)
                   addProductTable(e)
                 }}
                 options={dataProducts}
