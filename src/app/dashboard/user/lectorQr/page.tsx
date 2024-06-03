@@ -1,7 +1,8 @@
+import QRComponent from '../../../../../components/page/qr/QrReader';
 
 export default function page () {
     return (
-      <div>Soy el qr</div>
+      <QRComponent/>
     )
   }
   

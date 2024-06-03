@@ -13,18 +13,20 @@ const TodasLasMembresias = () => {
   const { url } = apisPeticion()
   const { Open, closeModal, openModal } = useOpenModal()
   const [selectedUser, setSelectedUser] = useState<any>(null)
+  const [updateCounter, setupdateCounter] = useState(0)
   const { show, toast } = useAlerts()
 
   const getData = () => {
     axios
       .get(`${url}/membership`, getConfig())
       .then((res) => {
-        setCustomers(res.data.data)
+        const dataFilter = res.data.data.filter((e:any)=>e.status === "active")
+        setCustomers(dataFilter)
       })
       .catch((err) => console.log(err))
   }
 
-  useEffect(() => {getData()}, [])
+  useEffect(() => {getData()}, [updateCounter])
 
   const editData = (data: any) => {
     return (
@@ -56,7 +58,7 @@ const TodasLasMembresias = () => {
                 show("Usuario actualizado Correctamente")
               }
             })
-            .catch((err) => console.log(err))
+            .catch((err) => console.log(err)).finally(()=>setupdateCounter(prev=>prev+1))
         }}
       >
         {data?.status}
@@ -126,6 +128,7 @@ const TodasLasMembresias = () => {
         customers={selectedUser}
         visible={Open}
         closeModal={closeModal}
+        setupdateCounter={setupdateCounter}
       />
     </div>
   )

@@ -119,11 +119,23 @@ const TodosLosClientes = () => {
   }
 
   const permissionButton = (data: any) => {
-    const dataPermission = data?.permission
+    const dataPermission = memberShip?.filter((e:any)=> e.id === data?.fk_membership) 
+
+    console.log("data",data)
+
+    console.log("data?.fk_membership",data?.fk_membership)
+
+    console.log("memberShip",memberShip)
+
+    console.log("dataPermission",dataPermission)
+
+    console.log("dataPermission?.permission",dataPermission?.permission)
+
+
 
     return (
       <button onClick={() => openUserModalPermission(data)}>
-        {dataPermission}
+        {dataPermission?.permission ?? "0"}
       </button>
     )
   }

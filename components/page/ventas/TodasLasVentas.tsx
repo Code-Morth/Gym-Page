@@ -18,6 +18,10 @@ const TodasLasVentas = () => {
 
   const config: any = getConfig()
 
+  console.log("dateStart",dateStart)
+  console.log("dateEnd",dateEnd)
+
+
   config.body = {
     order_date_ini: dateStart,
     order_date_end: dateEnd,

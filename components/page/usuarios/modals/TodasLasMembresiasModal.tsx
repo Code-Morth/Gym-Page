@@ -10,12 +10,14 @@ interface ModalUpdateUser {
   closeModal: () => void
   setlogin?: React.Dispatch<React.SetStateAction<boolean>>
   customers?: any
+  setupdateCounter?:any
 }
 
 const TodasLasMembresiasModal = ({
   visible,
   closeModal,
   customers,
+  setupdateCounter
 }: ModalUpdateUser) => {
   const { url } = apisPeticion()
   const { show, toast } = useAlerts()
@@ -40,7 +42,24 @@ const TodasLasMembresiasModal = ({
           closeModal()
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err)).finally(()=>setupdateCounter((prev:any)=>prev+1))
+  }
+
+  const deleteUser = () => {
+    axios
+      .put(
+        `${url}/membership/${customers?.id}`,
+        { status: "deleted" },
+        getConfig()
+      )
+      .then((res) => {
+        if (res.data.success) {
+          show("Usuario actualizado Correctamente")
+          dataRed.current.reset()
+          closeModal()
+        }
+      })
+      .catch((err) => console.log(err)).finally(()=>setupdateCounter((prev:any)=>prev+1))
   }
 
   return (
@@ -77,7 +96,16 @@ const TodasLasMembresiasModal = ({
                 <input required type="text" name="duration" />
               </div>
             </div>
-            <button className="button-default">Actualizar</button>
+            <div className="button-container">
+              <button className="button-default">Actualizar</button>
+              <button
+                onClick={deleteUser}
+                type="button"
+                className="button-default"
+              >
+                Eliminar
+              </button>
+            </div>
           </form>
         </div>
         <Toast ref={toast} position="top-center" />

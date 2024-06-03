@@ -8,15 +8,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-     
-        <body className="  flex ">
+      <body className="  flex ">
         <ProtectedRoute>
-
           <SidebarGym />
           {children}
         </ProtectedRoute>
-        </body>
-
+      </body>
     </html>
   )
 }

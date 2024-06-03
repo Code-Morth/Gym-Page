@@ -1,16 +1,15 @@
-'use client'
-import SidebarGym from "../../../../components/organims/SidebarGym";
-import ProtectedRoute from "../../../../components/protecte/ProtecteRouter";
+import SidebarGym from "../../../../components/organims/SidebarGym"
+import ProtectedRoute from "../../../../components/protecte/ProtecteRouter"
 
-export default function RootLayout({ children }:any) {
+export default function RootLayout({ children }: any) {
   return (
-    <html lang="en"> {/* Ensure consistent language */}
-        <body className="flex">
-      <ProtectedRoute>
+    <html lang="en">
+      <body className="flex">
+        <ProtectedRoute>
           <SidebarGym />
           {children}
-      </ProtectedRoute>
-        </body>
+        </ProtectedRoute>
+      </body>
     </html>
-  );
+  )
 }
