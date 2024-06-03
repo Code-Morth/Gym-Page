@@ -11,6 +11,7 @@ interface ModalUpdateUser {
   setlogin?: any
   customers?: any
   setupdateCounter?: any
+  setloader?: any
 }
 
 const AddUserModal = ({
@@ -18,6 +19,7 @@ const AddUserModal = ({
   closeModal,
   customers,
   setupdateCounter,
+  setloader,
 }: ModalUpdateUser) => {
   const { url } = apisPeticion()
   const { show, toast } = useAlerts()
@@ -27,6 +29,7 @@ const AddUserModal = ({
 
   const handleUpdateUser = (event: any) => {
     event?.preventDefault()
+    setloader(true)
 
     const userUpdateadd = Object.fromEntries(
       Array.from(new FormData(event.target)).filter(
@@ -46,11 +49,14 @@ const AddUserModal = ({
         }
       })
       .catch((err) => console.log(err))
+      .finally(() => {setloader(false),closeModal()})
 
     setupdateCounter((prev: any) => prev + 1)
   }
 
   const deleteUser = () => {
+    setloader(true)
+
     axios
       .put(
         `${url}/user/${customers?.id}`,
@@ -67,6 +73,7 @@ const AddUserModal = ({
         }
       })
       .catch((err) => console.log(err))
+      .finally(() => {setloader(false),closeModal()})
 
     setupdateCounter((prev: any) => prev + 1)
   }
@@ -80,7 +87,7 @@ const AddUserModal = ({
         className="p-[3rem] main-page "
       >
         <div className="box_modal_info main-page">
-          <h2>Actulizar Usuario</h2>
+          <h2>Actualizar Usuario</h2>
 
           <form
             className="box_modal_formu"

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html {
   font-size: 62.5%;
 }
@@ -76,8 +77,10 @@ body {
 /*-------------------------Tablas Generales-------------------------*/
 
 .tabla-container {
-  @apply border-[0.2rem] border-[white] max-h-[32rem] overflow-auto;
+  @apply border-[0.2rem] border-[white] max-h-[31rem] overflow-auto ;
 }
+
+
 
 .column {
   @apply border-collapse text-center;
@@ -159,6 +162,10 @@ body {
 
 input {
   @apply px-[0.5rem] rounded-[0.3rem] py-[.5rem] text-center outline-none;
+  border-color: #071429!important;
+  border: solid;
+  border-width: 0.2rem
+
 }
 
 select{

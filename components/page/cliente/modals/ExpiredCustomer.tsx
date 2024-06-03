@@ -11,6 +11,7 @@ interface Modalxd {
   closeModal: () => void
   customers?: any
   setupdateCounter?: any
+  setloader?:any
 }
 
 const ExpiredCustomer = ({
@@ -18,6 +19,7 @@ const ExpiredCustomer = ({
   closeModal,
   customers,
   setupdateCounter,
+  setloader
 }: Modalxd) => {
   const { url } = apisPeticion()
 
@@ -67,7 +69,7 @@ const ExpiredCustomer = ({
 
   const handleUpdateUser = (event: any) => {
     event?.preventDefault()
-
+    setloader(true)
     // const userUpdateadd = Object.fromEntries(new FormData(event.target))
 
     const userUpdateadd = Object.fromEntries(
@@ -96,6 +98,7 @@ const ExpiredCustomer = ({
       .catch((err) => console.log(err))
       .finally(() => {
         setupdateCounter((prev: any) => prev + 1)
+        setloader(false)
       })
   }
 
@@ -110,7 +113,7 @@ const ExpiredCustomer = ({
         className="p-[3rem] main-page "
       >
         <div className="box_modal_info">
-          <h2>Actulizar Usuario</h2>
+          <h2>Actualizar Usuario</h2>
 
           <form
             className="box_modal_formu"
