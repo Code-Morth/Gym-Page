@@ -5,21 +5,37 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import apisPeticion from "@/api/apisPeticion"
 import getConfig from "../../../utils/getConfig"
+import dayjs from 'dayjs'
+
 
 const TodasLasVentas = () => {
+  const actualDate = dayjs().format("YYYY-MM-DD").split("-")[1]
   const [customers, setCustomers] = useState<any>([])
-  const [dateStart, setdateStart] = useState<any>("")
-  const [dateEnd, setdateEnd] = useState<any>("")
+  const [dateStart, setdateStart] = useState<any>(actualDate)
+  const [dateEnd, setdateEnd] = useState<any>(actualDate)
   const { url } = apisPeticion()
 
-  function formatDate(dateString: any) {
-    const [year, month, day] = dateString.split("-")
-    return `${day}-${month}-${year}`
-  }
+
+
+
+
+
+
+
+
+
+  // function formatDate(dateString: any) {
+  //   const [year, month, day] = dateString.split("-")
+  //   return `${day}-${month}-${year}`
+  // }
+
+  console.log("dateStart",dateStart)
+  console.log("dateEnd",dateEnd)
+
 
   const params = {
-    order_date_ini: formatDate(dateStart),
-    order_date_end: formatDate(dateEnd),
+    order_date_ini: dateStart,
+    order_date_end: dateEnd,
   }
 
   const config = getConfig()

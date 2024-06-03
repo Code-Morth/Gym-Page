@@ -1,0 +1,19 @@
+.QrReader{
+
+    @apply w-full flex justify-center items-center ;
+
+    .qr-reader-container{
+
+        @apply flex text-[2rem] font-semibold justify-center items-center gap-[6rem] ;
+
+   } 
+
+    .data-container{
+
+        @apply flex flex-col justify-center items-center ;
+
+    }
+
+
+
+}

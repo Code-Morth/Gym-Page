@@ -5,7 +5,7 @@ export const useAlerts = () => {
     const toast = useRef<Toast>(null);
 
     const show = (est:string) => {
-      toast.current?.show({  detail:est, life: 1000});
+      toast.current?.show({  detail:est, life: 2000});
     };
 
     return { show , toast}
