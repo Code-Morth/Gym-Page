@@ -5,48 +5,27 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import apisPeticion from "@/api/apisPeticion"
 import getConfig from "../../../utils/getConfig"
-import dayjs from 'dayjs'
-
+import dayjs from "dayjs"
 
 const TodasLasVentas = () => {
-  const actualDate = dayjs().format("YYYY-MM-DD").split("-")[1]
+  const actualDate = dayjs().format("YYYY-MM-DD")
+  const datePlusOneMonth = dayjs().add(1, "month").format("YYYY/MM/DD")
+
   const [customers, setCustomers] = useState<any>([])
   const [dateStart, setdateStart] = useState<any>(actualDate)
-  const [dateEnd, setdateEnd] = useState<any>(actualDate)
+  const [dateEnd, setdateEnd] = useState<any>(datePlusOneMonth)
   const { url } = apisPeticion()
 
+  const config: any = getConfig()
 
-
-
-
-
-
-
-
-
-  // function formatDate(dateString: any) {
-  //   const [year, month, day] = dateString.split("-")
-  //   return `${day}-${month}-${year}`
-  // }
-
-  console.log("dateStart",dateStart)
-  console.log("dateEnd",dateEnd)
-
-
-  const params = {
+  config.body = {
     order_date_ini: dateStart,
     order_date_end: dateEnd,
   }
 
-  const config = getConfig()
-  const configWithParams = {
-    ...config,
-    params,
-  }
-
   useEffect(() => {
     axios
-      .get(`${url}/order?page=0&size=999999999999999`, configWithParams)
+      .get(`${url}/order?page=0&size=999999999999999`, getConfig())
       .then((res) => {
         console.log(res.data.data)
         setCustomers(res.data.data)
@@ -58,7 +37,7 @@ const TodasLasVentas = () => {
 
   const searchByDate = () => {
     axios
-      .get(`${url}/order?page=0&size=999999999999999`, configWithParams)
+      .get(`${url}/order?page=0&size=999999999999999`, config)
       .then((res) => {
         console.log(res.data.data)
         setCustomers(res.data.data)
@@ -78,7 +57,9 @@ const TodasLasVentas = () => {
     console.log(newData)
 
     return newData.map((name: any, index: any) => (
-      <span key={index}>{`${name} ${index === newData.length -1 ? "": " - "}`}</span>
+      <span key={index}>{`${name} ${
+        index === newData.length - 1 ? "" : " - "
+      }`}</span>
     ))
   }
 

@@ -73,10 +73,10 @@ const TodosLosClientes = () => {
           })
 
   const putStatusDeleted = (rowData: any) => {
-    console.log("rowData.id", rowData.id)
-    console.log("rowData", rowData)
 
-    if (rowData.quantity === rowData.duration + 1) {
+    console.log("rowData",rowData)
+
+    if (rowData.quantity === rowData.duration + 1 || rowData.duration - rowData.quantity <= 0) {
       axios
         .put(`${url}/client/${rowData.id}`, { status: "deleted" }, getConfig())
         .then((res) => {
@@ -148,7 +148,9 @@ const TodosLosClientes = () => {
   }
 
   const ticketsAvailable = (data: any) => {
-    const ticketA = data.duration - data.quantity ?? "0"
+    const ticketA = data.duration - data.quantity ?? "No disponible"
+
+    console.log("Soy el ticketA",ticketA)
 
     return <span>{ticketA}</span>
   }

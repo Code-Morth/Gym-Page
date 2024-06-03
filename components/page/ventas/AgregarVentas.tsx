@@ -33,7 +33,8 @@ const AgregarVentas = () => {
         if (res.data.success) {
           console.log(res.data.success)
         }
-        setdataUsers(res.data.data)
+        const clientsActive = res.data.data.filter((data:any)=>data.status === "active")
+        setdataUsers(clientsActive)
       })
       .catch((err) => console.log(err))
 
@@ -54,8 +55,8 @@ const AgregarVentas = () => {
           amount: 1,
           totalPrice:
             prev.totalPrice !== undefined
-              ? Number(prev.totalPrice) + Number(data.target.value.price_sell)
-              : 0 + Number(data.target.value.price_sell),
+              ? parseFloat((Number(prev.totalPrice) + Number(data.target.value.price_sell)).toFixed(2))
+              : parseFloat(0 + Number(data.target.value.price_sell).toFixed(2)),
           id: data.target.value.id,
         },
       ])
@@ -83,6 +84,10 @@ const AgregarVentas = () => {
       .then((res) => {
         if (res.data.success) {
           show("Producto Agregado")
+          console.log(res.data.success)
+        }
+        if (!res.data.success) {
+          show("Hubo un problema con la venta")
           console.log(res.data.success)
         }
       })

@@ -19,6 +19,7 @@ const Estadisticas = () => {
 
   const handleSearchClick = () => {
     axios.get(`${url}/client`, getConfig()).then((res) => {
+
       const dataMonthUsers = getMonthsBetweenDates(dateStart, dateEnd, res?.data?.data)
 
       console.log("dataMonthUsers", dataMonthUsers)

@@ -1,3 +1,4 @@
+'use client'
 import SidebarGym from "../../../../components/organims/SidebarGym";
 import ProtectedRoute from "../../../../components/protecte/ProtecteRouter";
 

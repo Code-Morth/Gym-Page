@@ -50,6 +50,8 @@ const QRComponent = () => {
         }
       })
       .catch((err) => console.log(err))
+
+      setuserData(null)
   }
 
   return (
