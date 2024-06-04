@@ -8,23 +8,27 @@ import getConfig from "../../../utils/getConfig"
 import dayjs from "dayjs"
 
 const TodasLasVentas = () => {
-  const actualDate = dayjs().format("YYYY-MM-DD")
-  const datePlusOneMonth = dayjs().add(1, "month").format("YYYY/MM/DD")
-
+  const actualDate = dayjs().format("DD-MM-YYYY")
+  const datePlusOneMonth = dayjs().add(1, "month").format("DD-MM-YYYY")
   const [customers, setCustomers] = useState<any>([])
   const [dateStart, setdateStart] = useState<any>(actualDate)
   const [dateEnd, setdateEnd] = useState<any>(datePlusOneMonth)
   const { url } = apisPeticion()
 
-  const config: any = getConfig()
+  const dateStartFormat = dayjs(dateStart).format("DD-MM-YYYY")
+  const dateEndFormat = dayjs(dateEnd).format("DD-MM-YYYY")
 
-  console.log("dateStart",dateStart)
-  console.log("dateEnd",dateEnd)
-
-
-  config.body = {
-    order_date_ini: dateStart,
-    order_date_end: dateEnd,
+  const searchByDate = () => {
+    axios
+      .get(
+        `${url}/order?page=0&size=999999999999999&order_date_ini=${dateStartFormat}&order_date_end=${dateEndFormat}`,
+        getConfig()
+      )
+      .then((res) => {
+        console.log(res.data.data)
+        setCustomers(res.data.data)
+      })
+      .catch((err) => console.log(err))
   }
 
   useEffect(() => {
@@ -38,16 +42,6 @@ const TodasLasVentas = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const searchByDate = () => {
-    axios
-      .get(`${url}/order?page=0&size=999999999999999`, config)
-      .then((res) => {
-        console.log(res.data.data)
-        setCustomers(res.data.data)
-      })
-      .catch((err) => console.log(err))
-  }
 
   const firstNameColumn = (data: any) => {
     return (

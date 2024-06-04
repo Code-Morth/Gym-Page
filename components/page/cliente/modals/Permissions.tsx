@@ -14,7 +14,7 @@ interface Modalxd {
   setupdateCounter?: any
   setValue?: any
   value?: any
-  setloader?:any
+  setloader?: any
 }
 
 const Permissions = ({
@@ -24,22 +24,39 @@ const Permissions = ({
   setupdateCounter,
   setValue,
   value,
-  setloader
+  setloader,
 }: Modalxd) => {
   const { url } = apisPeticion()
   const { show, toast } = useAlerts()
+  const [memberShipId, setmemberShipId] = useState<any>()
 
-  const maxPermission = customers?.permission
+  const fk_membershipLocal = customers?.fk_membership
+
+  useEffect(() => {
+    axios
+      .get(`${url}/membership/${fk_membershipLocal}`, getConfig())
+      .then((res: any) => setmemberShipId(res.data.data))
+      .catch((err) => console.log(err))
+  }, [visible])
+
+  // console.log("customers",customers)
+
+  console.log("customers?.permission", customers?.permission)
+
+  const maxPermission = Number(memberShipId?.permission)
 
   const handleChange = (e: any) => {
     let newValue = parseInt(e.target.value, 10)
 
-    if (newValue >= Number(customers?.quantity)) {
-      newValue = Number(customers?.quantity)
-    }
+    console.log("customers?.permission", customers?.permission)
 
-    if (newValue > maxPermission) {
-      newValue = maxPermission
+    if (
+      newValue + Number(customers?.permission) >=
+      Number(memberShipId.permission)
+    ) {
+      newValue = Number(memberShipId.permission) - Number(customers?.permission)
+    } else {
+      newValue = newValue
     }
 
     setValue(newValue)
@@ -51,8 +68,7 @@ const Permissions = ({
       .put(
         `${url}/client/${customers?.id}`,
         {
-          permission: customers?.permission - value,
-          quantity: customers?.quantity - value,
+          permission: customers?.permission + value,
         },
         getConfig()
       )
@@ -64,7 +80,8 @@ const Permissions = ({
       .catch((err) => console.log(err))
       .finally(() => {
         setupdateCounter((prev: any) => prev + 1),
-          show("Usuario actualizado Correctamente"),setloader(false)
+          show("Usuario actualizado Correctamente"),
+          setloader(false)
       })
   }
 

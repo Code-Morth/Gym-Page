@@ -74,9 +74,10 @@ const TodosLosClientes = () => {
 
   const putStatusDeleted = (rowData: any) => {
 
-    console.log("rowData",rowData)
-
-    if (rowData.quantity === rowData.duration + 1 || rowData.duration - rowData.quantity <= 0) {
+    if (
+      rowData.quantity === rowData.duration + 1 ||
+      rowData.duration - rowData.quantity <= 0
+    ) {
       axios
         .put(`${url}/client/${rowData.id}`, { status: "deleted" }, getConfig())
         .then((res) => {
@@ -119,23 +120,15 @@ const TodosLosClientes = () => {
   }
 
   const permissionButton = (data: any) => {
-    const dataPermission = memberShip?.filter((e:any)=> e.id === data?.fk_membership) 
+    const dataPermission = memberShip?.filter(
+      (e: any) => e.id === data?.fk_membership
+    )
 
-    console.log("data",data)
-
-    console.log("data?.fk_membership",data?.fk_membership)
-
-    console.log("memberShip",memberShip)
-
-    console.log("dataPermission",dataPermission)
-
-    console.log("dataPermission?.permission",dataPermission?.permission)
-
-
+    const dataPermisionFinal = dataPermission ? dataPermission[0]?.permission: "No data"
 
     return (
       <button onClick={() => openUserModalPermission(data)}>
-        {dataPermission?.permission ?? "0"}
+        {dataPermisionFinal ?? "No hay valor"}
       </button>
     )
   }
@@ -161,8 +154,6 @@ const TodosLosClientes = () => {
 
   const ticketsAvailable = (data: any) => {
     const ticketA = data.duration - data.quantity ?? "No disponible"
-
-    console.log("Soy el ticketA",ticketA)
 
     return <span>{ticketA}</span>
   }
@@ -258,7 +249,12 @@ const TodosLosClientes = () => {
                 ></Column>
                 <Column
                   className="column"
+                  header="Permisos usados"
                   field="permission"
+                  style={{ width: "3%" }}
+                ></Column>
+                <Column
+                  className="column"
                   header="Permisos"
                   style={{ width: "3%" }}
                   body={permissionButton}

@@ -102,8 +102,6 @@ const ExpiredCustomer = ({
       })
   }
 
-  console.log("membershipSelected", membershipSelected)
-
   return (
     <div>
       <Modal
