@@ -5,6 +5,7 @@
     }
     @screen laptop {
         width: calc(25rem * var(--scale));
+        height: 100%;
         font-size: calc(1.8rem * var(--scale));
     }
     .box_image{
