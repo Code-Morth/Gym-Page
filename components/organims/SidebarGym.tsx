@@ -17,6 +17,7 @@ const SidebarGym = () => {
   const salir = () => {
     eliminarLocal("fk_typeuser");
     eliminarLocal("token");
+    eliminarLocal("user");
 
     window.location.reload();
   };
