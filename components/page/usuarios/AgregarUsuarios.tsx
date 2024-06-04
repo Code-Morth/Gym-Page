@@ -26,9 +26,6 @@ const AgregarUsuarios = () => {
           dataRef.current.reset();
         }
         console.log("res",res.data.succes)
-
-        if(res.data.succes === undefined){show("El correo ya existe")}
-
       })
       .catch((err) => console.log(err));
   };
