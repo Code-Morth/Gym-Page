@@ -8,6 +8,7 @@ const ClienteNotifiy = ({ clients , load }:any) => {
           <div key={client.id} className="notification">
             <p>El cliente <strong>{client.first_name} {client.last_name1}</strong>   </p>
             <p>con CI: <strong>{client.ci}</strong>  tiene su cuenta por renovar. </p>
+            <p>{client.message}</p>
           </div>
         ))
       ) : (
