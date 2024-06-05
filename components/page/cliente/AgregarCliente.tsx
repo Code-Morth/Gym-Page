@@ -13,6 +13,7 @@ const AgregarCliente = () => {
   const [memberShip, setmemberShip] = useState<any>()
   const [membershipSelected, setmembershipSelected] = useState<any>()
   const [finalDate, setfinalDate] = useState<any>()
+  const [customers, setCustomers] = useState<any>([])
 
   useEffect(() => {
     axios
@@ -29,15 +30,23 @@ const AgregarCliente = () => {
       })
       .catch((err) => console.log(err))
 
+    axios
+      .get(`${url}/client?page=0&size=99999999`, getConfig())
+      .then((res) => setCustomers(res.data.data))
+      .catch((err) => console.log(err))
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  console.log("memberShip", memberShip)
+  const lengthCustomers = customers.length - 1
+
+  const finalIDCustomer:number = Number(customers[lengthCustomers]?.id) + 1
 
   const handleLogin = (event: any) => {
     event.preventDefault()
 
     const dataForm = Object.fromEntries(new FormData(event.target))
+    const dataForm2 = Object.fromEntries(new FormData(event.target))
 
     delete dataForm.price
     delete dataForm.initial_date
@@ -50,6 +59,19 @@ const AgregarCliente = () => {
       .then((res) => {
         if (res.data.success) {
           show("Usuario Creado Exitosamente")
+          dataRef.current.reset()
+        }
+      })
+      .catch((err) => console.log(err))
+
+    axios
+      .post(
+        `${url}/clientquote`,
+        {fk_client: finalIDCustomer, total: dataForm2.price },
+        getConfig()
+      )
+      .then((res) => {
+        if (res.data.success) {
           dataRef.current.reset()
         }
       })

@@ -13,6 +13,7 @@ const TodosLosProductos = () => {
   const [names, setname] = useState("")
   const { Open, closeModal, openModal } = useOpenModal()
   const [selectedUser, setSelectedUser] = useState<any>(null)
+  const [uptdateCounter, setuptdateCounter] = useState(0)
 
   useEffect(() => {
     axios
@@ -21,15 +22,14 @@ const TodosLosProductos = () => {
       .catch((err) => console.log(err))
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [uptdateCounter])
   const capture = (e: any) => {
     setname(e.target.value)
   }
 
-  const filterCustomers = customers.filter((custon: any) => {
-    const namesss = custon?.name.toLowerCase().includes(names.toLowerCase())
-    return namesss
-  })
+  const filterCustomers = customers.filter((e:any)=>e.status === "active")
+
+  console.log("filterCustomers",filterCustomers)
 
   const editData = (data:any) =>{    
 
@@ -77,6 +77,7 @@ const TodosLosProductos = () => {
           ></Column>
         </DataTable>
         <TodosLosProductosModal
+        setuptdateCounter={setuptdateCounter}
                 customers={selectedUser}
                 visible={Open}
                 closeModal={closeModal}
