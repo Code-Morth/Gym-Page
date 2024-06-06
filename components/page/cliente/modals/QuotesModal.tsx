@@ -35,7 +35,6 @@ const QuotesModal = ({
     axios
       .get(`${url}/membership/${customers?.fk_membership}`, getConfig())
       .then((res) => {
-
         let priceMembershipMoment = Number(res.data.data.price)
 
         quotesData.forEach((e: any) => {
@@ -47,8 +46,7 @@ const QuotesModal = ({
       .catch((err) => console.log(err))
       .finally(() => setupdateCounter((prev: any) => prev + 1))
 
-      setinputValue(0)
-      
+    setinputValue(0)
   }, [visible])
 
   const handleUpdateUser = (event: any) => {
@@ -56,10 +54,16 @@ const QuotesModal = ({
 
     const dataForm = Object.fromEntries(new FormData(event.target))
 
+    const quoteMoment = dataForm.quote
+
+    const quoteStringMoment = quoteMoment.toString()
+
+    const quoteNumberMoment = parseInt(quoteStringMoment, 10)
+
     axios
       .post(
         `${url}/clientquote`,
-        { fk_client: customers?.id, total: dataForm.quote },
+        { fk_client: customers?.id, total: quoteNumberMoment },
         getConfig()
       )
       .then((res) => {
@@ -73,7 +77,8 @@ const QuotesModal = ({
   const inputChange = (data: any) => {
     if (data.target.value >= maxInput) setinputValue(maxInput)
     if (data.target.value <= 0) setinputValue(0)
-    if (data.target.value > 0 && data.target.value < maxInput) setinputValue(data.target.value)
+    if (data.target.value > 0 && data.target.value < maxInput)
+      setinputValue(data.target.value)
   }
 
   return (

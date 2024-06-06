@@ -199,6 +199,8 @@ const TodosLosClientes = () => {
     )
   }
 
+  console.log("filterCustomerActive",filterCustomerActive)
+
   return (
     <div className="TodosLosClientes">
       {!loader && (
@@ -277,7 +279,7 @@ const TodosLosClientes = () => {
                 <Column
                   className="column"
                   header="Permisos usados"
-                  field="permission"
+                  field="quantity"
                   style={{ width: "3%" }}
                 ></Column>
                 <Column

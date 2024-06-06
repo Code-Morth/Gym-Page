@@ -51,10 +51,11 @@ const Permissions = ({
     console.log("customers?.permission", customers?.permission)
 
     if (
-      newValue + Number(customers?.permission) >=
+      newValue + Number(customers?.quantity) >=
       Number(memberShipId.permission)
     ) {
-      newValue = Number(memberShipId.permission) - Number(customers?.permission)
+      const newValueTest = Number(memberShipId.permission) - Number(customers?.quantity)
+      newValue = newValueTest < 0 ? 0 :newValueTest
     } else {
       newValue = newValue
     }

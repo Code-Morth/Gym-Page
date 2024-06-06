@@ -39,42 +39,23 @@ const AgregarCliente = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const lengthCustomers = customers.length - 1
-
-  const finalIDCustomer: number = Number(customers[lengthCustomers]?.id) + 1
-
   const handleLogin = (event: any) => {
     event.preventDefault()
 
-    const dataForm = Object.fromEntries(new FormData(event.target))
-    const dataForm2 = Object.fromEntries(new FormData(event.target))
+    const dataForm: any = Object.fromEntries(new FormData(event.target))
 
     delete dataForm.price
     delete dataForm.initial_date
     delete dataForm.final_date
     delete dataForm.number_entries
     delete dataForm.permissions
-
-    console.log("dataForm", dataForm)
+    dataForm.ammount = quoteNumber
 
     axios
       .post(`${url}/client`, dataForm, getConfig())
       .then((res) => {
         if (res.data.success) {
           show("Usuario Creado Exitosamente")
-          dataRef.current.reset()
-        }
-      })
-      .catch((err) => console.log(err))
-
-    axios
-      .post(
-        `${url}/clientquote`,
-        { fk_client: finalIDCustomer, total: dataForm2.price },
-        getConfig()
-      )
-      .then((res) => {
-        if (res.data.success) {
           dataRef.current.reset()
         }
       })
@@ -108,14 +89,25 @@ const AgregarCliente = () => {
   }
 
   const changeAmountQuote = (data: any) => {
-    if (data.target.value >= Number(membershipSelected?.price ?? 0))
-      setquoteNumber(Number(membershipSelected?.price ?? 0))
+    if (data.target.value >= Number(membershipSelected?.price ?? 0)) {
+      const stringMoment = (membershipSelected?.price ?? 0).toString()
+
+      const numberMoment = Number(stringMoment)
+
+      setquoteNumber(numberMoment)
+    }
+
     if (data.target.value <= 0) setquoteNumber(0)
     if (
       data.target.value > 0 &&
       data.target.value < Number(membershipSelected?.price ?? 0)
-    )
-      setquoteNumber(Number(data.target.value))
+    ) {
+      const stringMoment = data.target.value.toString()
+
+      const numberMoment = Number(stringMoment)
+
+      setquoteNumber(numberMoment)
+    }
   }
 
   useEffect(() => {
@@ -192,12 +184,12 @@ const AgregarCliente = () => {
                 name="number_entries"
                 type="text"
               />
-              <label htmlFor="amount">Pago</label>
+              <label htmlFor="ammount">Pago</label>
               <input
                 onChange={changeAmountQuote}
                 value={quoteNumber}
                 required
-                name="amount"
+                name="ammount"
                 type="number"
               />
             </div>
