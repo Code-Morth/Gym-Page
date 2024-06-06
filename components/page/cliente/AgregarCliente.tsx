@@ -14,6 +14,7 @@ const AgregarCliente = () => {
   const [membershipSelected, setmembershipSelected] = useState<any>()
   const [finalDate, setfinalDate] = useState<any>()
   const [customers, setCustomers] = useState<any>([])
+  const [quoteNumber, setquoteNumber] = useState(0)
 
   useEffect(() => {
     axios
@@ -40,7 +41,7 @@ const AgregarCliente = () => {
 
   const lengthCustomers = customers.length - 1
 
-  const finalIDCustomer:number = Number(customers[lengthCustomers]?.id) + 1
+  const finalIDCustomer: number = Number(customers[lengthCustomers]?.id) + 1
 
   const handleLogin = (event: any) => {
     event.preventDefault()
@@ -53,6 +54,8 @@ const AgregarCliente = () => {
     delete dataForm.final_date
     delete dataForm.number_entries
     delete dataForm.permissions
+
+    console.log("dataForm", dataForm)
 
     axios
       .post(`${url}/client`, dataForm, getConfig())
@@ -67,7 +70,7 @@ const AgregarCliente = () => {
     axios
       .post(
         `${url}/clientquote`,
-        {fk_client: finalIDCustomer, total: dataForm2.price },
+        { fk_client: finalIDCustomer, total: dataForm2.price },
         getConfig()
       )
       .then((res) => {
@@ -83,8 +86,6 @@ const AgregarCliente = () => {
     const selectedMembreship = memberShip.find(
       (item: any) => item.id === selectedId
     )
-
-    console.log("membreshipSelected", selectedMembreship)
 
     axios
       .get(`${url}/membership/${selectedMembreship.id}`, getConfig())
@@ -105,6 +106,21 @@ const AgregarCliente = () => {
 
     setfinalDate(`${month}/${day}/${year}`)
   }
+
+  const changeAmountQuote = (data: any) => {
+    if (data.target.value >= Number(membershipSelected?.price ?? 0))
+      setquoteNumber(Number(membershipSelected?.price ?? 0))
+    if (data.target.value <= 0) setquoteNumber(0)
+    if (
+      data.target.value > 0 &&
+      data.target.value < Number(membershipSelected?.price ?? 0)
+    )
+      setquoteNumber(Number(data.target.value))
+  }
+
+  useEffect(() => {
+    setquoteNumber(0)
+  }, [membershipSelected])
 
   return (
     <div className="AgregarCliente main-page">
@@ -175,6 +191,14 @@ const AgregarCliente = () => {
                 value={membershipSelected?.duration ?? "0"}
                 name="number_entries"
                 type="text"
+              />
+              <label htmlFor="amount">Pago</label>
+              <input
+                onChange={changeAmountQuote}
+                value={quoteNumber}
+                required
+                name="amount"
+                type="number"
               />
             </div>
           </div>

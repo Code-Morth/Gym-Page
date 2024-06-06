@@ -10,6 +10,7 @@ import useOpenModal from "../../../hook/useOpenModal"
 import ExpiredCustomer from "./modals/ExpiredCustomer"
 import Snipet from "../../loader/Snipet"
 import Permissions from "./modals/Permissions"
+import QuotesModal from "./modals/QuotesModal"
 
 const TodosLosClientes = () => {
   const { Open, openModal, closeModal } = useOpenModal()
@@ -21,10 +22,17 @@ const TodosLosClientes = () => {
   const [updateCounter, setupdateCounter] = useState(0)
   const [loader, setloader] = useState(false)
   const [visible2, setvisible2] = useState(false)
+  const [visible3, setvisible3] = useState(false)
   const [value, setValue] = useState(0)
+  const [cuotesData, setcuotesData] = useState<any>()
 
   const closeModal2 = () => {
     setvisible2(false)
+    setValue(0)
+  }
+
+  const closeModal3 = () => {
+    setvisible3(false)
     setValue(0)
   }
 
@@ -73,7 +81,6 @@ const TodosLosClientes = () => {
           })
 
   const putStatusDeleted = (rowData: any) => {
-
     if (
       rowData.quantity === rowData.duration + 1 ||
       rowData.duration - rowData.quantity <= 0
@@ -115,6 +122,11 @@ const TodosLosClientes = () => {
     setvisible2(true)
   }
 
+  const openQuotesModal = (user: any) => {
+    setSelectedUser(user)
+    setvisible3(true)
+  }
+
   const putStatusActive = (data: any) => {
     return <button onClick={() => openUserModal(data)}>Activar</button>
   }
@@ -124,7 +136,9 @@ const TodosLosClientes = () => {
       (e: any) => e.id === data?.fk_membership
     )
 
-    const dataPermisionFinal = dataPermission ? dataPermission[0]?.permission: "No data"
+    const dataPermisionFinal = dataPermission
+      ? dataPermission[0]?.permission
+      : "No data"
 
     return (
       <button onClick={() => openUserModalPermission(data)}>
@@ -172,6 +186,19 @@ const TodosLosClientes = () => {
     return <span>{`${month}/${day}/${year}`}</span>
   }
 
+  const quotes = (data: any) => {
+    const quotesArray = data?.quotes?.map((e: any) => e.total)
+
+
+    return (
+      <button style={{minWidth:"3rem",minHeight:"3rem",width:"100%",height:"100%"}} onClick={() =>openQuotesModal(data)}>
+        {quotesArray?.map((a: any, index: number) => (
+          <span key={index}>{a} </span>
+        ))}
+      </button>
+    )
+  }
+
   return (
     <div className="TodosLosClientes">
       {!loader && (
@@ -202,19 +229,19 @@ const TodosLosClientes = () => {
                   className="column"
                   field="first_name"
                   header="Nombre completo"
-                  style={{ width: "8%" }}
+                  style={{ width: "5%" }}
                 ></Column>
                 <Column
                   className="column"
                   field="last_name1"
                   header="Primer apellido"
-                  style={{ width: "8%" }}
+                  style={{ width: "5%" }}
                 ></Column>
                 <Column
                   className="column"
                   field="last_name2"
                   header="Segundo apellido"
-                  style={{ width: "8%" }}
+                  style={{ width: "5%" }}
                 ></Column>
                 <Column
                   className="column"
@@ -226,20 +253,20 @@ const TodosLosClientes = () => {
                   className="column"
                   field="fk_membership"
                   header="Membresia"
-                  style={{ width: "10%" }}
+                  style={{ width: "5%" }}
                   body={columnMemberShip}
                 ></Column>
                 <Column
                   className="column"
                   field="phone"
                   header="Telefono"
-                  style={{ width: "10%" }}
+                  style={{ width: "5%" }}
                 ></Column>
                 <Column
                   className="column"
                   field="address"
                   header="Direccion"
-                  style={{ width: "10%" }}
+                  style={{ width: "7%" }}
                 ></Column>
                 <Column
                   className="column"
@@ -269,20 +296,26 @@ const TodosLosClientes = () => {
                 <Column
                   className="column"
                   header="Fecha final de inscripcion"
-                  style={{ width: "15%" }}
+                  style={{ width: "6%" }}
                   body={finalDayRegistration}
+                ></Column>
+                <Column
+                  className="column"
+                  header="Cuotas"
+                  style={{ width: "5%" }}
+                  body={quotes}
                 ></Column>
                 <Column
                   className="column"
                   field="status"
                   header="Estado de membresia"
-                  style={{ width: "10%" }}
+                  style={{ width: "5%" }}
                 ></Column>
                 <Column
                   className="column"
                   field="id"
                   header="Acciones"
-                  style={{ width: "10%" }}
+                  style={{ width: "2%" }}
                   body={putStatusDeleted}
                 ></Column>
               </DataTable>
@@ -387,6 +420,13 @@ const TodosLosClientes = () => {
         customers={selectedUser}
         setValue={setValue}
         value={value}
+        setloader={setloader}
+      />
+      <QuotesModal
+        setupdateCounter={setupdateCounter}
+        customers={selectedUser}
+        visible={visible3}
+        closeModal={closeModal3}
         setloader={setloader}
       />
     </div>
