@@ -105,10 +105,13 @@ const ExpiredCustomer = ({
       .delete(`${url}/client/${customers?.id}`, getConfig())
       .then((res) => {
         if (res.data.success) {
+          setupdateCounter((prev: any) => prev + 1)
           dataRed.current.reset()
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setupdateCounter((prev: any) => prev + 1), console.log(err)
+      })
       .finally(() => {
         setupdateCounter((prev: any) => prev + 1),
           setloader(false),

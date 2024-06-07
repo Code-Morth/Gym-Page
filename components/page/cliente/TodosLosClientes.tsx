@@ -24,7 +24,6 @@ const TodosLosClientes = () => {
   const [visible2, setvisible2] = useState(false)
   const [visible3, setvisible3] = useState(false)
   const [value, setValue] = useState(0)
-  const [cuotesData, setcuotesData] = useState<any>()
 
   const closeModal2 = () => {
     setvisible2(false)
@@ -47,8 +46,6 @@ const TodosLosClientes = () => {
       .then((res) => setmemberShip(res.data.data))
       .catch((err) => console.log(err))
   }, [updateCounter, url])
-
-  console.log("customers",customers)
 
   const filterCustomerExpired =
     customers && customers.length > 0
