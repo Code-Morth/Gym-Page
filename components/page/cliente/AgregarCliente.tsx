@@ -40,6 +40,7 @@ const AgregarCliente = () => {
   }, [])
 
   const handleLogin = (event: any) => {
+
     event.preventDefault()
 
     const dataForm: any = Object.fromEntries(new FormData(event.target))
@@ -51,15 +52,17 @@ const AgregarCliente = () => {
     delete dataForm.permissions
     dataForm.ammount = quoteNumber
 
-    axios
-      .post(`${url}/client`, dataForm, getConfig())
-      .then((res) => {
-        if (res.data.success) {
-          show("Usuario Creado Exitosamente")
-          dataRef.current.reset()
-        }
-      })
-      .catch((err) => console.log(err))
+    console.log("dataForm",dataForm)
+
+    // axios
+    //   .post(`${url}/client`, dataForm, getConfig())
+    //   .then((res) => {
+    //     if (res.data.success) {
+    //       show("Usuario Creado Exitosamente")
+    //       dataRef.current.reset()
+    //     }
+    //   })
+    //   .catch((err) => console.log(err))
   }
 
   const handleMembreshipChange = (event: any) => {
@@ -193,9 +196,8 @@ const AgregarCliente = () => {
               <input
                 onChange={changeAmountQuote}
                 value={quoteNumber}
-                required
                 name="ammount"
-                type="number"
+                type="tel"
               />
             </div>
           </div>
