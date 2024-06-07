@@ -11,7 +11,7 @@ interface Modalxd {
   closeModal: () => void
   customers?: any
   setupdateCounter?: any
-  setloader?:any
+  setloader?: any
 }
 
 const ExpiredCustomer = ({
@@ -19,7 +19,7 @@ const ExpiredCustomer = ({
   closeModal,
   customers,
   setupdateCounter,
-  setloader
+  setloader,
 }: Modalxd) => {
   const { url } = apisPeticion()
 
@@ -89,16 +89,31 @@ const ExpiredCustomer = ({
     axios
       .put(`${url}/client/${customers?.id}`, userUpdateadd, getConfig())
       .then((res) => {
-        if (res.data.success) {
-          show("Usuario actualizado Correctamente")
-          dataRed.current.reset()
-          closeModal()
-        }
+        show("Usuario actualizado Correctamente")
+        dataRed.current.reset()
+        closeModal()
       })
       .catch((err) => console.log(err))
       .finally(() => {
         setupdateCounter((prev: any) => prev + 1)
         setloader(false)
+      })
+  }
+
+  const deletedUser = () => {
+    axios
+      .delete(`${url}/client/${customers?.id}`, getConfig())
+      .then((res) => {
+        if (res.data.success) {
+          dataRed.current.reset()
+        }
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setupdateCounter((prev: any) => prev + 1),
+          setloader(false),
+          closeModal(),
+          show("Usuario eliminado Correctamente")
       })
   }
 
@@ -122,7 +137,7 @@ const ExpiredCustomer = ({
               <div className="content_box_inputs">
                 <label htmlFor="first_name">Nombre de usuario</label>
                 <input name="first_name" type="text" />
-              </div>              
+              </div>
               <div className="content_box_inputs">
                 <label htmlFor="last_name1">Primer apellido</label>
                 <input name="last_name1" type="text" />
@@ -149,7 +164,11 @@ const ExpiredCustomer = ({
               </div>
               <div className="content_box_inputs">
                 <label htmlFor="">Cambiar membresia</label>
-                <select required onChange={handleMembreshipChange} name="fk_membership">
+                <select
+                  required
+                  onChange={handleMembreshipChange}
+                  name="fk_membership"
+                >
                   <option disabled value="">
                     Elegir
                   </option>
@@ -165,9 +184,10 @@ const ExpiredCustomer = ({
 
                 <select name="status">
                   <option>Elija</option>
-                  <option selected value="active">Activar</option>
+                  <option selected value="active">
+                    Activar
+                  </option>
                   <option value="deleted">Desactivar</option>
-                  <option value="pending">Eliminar</option>
                 </select>
               </div>
               <div className="content_box_inputs">
@@ -211,10 +231,18 @@ const ExpiredCustomer = ({
                 />
               </div>
             </div>
-
-            <button className="button-default" type="submit">
-              Actualizar
-            </button>
+            <div className="button-container">
+              <button className="button-default" type="submit">
+                Actualizar
+              </button>
+              <button
+                onClick={deletedUser}
+                className="button-default"
+                type="button"
+              >
+                Eliminar
+              </button>
+            </div>
           </form>
         </div>
         <Toast ref={toast} position="top-center" />

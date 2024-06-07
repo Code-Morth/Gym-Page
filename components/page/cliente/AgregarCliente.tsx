@@ -14,7 +14,7 @@ const AgregarCliente = () => {
   const [membershipSelected, setmembershipSelected] = useState<any>()
   const [finalDate, setfinalDate] = useState<any>()
   const [customers, setCustomers] = useState<any>([])
-  const [quoteNumber, setquoteNumber] = useState(0)
+  const [quoteNumber, setquoteNumber] = useState<any>()
 
   useEffect(() => {
     axios
@@ -94,6 +94,9 @@ const AgregarCliente = () => {
 
       const numberMoment = Number(stringMoment)
 
+      console.log("numberMoment1",numberMoment)
+
+
       setquoteNumber(numberMoment)
     }
 
@@ -105,6 +108,8 @@ const AgregarCliente = () => {
       const stringMoment = data.target.value.toString()
 
       const numberMoment = Number(stringMoment)
+
+      console.log("numberMoment2",numberMoment)
 
       setquoteNumber(numberMoment)
     }

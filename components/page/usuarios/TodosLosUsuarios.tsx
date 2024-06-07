@@ -92,7 +92,7 @@ const TodosLosUsuarios = () => {
 
   const filterUserCi = customers.filter((user: any) => {
     const dat = user?.ci.toLowerCase().includes(CiT.toLowerCase())
-    const xdd = user?.status === "deleted"
+    const xdd = user?.status !== "active"  
     return dat && xdd
   })
 

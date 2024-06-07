@@ -71,7 +71,7 @@ const QuotesModal = ({
           dataRef.current.reset()
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err)).finally(()=>closeModal())
   }
 
   const inputChange = (data: any) => {

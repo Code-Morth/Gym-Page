@@ -48,15 +48,23 @@ const TodosLosClientes = () => {
       .catch((err) => console.log(err))
   }, [updateCounter, url])
 
+  console.log("customers",customers)
+
   const filterCustomerExpired =
     customers && customers.length > 0
       ? customers?.filter((user: any) => {
           const statusUser = user?.status !== "active"
           return statusUser
+        }).filter((custon: any) => {
+          const namesss = custon?.ci?.includes(inputData)
+          return namesss
         })
       : [customers]?.filter((user: any) => {
           const statusUser = user?.status !== "active"
           return statusUser
+        }).filter((custon: any) => {
+          const namesss = custon?.ci?.includes(inputData)
+          return namesss
         })
 
   const filterCustomerActive =
@@ -67,7 +75,7 @@ const TodosLosClientes = () => {
             return statusUser
           })
           .filter((custon: any) => {
-            const namesss = custon?.ci.includes(inputData)
+            const namesss = custon?.ci?.includes(inputData)
             return namesss
           })
       : [customers]
@@ -76,7 +84,7 @@ const TodosLosClientes = () => {
             return statusUser
           })
           .filter((custon: any) => {
-            const namesss = custon?.ci.includes(inputData)
+            const namesss = custon?.ci?.includes(inputData)
             return namesss
           })
 
@@ -198,8 +206,6 @@ const TodosLosClientes = () => {
       </button>
     )
   }
-
-  console.log("filterCustomerActive",filterCustomerActive)
 
   return (
     <div className="TodosLosClientes">

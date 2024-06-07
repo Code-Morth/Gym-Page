@@ -49,7 +49,9 @@ const AddUserModal = ({
         }
       })
       .catch((err) => console.log(err))
-      .finally(() => {setloader(false),closeModal()})
+      .finally(() => {
+        setloader(false), closeModal()
+      })
 
     setupdateCounter((prev: any) => prev + 1)
   }
@@ -58,22 +60,21 @@ const AddUserModal = ({
     setloader(true)
 
     axios
-      .put(
+      .delete(
         `${url}/user/${customers?.id}`,
-        {
-          status: "pending",
-        },
         getConfig()
       )
       .then((res) => {
         if (res.data.success) {
-          show("Usuario actualizado Correctamente")
+          show("Usuario eliminado Correctamente")
           dataRed.current.reset()
           closeModal()
         }
       })
       .catch((err) => console.log(err))
-      .finally(() => {setloader(false),closeModal()})
+      .finally(() => {
+        setloader(false), closeModal()
+      })
 
     setupdateCounter((prev: any) => prev + 1)
   }

@@ -37,13 +37,7 @@ const UpdateUserModal = ({
 
     if (userUpdate.status === "delete") {
       axios
-        .put(
-          `${url}/user/${customers?.id}`,
-          {
-            status: "pending",
-          },
-          getConfig()
-        )
+        .delete(`${url}/user/${customers?.id}`, getConfig())
         .then((res) => {
           if (res.data.success) {
             dataRed.current.reset()
@@ -54,8 +48,8 @@ const UpdateUserModal = ({
           setupdateCounter((prev: any) => prev + 1),
             setloader(false),
             closeModal(),
-            show("Usuario actualizado Correctamente")
-        })
+            show("Usuario eliminado Correctamente")
+          })
     }
 
     if (userUpdate.status === "deactivate") {
